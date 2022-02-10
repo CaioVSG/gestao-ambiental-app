@@ -1,16 +1,22 @@
-# meioambientemobile
+# Sistema de Gestão Ambiental Mobile - SGA
 
-A new Flutter project.
-
+##Como iniciar este projeto?
+1 - Clone este repositório
+1 - Instale o Flutter suas dependências
+1 - Execute com "f5".
 ## Getting Started
 
 This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+##Tecnologias usadas:
+- [Flutter e Dart](https://flutter.dev/)
+###Packages utilizados no aplicativo:
+Gerência de Estado: Provider
+Responsividade: responsive_framework
+Cliente HTTP: Dio
+File explorer: path provider
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+##DESENVOLVIDO POR: 
+LMTS • Alunos: Atalias Raniel, Daniel, Caio
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+ 
