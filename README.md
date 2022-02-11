@@ -14,6 +14,6 @@ Cliente HTTP: Dio
 File explorer: path provider
 
 ##DESENVOLVIDO POR: 
-LMTS • Alunos: Atalias Raniel, Daniel, Caio
+LMTS • Alunos: Atalias Raniel, Daniel, Caio Vinícius
 
  
