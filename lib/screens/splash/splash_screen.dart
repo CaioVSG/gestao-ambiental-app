@@ -12,30 +12,32 @@ class SplashScreen extends StatelessWidget {
     controller.startApp(context);
     Size size = MediaQuery.of(context).size;
     TextTheme textTheme = Theme.of(context).textTheme;
-    return Scaffold(
-      body: SizedBox(
-        height: size.height,
-        width: size.width,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Spacer(),
-            Container(
-              padding: const EdgeInsets.all(kDefaultPadding),
-              child: Text(
-                'Sistema de Gestão Ambiental - SGA',
-                textAlign: TextAlign.center,
-                style: textTheme.headline5,
+    return SafeArea(
+      child: Scaffold(
+        body: SizedBox(
+          height: size.height,
+          width: size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Spacer(),
+              Container(
+                padding: const EdgeInsets.all(kDefaultPadding),
+                child: Text(
+                  'Sistema de Gestão Ambiental - SGA',
+                  textAlign: TextAlign.center,
+                  style: textTheme.headline5,
+                ),
               ),
-            ),
-            const CircularProgressIndicator(),
-            const Spacer(),
-            Padding(
-              padding: const EdgeInsets.all(kSmallHeight),
-              child: const Text('versão: 1.0.0'),
-            ),
-          ],
+              const CircularProgressIndicator(),
+              const Spacer(),
+              Padding(
+                padding: const EdgeInsets.all(kSmallHeight),
+                child: const Text('versão: 1.0.0'),
+              ),
+            ],
+          ),
         ),
       ),
     );

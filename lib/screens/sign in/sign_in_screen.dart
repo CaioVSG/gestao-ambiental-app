@@ -6,6 +6,8 @@ import 'package:meioambientemobile/components/vertical_spacer_box.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
 import 'package:meioambientemobile/screens/password%20recovery/password_recovery_screen.dart';
 import 'package:meioambientemobile/screens/sign%20in/sign_in_bloc.dart';
+import 'package:meioambientemobile/screens/sign%20in/sign_in_controller.dart';
+import 'package:provider/provider.dart';
 
 class SignInScreen extends StatefulWidget {
   static const String id = 'sign_in_screen';
@@ -16,67 +18,65 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  final SignInBloc signInBloc = SignInBloc();
-  int counter = 0;
-  increment() {
-    counter++;
-    return counter;
-  }
-
+  final _controller = SignInController();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     TextTheme textTheme = Theme.of(context).textTheme;
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
-        child: Center(
-          child: Card(
-            child: Container(
-              padding: const EdgeInsets.all(kDefaultPadding),
-              height: size.height * 0.8,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Sistema de Gestão Ambiental - SGA',
-                    textAlign: TextAlign.center,
-                    style: textTheme.headline5,
-                  ),
-                  const VerticalSpacerBox(size: SpacerSize.small),
-                  AuthFormField(label: 'Email'),
-                  const VerticalSpacerBox(size: SpacerSize.small),
-                  AuthFormField(label: 'Senha'),
-                  VerticalSpacerBox(size: SpacerSize.medium),
-                  PrimaryButton(
-                    text: 'Entrar',
-                    onPressed: () {},
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text('Esqueceu sua Senha?'),
-                      TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(
-                                context, PasswordRecoveryScreen.id);
-                          },
-                          child: const Text(
-                            'Toque Aqui',
-                            style: kTextButtonTextStyle,
-                          )),
-                    ],
-                  ),
-                  const Text('ou'),
-                  TextButton(
-                      onPressed: () {
-                        signInBloc.counterSink.add(increment());
-                      },
-                      child: const Text(
-                        'Cadastre-se',
-                        style: kTextButtonTextStyle,
-                      ))
-                ],
+    return SafeArea(
+      child: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+          child: Center(
+            child: Card(
+              child: Container(
+                padding: const EdgeInsets.all(kDefaultPadding),
+                height: size.height * 0.8,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Sistema de Gestão Ambiental - SGA',
+                      textAlign: TextAlign.center,
+                      style: textTheme.headline5,
+                    ),
+                    const VerticalSpacerBox(size: SpacerSize.small),
+                    const AuthFormField(label: 'Email'),
+                    const VerticalSpacerBox(size: SpacerSize.small),
+                    const AuthFormField(label: 'Senha'),
+                    const VerticalSpacerBox(size: SpacerSize.medium),
+                    context.watch<SignInController>().isLoading
+                        ? const CircularProgressIndicator()
+                        : PrimaryButton(
+                            text: 'Entrar',
+                            onPressed: () {
+                              context.read<SignInController>().signIn(context);
+                            },
+                          ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('Esqueceu sua Senha?'),
+                        TextButton(
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                  context, PasswordRecoveryScreen.id);
+                            },
+                            child: const Text(
+                              'Toque Aqui',
+                              style: kTextButtonTextStyle,
+                            )),
+                      ],
+                    ),
+                    const Text('ou'),
+                    TextButton(
+                        onPressed: () {},
+                        child: const Text(
+                          'Cadastre-se',
+                          style: kTextButtonTextStyle,
+                        ))
+                  ],
+                ),
               ),
             ),
           ),

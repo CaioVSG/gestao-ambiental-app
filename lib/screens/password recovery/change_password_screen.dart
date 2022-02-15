@@ -3,12 +3,11 @@ import 'package:meioambientemobile/components/auth_form_field.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
 import 'package:meioambientemobile/components/primary_button.dart';
 import 'package:meioambientemobile/components/vertical_spacer_box.dart';
+import 'package:meioambientemobile/screens/sign%20in/sign_in_screen.dart';
 
-import '../email auth/email_autentication_screen.dart';
-
-class PasswordRecoveryScreen extends StatelessWidget {
-  static const String id = 'password_recovery_screen';
-  const PasswordRecoveryScreen({Key? key}) : super(key: key);
+class ChangePasswordScreen extends StatelessWidget {
+  static const String id = 'change_password_screen';
+  const ChangePasswordScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,17 +28,21 @@ class PasswordRecoveryScreen extends StatelessWidget {
               child:
                   Column(mainAxisAlignment: MainAxisAlignment.start, children: [
                 Text(
-                  'Digite o Seu Email',
+                  'Digite Sua Nova Senha',
                   textAlign: TextAlign.left,
                   style: textTheme.headline5,
                 ),
                 const VerticalSpacerBox(size: SpacerSize.small),
-                const AuthFormField(label: 'Email'),
+                const AuthFormField(label: 'Nova Senha'),
+                const VerticalSpacerBox(size: SpacerSize.small),
+                const AuthFormField(label: 'Repita a Senha'),
+                const VerticalSpacerBox(size: SpacerSize.medium),
                 PrimaryButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, EmailAutenticationScreen.id);
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, SignInScreen.id, (route) => false);
                   },
-                  text: 'Enviar',
+                  text: 'Confirmar',
                 ),
               ]),
             ),

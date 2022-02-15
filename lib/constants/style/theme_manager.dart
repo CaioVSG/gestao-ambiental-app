@@ -7,6 +7,7 @@ class ThemeManager {
       backgroundColor: kPrimaryColor,
       scaffoldBackgroundColor: kPrimaryColor,
       primarySwatch: Colors.blue,
+      appBarTheme: const AppBarTheme(backgroundColor: kDetailColor),
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(textStyle: TextButton.styleFrom().textStyle),
       ),

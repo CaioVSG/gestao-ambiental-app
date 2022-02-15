@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meioambientemobile/constants/style/theme_manager.dart';
 import 'package:meioambientemobile/screens/home/home_screen.dart';
+import 'package:meioambientemobile/screens/password%20recovery/change_password_screen.dart';
 import 'package:meioambientemobile/screens/password%20recovery/password_recovery_screen.dart';
 import 'package:meioambientemobile/screens/sign%20in/sign_in_screen.dart';
 import 'package:meioambientemobile/screens/splash/splash_screen.dart';
@@ -19,6 +20,7 @@ class App extends StatelessWidget {
         SplashScreen.routeName: (context) => const SplashScreen(),
         HomeScreen.id: (context) => const HomeScreen(),
         PasswordRecoveryScreen.id: (context) => const PasswordRecoveryScreen(),
+        ChangePasswordScreen.id: (context) => const ChangePasswordScreen(),
         SignInScreen.id: (context) => const SignInScreen(),
       },
     );
