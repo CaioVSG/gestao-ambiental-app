@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:meioambientemobile/components/vertical_spacer_box.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
 
+import 'components/custom_drawer.dart';
+import 'components/visit_tile.dart';
+
 class HomeScreen extends StatefulWidget {
   static const String id = 'home_screen';
   const HomeScreen({Key? key}) : super(key: key);
@@ -18,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(),
-        drawer: Drawer(),
+        drawer: const CustomDrawer(),
         body: Padding(
             padding: const EdgeInsets.all(kDefaultPadding),
             child: Column(
@@ -29,23 +32,25 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: textTheme.headline4,
                 ),
                 const VerticalSpacerBox(size: SpacerSize.medium),
-                ListView.separated(
-                  shrinkWrap: true,
-                  separatorBuilder: (context, index) {
-                    return const VerticalSpacerBox(size: SpacerSize.small);
-                  },
-                  itemBuilder: ((context, index) {
-                    return Container(
-                      height: size.height * 0.09,
-                      decoration: BoxDecoration(
-                          color: kDetailColor,
-                          borderRadius: BorderRadius.circular(kDefaultRadius)),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [Text('Posto Delta'), Text('03/04/2022')]),
-                    );
-                  }),
-                  itemCount: 5,
+                SizedBox(
+                  height: size.height * 0.7,
+                  child: ListView.separated(
+                    separatorBuilder: (context, index) {
+                      return const VerticalSpacerBox(size: SpacerSize.small);
+                    },
+                    itemBuilder: ((context, index) {
+                      return Container(
+                        height: size.height * 0.09,
+                        decoration: BoxDecoration(
+                            color: kDetailColor,
+                            borderRadius:
+                                BorderRadius.circular(kDefaultRadius)),
+                        child: const VisitTile(
+                            title: 'Posto Delta', date: '12/12/2020'),
+                      );
+                    }),
+                    itemCount: 8,
+                  ),
                 ),
               ],
             )),
