@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const VerticalSpacerBox(size: SpacerSize.medium),
                 SizedBox(
-                  height: size.height * 0.7,
+                  height: size.height * 0.6,
                   child: ListView.separated(
                     separatorBuilder: (context, index) {
                       return const VerticalSpacerBox(size: SpacerSize.small);
