@@ -4,6 +4,7 @@ import 'package:meioambientemobile/components/custom_text_button.dart';
 import 'package:meioambientemobile/components/primary_button.dart';
 import 'package:meioambientemobile/components/vertical_spacer_box.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
+import 'package:meioambientemobile/screens/new%20register/new_register.dart';
 import 'package:meioambientemobile/screens/password%20recovery/password_recovery_screen.dart';
 import 'package:meioambientemobile/screens/sign%20in/sign_in_bloc.dart';
 import 'package:meioambientemobile/screens/sign%20in/sign_in_controller.dart';
@@ -70,7 +71,9 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                     const Text('ou'),
                     TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, NewRegister.id);
+                        },
                         child: const Text(
                           'Cadastre-se',
                           style: kTextButtonTextStyle,
