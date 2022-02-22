@@ -39,14 +39,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       return const VerticalSpacerBox(size: SpacerSize.small);
                     },
                     itemBuilder: ((context, index) {
-                      return Container(
-                        height: size.height * 0.09,
-                        decoration: BoxDecoration(
-                            color: kDetailColor,
-                            borderRadius:
-                                BorderRadius.circular(kDefaultRadius)),
-                        child: const VisitTile(
-                            title: 'Posto Delta', date: '12/12/2020'),
+                      return Card(
+                        child: Container(
+                          height: size.height * 0.09,
+                          decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.circular(kDefaultRadius)),
+                          child: const VisitTile(
+                              title: 'Posto Delta', date: '12/12/2020'),
+                        ),
                       );
                     }),
                     itemCount: 8,

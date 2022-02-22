@@ -1,21 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
 
-class AuthFormField extends StatelessWidget {
+class AuthFormField extends StatefulWidget {
   final String label;
+  final bool isPassword;
+  final TextInputType inputType;
 
-  const AuthFormField({Key? key, required this.label}) : super(key: key);
+  const AuthFormField(
+      {Key? key,
+      required this.label,
+      required this.isPassword,
+      required this.inputType})
+      : super(key: key);
 
+  @override
+  State<AuthFormField> createState() => _AuthFormFieldState();
+}
+
+class _AuthFormFieldState extends State<AuthFormField> {
+  bool showPassword = false;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: kLargeHeight,
       child: TextFormField(
+        style: const TextStyle(color: kTextColor),
+        obscureText: showPassword,
+        keyboardType: widget.inputType,
         decoration: InputDecoration(
-          labelText: label,
+          suffixIcon: widget.isPassword
+              ? InkWell(
+                  onTap: () {
+                    setState(() {
+                      showPassword = !showPassword;
+                    });
+                  },
+                  child: Icon(
+                      showPassword ? Icons.visibility : Icons.visibility_off,
+                      color: kDetailColor))
+              : null,
+          labelText: widget.label,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(
+            borderSide: const BorderSide(
               color: kDetailColor,
               width: 1,
             ),

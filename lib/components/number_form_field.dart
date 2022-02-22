@@ -12,6 +12,7 @@ class NumberFormField extends StatelessWidget {
     return SizedBox(
       height: kLargeHeight,
       child: TextFormField(
+        style: const TextStyle(color: kDetailColor),
         keyboardType: TextInputType.number,
         inputFormatters: [FilteringTextInputFormatter.digitsOnly],
         decoration: InputDecoration(

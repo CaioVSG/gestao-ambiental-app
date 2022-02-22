@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
 import 'package:meioambientemobile/components/primary_button.dart';
 import 'package:meioambientemobile/components/vertical_spacer_box.dart';
+import 'package:meioambientemobile/screens/email%20auth/components/code_verification_dialog.dart';
 // import 'package:meioambientemobile/components/number_form_field.dart';
 import 'package:meioambientemobile/screens/password%20recovery/change_password_screen.dart';
+
+import '../../components/number_form_field.dart';
 
 class EmailAutenticationScreen extends StatelessWidget {
   static const String id = 'email_autentication_screen';
@@ -15,7 +18,7 @@ class EmailAutenticationScreen extends StatelessWidget {
     TextTheme textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Recuperar Senha'),
+        title: const Text('Recuperar Senha'),
         backgroundColor: kDetailColor,
       ),
       body: Padding(
@@ -28,16 +31,19 @@ class EmailAutenticationScreen extends StatelessWidget {
               child:
                   Column(mainAxisAlignment: MainAxisAlignment.start, children: [
                 Text(
-                  'Digite o Código enviado para seu Email',
+                  'Digite o código enviado para seu email',
                   textAlign: TextAlign.left,
                   style: textTheme.headline5,
                 ),
                 const VerticalSpacerBox(size: SpacerSize.small),
-                // const NumberFormField(label: 'Digite o codigo'),
+                const NumberFormField(label: 'Seu código'),
+                const VerticalSpacerBox(size: SpacerSize.medium),
                 PrimaryButton(
                   text: 'Confirmar',
                   onPressed: () {
-                    Navigator.pushNamed(context, ChangePasswordScreen.id);
+                    showDialog(
+                        context: context,
+                        builder: (context) => const CodeVerificationDialog());
                   },
                 ),
               ]),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:meioambientemobile/components/vertical_spacer_box.dart';
+import 'package:meioambientemobile/constants/style/constants.dart';
 
 class VisitTile extends StatelessWidget {
   final String title;
@@ -12,12 +14,17 @@ class VisitTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
-    return Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-      Text(
-        title,
-        style: textTheme.headline6,
-      ),
-      Text(date, style: textTheme.subtitle1),
-    ]);
+    return Padding(
+      padding: const EdgeInsets.all(kDefaultRadius),
+      child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+        const Icon(Icons.location_on),
+        Text(
+          title,
+          style: textTheme.headline6,
+        ),
+        const Spacer(),
+        Text(date, style: textTheme.subtitle1),
+      ]),
+    );
   }
 }

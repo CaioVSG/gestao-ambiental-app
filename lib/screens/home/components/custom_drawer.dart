@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
+import 'package:meioambientemobile/screens/sign%20in/sign_in_screen.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({
@@ -40,7 +41,7 @@ class CustomDrawer extends StatelessWidget {
         leading: const Icon(Icons.exit_to_app),
         title: const Text('Sair'),
         onTap: () {
-          Navigator.pop(context);
+          Navigator.popAndPushNamed(context, SignInScreen.id);
         },
       ),
     ]));
