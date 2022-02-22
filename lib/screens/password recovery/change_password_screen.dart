@@ -3,6 +3,7 @@ import 'package:meioambientemobile/components/auth_form_field.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
 import 'package:meioambientemobile/components/primary_button.dart';
 import 'package:meioambientemobile/components/vertical_spacer_box.dart';
+import 'package:meioambientemobile/screens/password%20recovery/components/password_confirmation_dialog.dart';
 import 'package:meioambientemobile/screens/sign%20in/sign_in_screen.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
@@ -15,7 +16,7 @@ class ChangePasswordScreen extends StatelessWidget {
     TextTheme textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Recuperar Senha'),
+        title: const Text('Recuperar Senha'),
         backgroundColor: kDetailColor,
       ),
       body: Padding(
@@ -25,26 +26,31 @@ class ChangePasswordScreen extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(kDefaultPadding),
               height: size.height * 0.8,
-              child:
-                  Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-                Text(
-                  'Digite Sua Nova Senha',
-                  textAlign: TextAlign.left,
-                  style: textTheme.headline5,
-                ),
-                const VerticalSpacerBox(size: SpacerSize.small),
-                const AuthFormField(label: 'Nova Senha'),
-                const VerticalSpacerBox(size: SpacerSize.small),
-                const AuthFormField(label: 'Repita a Senha'),
-                const VerticalSpacerBox(size: SpacerSize.medium),
-                PrimaryButton(
-                  onPressed: () {
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, SignInScreen.id, (route) => false);
-                  },
-                  text: 'Confirmar',
-                ),
-              ]),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Digite sua nova senha',
+                      textAlign: TextAlign.left,
+                      style: textTheme.headline5,
+                    ),
+                    const VerticalSpacerBox(size: SpacerSize.small),
+                    const AuthFormField(
+                        label: 'Nova Senha',
+                        isPassword: true,
+                        inputType: TextInputType.visiblePassword),
+                    const VerticalSpacerBox(size: SpacerSize.medium),
+                    PrimaryButton(
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) =>
+                                const PasswordConfirmationDialog());
+                      },
+                      text: 'Confirmar',
+                    ),
+                  ]),
             ),
           ),
         ),

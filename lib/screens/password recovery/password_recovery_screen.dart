@@ -26,22 +26,29 @@ class PasswordRecoveryScreen extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(kDefaultPadding),
               height: size.height * 0.8,
-              child:
-                  Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-                Text(
-                  'Digite o Seu Email',
-                  textAlign: TextAlign.left,
-                  style: textTheme.headline5,
-                ),
-                const VerticalSpacerBox(size: SpacerSize.small),
-                const AuthFormField(label: 'Email'),
-                PrimaryButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, EmailAutenticationScreen.id);
-                  },
-                  text: 'Enviar',
-                ),
-              ]),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Digite o Seu Email',
+                      textAlign: TextAlign.left,
+                      style: textTheme.headline5,
+                    ),
+                    const VerticalSpacerBox(size: SpacerSize.small),
+                    const AuthFormField(
+                        label: 'Email',
+                        isPassword: false,
+                        inputType: TextInputType.emailAddress),
+                    const VerticalSpacerBox(size: SpacerSize.medium),
+                    PrimaryButton(
+                      onPressed: () {
+                        Navigator.pushNamed(
+                            context, EmailAutenticationScreen.id);
+                      },
+                      text: 'Recuperar senha',
+                    ),
+                  ]),
             ),
           ),
         ),

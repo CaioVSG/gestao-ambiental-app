@@ -33,20 +33,21 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const VerticalSpacerBox(size: SpacerSize.medium),
                 SizedBox(
-                  height: size.height * 0.6,
+                  height: size.height * 0.7,
                   child: ListView.separated(
                     separatorBuilder: (context, index) {
                       return const VerticalSpacerBox(size: SpacerSize.small);
                     },
                     itemBuilder: ((context, index) {
-                      return Container(
-                        height: size.height * 0.09,
-                        decoration: BoxDecoration(
-                            color: kDetailColor,
-                            borderRadius:
-                                BorderRadius.circular(kDefaultRadius)),
-                        child: const VisitTile(
-                            title: 'Posto Delta', date: '12/12/2020'),
+                      return Card(
+                        child: Container(
+                          height: size.height * 0.09,
+                          decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.circular(kDefaultRadius)),
+                          child: const VisitTile(
+                              title: 'Posto Delta', date: '12/12/2020'),
+                        ),
                       );
                     }),
                     itemCount: 8,

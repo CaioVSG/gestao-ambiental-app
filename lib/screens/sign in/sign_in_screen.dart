@@ -4,7 +4,7 @@ import 'package:meioambientemobile/components/custom_text_button.dart';
 import 'package:meioambientemobile/components/primary_button.dart';
 import 'package:meioambientemobile/components/vertical_spacer_box.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
-import 'package:meioambientemobile/screens/new%20register/new_register.dart';
+import 'package:meioambientemobile/screens/new%20register/new_register_screen.dart';
 import 'package:meioambientemobile/screens/password%20recovery/password_recovery_screen.dart';
 import 'package:meioambientemobile/screens/sign%20in/sign_in_bloc.dart';
 import 'package:meioambientemobile/screens/sign%20in/sign_in_controller.dart';
@@ -42,9 +42,15 @@ class _SignInScreenState extends State<SignInScreen> {
                       style: textTheme.headline5,
                     ),
                     const VerticalSpacerBox(size: SpacerSize.small),
-                    const AuthFormField(label: 'Email'),
+                    const AuthFormField(
+                        label: 'Email',
+                        isPassword: false,
+                        inputType: TextInputType.emailAddress),
                     const VerticalSpacerBox(size: SpacerSize.small),
-                    const AuthFormField(label: 'Senha'),
+                    const AuthFormField(
+                        label: 'Senha',
+                        isPassword: true,
+                        inputType: TextInputType.visiblePassword),
                     const VerticalSpacerBox(size: SpacerSize.medium),
                     context.watch<SignInController>().isLoading
                         ? const CircularProgressIndicator()
@@ -72,7 +78,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     const Text('ou'),
                     TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, NewRegister.id);
+                          Navigator.pushNamed(context, NewRegisterScreen.id);
                         },
                         child: const Text(
                           'Cadastre-se',
