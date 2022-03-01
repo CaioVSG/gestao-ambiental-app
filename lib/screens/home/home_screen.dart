@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meioambientemobile/components/vertical_spacer_box.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
+import 'package:meioambientemobile/screens/details/details_screen.dart';
 
 import 'components/custom_drawer.dart';
 import 'components/visit_tile.dart';
@@ -45,8 +46,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           decoration: BoxDecoration(
                               borderRadius:
                                   BorderRadius.circular(kDefaultRadius)),
-                          child: const VisitTile(
-                              title: 'Posto Delta', date: '12/12/2020'),
+                          child: VisitTile(
+                            title: 'Posto Delta',
+                            date: '12/12/2020',
+                            onTap: () {
+                              Navigator.pushNamed(context, DetailsScreen.id);
+                            },
+                          ),
                         ),
                       );
                     }),
