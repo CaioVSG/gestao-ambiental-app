@@ -24,11 +24,7 @@ class SplashScreen extends StatelessWidget {
               const Spacer(),
               Container(
                 padding: const EdgeInsets.all(kDefaultPadding),
-                child: Text(
-                  'Sistema de Gestão Ambiental - SGA',
-                  textAlign: TextAlign.center,
-                  style: textTheme.headline5,
-                ),
+                child: Image.asset('lib/assets/images/logo.png'),
               ),
               const CircularProgressIndicator(),
               const Spacer(),
@@ -43,3 +39,5 @@ class SplashScreen extends StatelessWidget {
     );
   }
 }
+
+class Users {}
