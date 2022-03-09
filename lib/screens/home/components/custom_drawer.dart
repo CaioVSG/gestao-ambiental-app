@@ -46,6 +46,7 @@ class CustomDrawer extends StatelessWidget {
           Navigator.popAndPushNamed(context, SignInScreen.id);
         },
       ),
+      const Spacer(),
       ListTile(
         leading: const Icon(Icons.exit_to_app),
         title: const Text('Sair'),
