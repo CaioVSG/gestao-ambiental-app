@@ -55,7 +55,6 @@ class CustomDrawer extends StatelessWidget {
           Navigator.popAndPushNamed(context, SignInScreen.id);
         },
       ),
-      const Spacer(),
       const Text('Versão: 1.0.0'),
       const VerticalSpacerBox(size: SpacerSize.small)
     ]));
