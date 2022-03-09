@@ -15,13 +15,9 @@ class CustomDrawer extends StatelessWidget {
       Container(
         height: MediaQuery.of(context).size.height * 0.15,
         width: MediaQuery.of(context).size.width,
-        color: kDetailColor,
+        color: kPrimaryColor,
         child: Center(
-          child: Text(
-            'Meio Ambiente',
-            style: TextStyle(
-                fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white),
-          ),
+          child: Image.asset('lib/assets/images/logo.png'),
         ),
       ),
       ListTile(

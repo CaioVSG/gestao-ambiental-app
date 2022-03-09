@@ -32,10 +32,9 @@ class _SignInScreenState extends State<SignInScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      'Sistema de Gestão Ambiental - SGA',
-                      textAlign: TextAlign.center,
-                      style: textTheme.headline5,
+                    Image.asset(
+                      'lib/assets/images/logo.png',
+                      width: size.width * 1,
                     ),
                     const VerticalSpacerBox(size: SpacerSize.small),
                     AuthFormField(
