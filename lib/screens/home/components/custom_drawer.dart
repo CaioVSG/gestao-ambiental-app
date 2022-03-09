@@ -27,13 +27,29 @@ class CustomDrawer extends StatelessWidget {
       ListTile(
         leading: const Icon(Icons.history),
         title: const Text('Visitas Anteriores'),
+        textColor: Colors.green,
         onTap: () {
           Navigator.pop(context);
         },
       ),
       ListTile(
+        leading: const Icon(Icons.camera),
+        title: const Text("Galeria"),
+        textColor: Colors.green,
+        onTap: () {},
+      ),
+      ListTile(
+        leading: const Icon(Icons.engineering),
+        title: const Text('Configurações'),
+        textColor: Colors.green,
+        onTap: () {
+          Navigator.popAndPushNamed(context, SignInScreen.id);
+        },
+      ),
+      ListTile(
         leading: const Icon(Icons.exit_to_app),
         title: const Text('Sair'),
+        textColor: Colors.green,
         onTap: () {
           Navigator.popAndPushNamed(context, SignInScreen.id);
         },

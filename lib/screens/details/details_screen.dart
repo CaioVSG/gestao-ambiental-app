@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:meioambientemobile/components/custom_text_button.dart';
 import 'package:meioambientemobile/components/primary_button.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
 
