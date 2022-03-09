@@ -5,12 +5,14 @@ class AuthFormField extends StatefulWidget {
   final String label;
   final bool isPassword;
   final TextInputType inputType;
+  final Function(String) onChanged;
 
   const AuthFormField(
       {Key? key,
       required this.label,
       required this.isPassword,
-      required this.inputType})
+      required this.inputType,
+      required this.onChanged})
       : super(key: key);
 
   @override
@@ -24,6 +26,7 @@ class _AuthFormFieldState extends State<AuthFormField> {
     return SizedBox(
       height: kLargeHeight,
       child: TextFormField(
+        onChanged: widget.onChanged,
         style: const TextStyle(color: kTextColor),
         obscureText: showPassword,
         keyboardType: widget.inputType,

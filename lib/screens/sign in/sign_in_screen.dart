@@ -38,12 +38,16 @@ class _SignInScreenState extends State<SignInScreen> {
                       style: textTheme.headline5,
                     ),
                     const VerticalSpacerBox(size: SpacerSize.small),
-                    const AuthFormField(
+                    AuthFormField(
+                        onChanged: (String value) =>
+                            _controller.setEmail(value),
                         label: 'Email',
                         isPassword: false,
                         inputType: TextInputType.emailAddress),
                     const VerticalSpacerBox(size: SpacerSize.small),
-                    const AuthFormField(
+                    AuthFormField(
+                        onChanged: (String value) =>
+                            _controller.setPassword(value),
                         label: 'Senha',
                         isPassword: true,
                         inputType: TextInputType.visiblePassword),
