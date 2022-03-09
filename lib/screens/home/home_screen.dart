@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:meioambientemobile/components/vertical_spacer_box.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
 import 'package:meioambientemobile/screens/details/details_screen.dart';
-
 import 'components/custom_drawer.dart';
 import 'components/visit_tile.dart';
 
@@ -30,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Text(
                   'Visitas agendadas'.toUpperCase(),
-                  style: textTheme.headline4,
+                  style: TextStyle(color: Colors.green),
                 ),
                 const VerticalSpacerBox(size: SpacerSize.medium),
                 SizedBox(
