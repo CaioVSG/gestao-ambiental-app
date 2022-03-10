@@ -49,7 +49,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             _controller.setPassword(value),
                         label: 'Senha',
                         isPassword: true,
-                        inputType: TextInputType.text),
+                        inputType: TextInputType.visiblePassword),
                     const VerticalSpacerBox(size: SpacerSize.medium),
                     context.watch<SignInController>().isLoading
                         ? const CircularProgressIndicator()
