@@ -9,7 +9,7 @@ class Api {
   Future login(BuildContext context, String email, String password) async {
     final UserModel userModel = Provider.of<UserModel>(context, listen: false);
     try {
-      var response = await _dio.post('http://77.243.85.238:8003/api/users/auth',
+      var response = await _dio.post(baseUrl + '/users/auth',
           options: Options(
             headers: {
               'Content-Type': 'application/json',
@@ -29,13 +29,5 @@ class Api {
     } catch (e) {
       return false;
     }
-
-    // if (response.statusCode == 200) {
-    //   print(response.data);
-    //   // UserModel(refreshToken: response.data);
-    //   return true;
-    // } else {
-    //   return false;
-    // }
   }
 }
