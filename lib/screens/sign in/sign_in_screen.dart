@@ -15,9 +15,9 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  final _controller = SignInController();
   @override
   Widget build(BuildContext context) {
+    final _controller = Provider.of<SignInController>(context);
     Size size = MediaQuery.of(context).size;
     TextTheme textTheme = Theme.of(context).textTheme;
     return SafeArea(
@@ -49,7 +49,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             _controller.setPassword(value),
                         label: 'Senha',
                         isPassword: true,
-                        inputType: TextInputType.visiblePassword),
+                        inputType: TextInputType.text),
                     const VerticalSpacerBox(size: SpacerSize.medium),
                     context.watch<SignInController>().isLoading
                         ? const CircularProgressIndicator()

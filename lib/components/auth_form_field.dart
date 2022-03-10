@@ -20,7 +20,7 @@ class AuthFormField extends StatefulWidget {
 }
 
 class _AuthFormFieldState extends State<AuthFormField> {
-  bool showPassword = false;
+  bool showPassword = true;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -28,7 +28,7 @@ class _AuthFormFieldState extends State<AuthFormField> {
       child: TextFormField(
         onChanged: widget.onChanged,
         style: const TextStyle(color: kTextColor),
-        obscureText: showPassword,
+        obscureText: widget.isPassword ? showPassword : false,
         keyboardType: widget.inputType,
         decoration: InputDecoration(
           suffixIcon: widget.isPassword
