@@ -26,6 +26,13 @@ class _AuthFormFieldState extends State<AuthFormField> {
     return SizedBox(
       height: kLargeHeight,
       child: TextFormField(
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Este campo não pode ficar vazio';
+          } else {
+            return null;
+          }
+        },
         onChanged: widget.onChanged,
         style: const TextStyle(color: kTextColor),
         obscureText: widget.isPassword ? showPassword : false,

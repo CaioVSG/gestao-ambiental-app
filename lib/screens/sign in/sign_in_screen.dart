@@ -15,11 +15,11 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+  final _formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final _controller = Provider.of<SignInController>(context);
     Size size = MediaQuery.of(context).size;
-    TextTheme textTheme = Theme.of(context).textTheme;
     return SafeArea(
       child: Scaffold(
         body: Padding(
@@ -29,37 +29,44 @@ class _SignInScreenState extends State<SignInScreen> {
               child: Container(
                 padding: const EdgeInsets.all(kDefaultPadding),
                 height: size.height * 0.8,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'lib/assets/images/logo.png',
-                      width: size.width * 1,
-                    ),
-                    const VerticalSpacerBox(size: SpacerSize.small),
-                    AuthFormField(
-                        onChanged: (String value) =>
-                            _controller.setEmail(value),
-                        label: 'Email',
-                        isPassword: false,
-                        inputType: TextInputType.emailAddress),
-                    const VerticalSpacerBox(size: SpacerSize.small),
-                    AuthFormField(
-                        onChanged: (String value) =>
-                            _controller.setPassword(value),
-                        label: 'Senha',
-                        isPassword: true,
-                        inputType: TextInputType.visiblePassword),
-                    const VerticalSpacerBox(size: SpacerSize.medium),
-                    context.watch<SignInController>().isLoading
-                        ? const CircularProgressIndicator()
-                        : PrimaryButton(
-                            text: 'Entrar',
-                            onPressed: () {
-                              context.read<SignInController>().signIn(context);
-                            },
-                          ),
-                  ],
+                child: Form(
+                  key: _formkey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'lib/assets/images/logo.png',
+                        width: size.width * 1,
+                      ),
+                      const VerticalSpacerBox(size: SpacerSize.small),
+                      AuthFormField(
+                          onChanged: (String value) =>
+                              _controller.setEmail(value),
+                          label: 'Email',
+                          isPassword: false,
+                          inputType: TextInputType.emailAddress),
+                      const VerticalSpacerBox(size: SpacerSize.small),
+                      AuthFormField(
+                          onChanged: (String value) =>
+                              _controller.setPassword(value),
+                          label: 'Senha',
+                          isPassword: true,
+                          inputType: TextInputType.visiblePassword),
+                      const VerticalSpacerBox(size: SpacerSize.medium),
+                      context.watch<SignInController>().isLoading
+                          ? const CircularProgressIndicator()
+                          : PrimaryButton(
+                              text: 'Entrar',
+                              onPressed: () {
+                                if (_formkey.currentState!.validate()) {
+                                  context
+                                      .read<SignInController>()
+                                      .signIn(context);
+                                }
+                              },
+                            ),
+                    ],
+                  ),
                 ),
               ),
             ),
