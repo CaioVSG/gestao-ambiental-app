@@ -25,7 +25,7 @@ class App extends StatelessWidget {
           const ResponsiveBreakpoint.resize(1000, name: DESKTOP),
         ],
       ),
-      title: 'Sistema de Gestão Ambiental - SGA Mobile',
+      title: 'Sistema de Gestão Ambiental',
       home: const SplashScreen(),
       theme: ThemeManager.themeData,
       routes: {

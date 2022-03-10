@@ -10,6 +10,7 @@ class CustomDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Drawer(
         child: Column(children: [
       Container(
@@ -17,35 +18,22 @@ class CustomDrawer extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         color: kPrimaryColor,
         child: Center(
-          child: Image.asset('lib/assets/images/logo.png'),
+          child: Image.asset('lib/assets/images/logo.png',
+              width: size.width * 0.5),
         ),
       ),
       ListTile(
         leading: const Icon(Icons.history),
-        title: const Text('Visitas Anteriores'),
-        textColor: Colors.green,
+        title: Text('Visitas Anteriores'.toUpperCase(), style: kdrawerText),
+        textColor: Color(0xFF4A7836),
         onTap: () {
           Navigator.pop(context);
-        },
-      ),
-      ListTile(
-        leading: const Icon(Icons.camera),
-        title: const Text("Galeria"),
-        textColor: Colors.green,
-        onTap: () {},
-      ),
-      ListTile(
-        leading: const Icon(Icons.engineering),
-        title: const Text('Configurações'),
-        textColor: Colors.green,
-        onTap: () {
-          Navigator.popAndPushNamed(context, SignInScreen.id);
         },
       ),
       const Spacer(),
       ListTile(
         leading: const Icon(Icons.exit_to_app),
-        title: const Text('Sair'),
+        title: Text('Sair'.toUpperCase(), style: kdrawerText),
         textColor: Colors.green,
         onTap: () {
           Navigator.popAndPushNamed(context, SignInScreen.id);

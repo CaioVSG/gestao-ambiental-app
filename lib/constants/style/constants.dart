@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 // =======COLORS=========//
@@ -19,6 +21,18 @@ const double kLargeHeight = 40;
 
 // =======TEXT STYLE=========//
 const TextStyle kTextButtonTextStyle = TextStyle(
+  fontWeight: FontWeight.bold,
+  color: kDetailColor,
+);
+
+const TextStyle kTitleStyles = TextStyle(
+  fontSize: 25,
+  fontWeight: FontWeight.bold,
+  color: kDetailColor,
+);
+
+const TextStyle kdrawerText = TextStyle(
+  fontSize: 15,
   fontWeight: FontWeight.bold,
   color: kDetailColor,
 );

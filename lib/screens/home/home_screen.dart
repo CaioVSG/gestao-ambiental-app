@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:meioambientemobile/components/vertical_spacer_box.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
@@ -27,11 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Visitas agendadas'.toUpperCase(),
-                  style: TextStyle(color: Colors.green),
-                ),
-                const VerticalSpacerBox(size: SpacerSize.medium),
+                Text('Visitas agendadas'.toUpperCase(), style: kTitleStyles),
+                const VerticalSpacerBox(size: SpacerSize.large),
                 SizedBox(
                   height: size.height * 0.7,
                   child: ListView.separated(
@@ -41,13 +40,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemBuilder: ((context, index) {
                       return Card(
                         child: Container(
-                          height: size.height * 0.09,
+                          height: size.height * 0.13,
                           decoration: BoxDecoration(
                               borderRadius:
                                   BorderRadius.circular(kDefaultRadius)),
                           child: VisitTile(
                             title: 'Posto Delta',
-                            date: '12/12/2020',
+                            VisitDate: '12/12/2020',
+                            CriationDate: '10/03/2022',
                             onTap: () {
                               Navigator.pushNamed(context, DetailsScreen.id);
                             },
