@@ -24,7 +24,7 @@ class SplashScreen extends StatelessWidget {
               const Spacer(),
               Container(
                 padding: const EdgeInsets.all(kDefaultPadding),
-                child: Image.asset('lib/assets/images/logo.png'),
+                child: Image.asset('lib/assets/images/logo.png', width: size.width * 0.6),
               ),
               const CircularProgressIndicator(),
               const Spacer(),
