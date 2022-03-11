@@ -5,6 +5,7 @@ import 'package:meioambientemobile/components/vertical_spacer_box.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
 import 'package:meioambientemobile/screens/details/details_screen.dart';
 import 'package:meioambientemobile/screens/home/home_screen_controller.dart';
+import 'package:provider/provider.dart';
 import 'components/custom_drawer.dart';
 import 'components/visit_tile.dart';
 
@@ -20,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void didChangeDependencies() {
     final controller = Provider.of<HomeScreenController>(context);
-    controller.
+    controller.getAllVisits(context);
     super.didChangeDependencies();
   }
 
