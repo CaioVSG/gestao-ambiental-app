@@ -3,7 +3,6 @@ import 'package:meioambientemobile/constants/style/constants.dart';
 import 'package:meioambientemobile/core/api.dart';
 import 'package:meioambientemobile/core/user_model.dart';
 import 'package:meioambientemobile/screens/home/home_screen.dart';
-import 'package:provider/provider.dart';
 
 class SignInController with ChangeNotifier {
   bool isLoading = false;

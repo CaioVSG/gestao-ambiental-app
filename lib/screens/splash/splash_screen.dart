@@ -36,9 +36,8 @@ class _SplashScreenState extends State<SplashScreen> {
               Container(
                 padding: const EdgeInsets.all(kDefaultPadding),
                 child: Image.asset('lib/assets/images/logo.png',
-                    width: size.width * 0.6),
+                    width: size.width * 0.5),
               ),
-              const CircularProgressIndicator(),
               const Spacer(),
               Padding(
                 padding: const EdgeInsets.all(kSmallHeight),

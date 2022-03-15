@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:meioambientemobile/components/vertical_spacer_box.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
@@ -39,6 +37,8 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('Visitas agendadas'.toUpperCase(), style: kTitleStyles),
+                //Icon(Icons.add_circle_outline,
+                //color: kDetailColor, size: size.width * 0.09),
                 const VerticalSpacerBox(size: SpacerSize.large),
                 SizedBox(
                   height: size.height * 0.7,
@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemBuilder: ((context, index) {
                       return Card(
                         child: Container(
-                          height: size.height * 0.13,
+                          height: size.height * 0.17,
                           decoration: BoxDecoration(
                               borderRadius:
                                   BorderRadius.circular(kDefaultRadius)),
@@ -57,6 +57,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             title: 'Posto Delta',
                             VisitDate: '12/12/2020',
                             CriationDate: '10/03/2022',
+                            business: 'LMTS',
+                            tipo: 'Denúncia',
                             onTap: () {
                               Navigator.pushNamed(context, DetailsScreen.id);
                             },

@@ -7,12 +7,16 @@ class VisitTile extends StatelessWidget {
   final String VisitDate;
   final String CriationDate;
   final VoidCallback onTap;
+  final String business;
+  final String tipo;
   const VisitTile({
     Key? key,
     required this.title,
     required this.VisitDate,
     required this.CriationDate,
     required this.onTap,
+    required this.business,
+    required this.tipo,
   }) : super(key: key);
 
   @override
@@ -25,28 +29,33 @@ class VisitTile extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Tipo: '),
+            Row(
+              children: [
+                Icon(Icons.description),
+                Text('Tipo: ' + tipo, style: textTheme.subtitle1),
+              ],
+            ),
             Row(mainAxisAlignment: MainAxisAlignment.start, children: [
               const Icon(Icons.location_on),
               Text(
                 title,
-                style: textTheme.headline6,
+                style: textTheme.subtitle1,
               ),
               const Spacer(),
               Column(
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.event_available),
-                      Text('Data de Visita: ' + VisitDate,
+                      Icon(Icons.event),
+                      Text('Data de Criação: ' + VisitDate,
                           style: textTheme.subtitle1),
                     ],
                   ),
                   VerticalSpacerBox(size: SpacerSize.tiny),
                   Row(
                     children: [
-                      Icon(Icons.event, color: kDetailColor),
-                      Text('Data de Criação: ' + CriationDate,
+                      Icon(Icons.event_available, color: kDetailColor),
+                      Text('Data de Visita: ' + CriationDate,
                           style: textTheme.subtitle1),
                     ],
                   ),
@@ -56,7 +65,7 @@ class VisitTile extends StatelessWidget {
             Row(
               children: [
                 Icon(Icons.business),
-                Text('Empresa: '),
+                Text('Empresa: ' + business, style: textTheme.subtitle1),
               ],
             )
           ],
