@@ -13,6 +13,7 @@ class SignInController with ChangeNotifier {
   String password = '';
 
   void signIn(BuildContext context) async {
+    print('entrando');
     isLoading = true;
     _api.login(context, email, password).then((value) {
       isLoading = false;

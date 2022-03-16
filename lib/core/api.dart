@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:meioambientemobile/core/models/user_model.dart';
+import 'package:meioambientemobile/core/models/visits_model.dart';
 import 'package:provider/provider.dart';
 
 class Api {
@@ -24,7 +25,6 @@ class Api {
           });
       if (response.statusCode == 200) {
         userModel.setUserRefreshToken(response.data);
-        print(userModel.refreshToken);
         return true;
       }
     } catch (e) {
@@ -46,8 +46,8 @@ class Api {
           },
         ),
       );
-      print(response.data);
       if (response.statusCode == 200) {
+        print(response.data);
         return (response.data);
       } else {
         return null;
