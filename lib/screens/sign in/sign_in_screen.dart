@@ -35,7 +35,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   children: [
                     Image.asset(
                       'lib/assets/images/logo.png',
-                      width: size.width * 1,
+                      width: size.width * 0.6,
                     ),
                     const VerticalSpacerBox(size: SpacerSize.small),
                     AuthFormField(

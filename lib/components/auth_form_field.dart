@@ -23,8 +23,9 @@ class _AuthFormFieldState extends State<AuthFormField> {
   bool showPassword = true;
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return SizedBox(
-      height: kLargeHeight,
+      height: size.height * 0.08,
       child: TextFormField(
         validator: (value) {
           if (value == null || value.isEmpty) {
