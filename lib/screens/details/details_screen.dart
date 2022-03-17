@@ -113,27 +113,17 @@ class DetailsScreen extends StatelessWidget {
               InkWell(
                 onTap: () => controller.selectImages(),
                 child: Card(
-                    margin: EdgeInsets.all(8),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text('Anexar fotos'),
-                        Icon(
-                          Icons.add_a_photo,
-                        ),
-                      ],
-                    )
-                    // child: SizedBox(
-                    //   height: size.height * 0.2,
-                    //   width: size.width * 0.92,
-                    //   child: ListView.builder(
-                    //       scrollDirection: Axis.horizontal,
-                    //       shrinkWrap: true,
-                    //       itemBuilder: (context, index) {
-                    //         return Text('asasd');
-                    //       }),
-                    // ),
-                    ),
+                  margin: EdgeInsets.all(8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('Anexar fotos'),
+                      Icon(
+                        Icons.add_a_photo,
+                      ),
+                    ],
+                  ),
+                ),
               ),
               Divider(color: kSecondaryTextColor),
               Text('Tipo de Visita: ',
