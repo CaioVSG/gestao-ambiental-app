@@ -47,7 +47,7 @@ class VisitTile extends StatelessWidget {
                   Row(
                     children: [
                       Icon(Icons.event),
-                      Text('Data de Criação: ' + VisitDate,
+                      Text('Data de Criação: ' + CriationDate,
                           style: textTheme.subtitle1),
                     ],
                   ),
@@ -55,7 +55,7 @@ class VisitTile extends StatelessWidget {
                   Row(
                     children: [
                       Icon(Icons.event_available, color: kDetailColor),
-                      Text('Data de Visita: ' + CriationDate,
+                      Text('Data de Visita: ' + VisitDate,
                           style: textTheme.subtitle1),
                     ],
                   ),
