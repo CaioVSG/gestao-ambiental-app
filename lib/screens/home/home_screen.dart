@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 return const VerticalSpacerBox(
                                     size: SpacerSize.small);
                               },
-                              itemCount: 1,
+                              itemCount: 2,
                               itemBuilder: ((context, index) {
                                 return Card(
                                   child: Container(

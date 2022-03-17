@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class PrimaryButton extends StatelessWidget {
   final String text;
   final Function() onPressed;
-  const PrimaryButton({Key? key, required this.text, required this.onPressed})
+  const PrimaryButton({Key? key, required this.text, required this.onPressed, Text? child})
       : super(key: key);
 
   @override
