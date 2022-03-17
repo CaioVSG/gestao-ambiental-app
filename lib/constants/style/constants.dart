@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 // =======COLORS=========//
@@ -26,7 +24,7 @@ const TextStyle kTextButtonTextStyle = TextStyle(
 );
 
 const TextStyle kTitleStyles = TextStyle(
-  fontSize: 25,
+  fontSize: 22,
   fontWeight: FontWeight.bold,
   color: kDetailColor,
 );

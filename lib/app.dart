@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meioambientemobile/constants/style/theme_manager.dart';
 import 'package:meioambientemobile/screens/home/home_screen.dart';
+import 'package:meioambientemobile/screens/profile/profile_screen.dart';
 import 'package:meioambientemobile/screens/sign%20in/sign_in_screen.dart';
 import 'package:meioambientemobile/screens/splash/splash_screen.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -33,6 +34,7 @@ class App extends StatelessWidget {
         HomeScreen.id: (context) => const HomeScreen(),
         SignInScreen.id: (context) => const SignInScreen(),
         DetailsScreen.id: (context) => const DetailsScreen(),
+        ProfileScreen.id: (context) => const ProfileScreen(),
       },
     );
   }

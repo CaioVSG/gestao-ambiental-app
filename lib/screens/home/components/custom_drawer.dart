@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meioambientemobile/components/vertical_spacer_box.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
+import 'package:meioambientemobile/screens/profile/profile_screen.dart';
 import 'package:meioambientemobile/screens/sign%20in/sign_in_screen.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -25,9 +26,17 @@ class CustomDrawer extends StatelessWidget {
       ListTile(
         leading: const Icon(Icons.history),
         title: Text('Visitas Anteriores'.toUpperCase(), style: kdrawerText),
-        textColor: Color(0xFF4A7836),
+        textColor: kDetailColor,
         onTap: () {
           Navigator.pop(context);
+        },
+      ),
+      ListTile(
+        leading: const Icon(Icons.person),
+        title: Text('Perfil'.toUpperCase(), style: kdrawerText),
+        textColor: kDetailColor,
+        onTap: () {
+          Navigator.pushNamed(context, ProfileScreen.id);
         },
       ),
       const Spacer(),

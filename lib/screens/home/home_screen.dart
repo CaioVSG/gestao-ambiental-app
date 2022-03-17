@@ -74,9 +74,16 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                             ),
                           ),
+<<<<<<< HEAD
                         );
                       }),
                     ),
+=======
+                        ),
+                      );
+                    }),
+                    itemCount: 1,
+>>>>>>> 2d943b2f8cc3712a6e00765df32471b17a9b550e
                   ),
                 ],
               );
