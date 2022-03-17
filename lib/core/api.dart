@@ -18,13 +18,12 @@ class Api {
             },
           ),
           data: {
-            'email': email,
-            'password': password,
+            'email': 'analista@analista.com',
+            'password': '12345678',
             'device_name': 'mobile',
           });
       if (response.statusCode == 200) {
         userModel.setUserRefreshToken(response.data);
-        print(userModel.refreshToken);
         return true;
       }
     } catch (e) {
@@ -46,7 +45,6 @@ class Api {
           },
         ),
       );
-      print(response.data);
       if (response.statusCode == 200) {
         return (response.data);
       } else {
