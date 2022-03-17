@@ -37,8 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: FutureBuilder(
                 future: Api().getAllVisits(context),
                 builder: ((context, snapshot) {
-                  print(snapshot.data.runtimeType);
-                  Object? list = snapshot.data;
+                  List<dynamic> dataList = snapshot.data as List<dynamic>;
 
                   if (!snapshot.hasData) {
                     return const Center(child: CircularProgressIndicator());
@@ -56,8 +55,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                 return const VerticalSpacerBox(
                                     size: SpacerSize.small);
                               },
-                              itemCount: 2,
+                              itemCount: dataList.length,
                               itemBuilder: ((context, index) {
+                                final visitsModel = VisitsModel(
+                                    visitDate: dataList[index]['data_marcada'],
+                                    createdAt: dataList[index]['created_at']);
                                 return Card(
                                   child: Container(
                                     height: size.height * 0.17,
@@ -66,7 +68,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                             kDefaultRadius)),
                                     child: VisitTile(
                                       title: 'Posto Delta',
-                                      VisitDate: '12/12/2020',
+                                      VisitDate:
+                                          visitsModel.visitDate.toString(),
                                       CriationDate: '10/03/2022',
                                       business: 'LMTS',
                                       tipo: 'Denúncia',

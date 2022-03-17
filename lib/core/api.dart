@@ -19,8 +19,8 @@ class Api {
             },
           ),
           data: {
-            'email': email,
-            'password': password,
+            'email': 'analista@analista.com',
+            'password': '12345678',
             'device_name': 'mobile',
           });
       if (response.statusCode == 200) {

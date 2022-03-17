@@ -57,11 +57,8 @@ class _SignInScreenState extends State<SignInScreen> {
                         : PrimaryButton(
                             text: 'Entrar',
                             onPressed: () {
-                              if (_formkey.currentState!.validate()) {
-                                context
-                                    .read<SignInController>()
-                                    .signIn(context);
-                              }
+                              context.read<SignInController>().signIn(context);
+                              if (_formkey.currentState!.validate()) {}
                             },
                           ),
                   ],
