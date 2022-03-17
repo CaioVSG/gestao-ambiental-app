@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:meioambientemobile/components/horizontal_spacer_box.dart';
 import 'package:meioambientemobile/components/primary_button.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
+import 'package:meioambientemobile/screens/details/details_screen_controller.dart';
 
 class DetailsScreen extends StatelessWidget {
   static const String id = 'details_screen';
@@ -8,6 +10,7 @@ class DetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = DetailsScreenController();
     Size size = MediaQuery.of(context).size;
     TextTheme textTheme = Theme.of(context).textTheme;
     return Scaffold(
@@ -89,8 +92,26 @@ class DetailsScreen extends StatelessWidget {
                 ),
               ),
               Center(child: const Text('NENHUMA FOTO FOI ADICIONADA AINDA')),
+              SizedBox(
+                height: size.height * 0.15,
+                child: ListView.separated(
+                  separatorBuilder: (context, index) {
+                    return const HorizontalSpacerBox(size: SpacerSize.small);
+                  },
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 4,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container(
+                      height: size.height,
+                      width: size.width * 0.4,
+                      color: Colors.red,
+                      child: Text('Foto'),
+                    );
+                  },
+                ),
+              ),
               InkWell(
-                onTap: () {},
+                onTap: () => controller.selectImages(),
                 child: Card(
                   margin: EdgeInsets.all(8),
                   child: Row(

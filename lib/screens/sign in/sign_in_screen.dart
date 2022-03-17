@@ -25,47 +25,46 @@ class _SignInScreenState extends State<SignInScreen> {
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
           child: Center(
-            child: Card(
-              child: Container(
-                padding: const EdgeInsets.all(kDefaultPadding),
-                height: size.height * 0.8,
-                child: Form(
-                  key: _formkey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        'lib/assets/images/logo.png',
-                        width: size.width * 1,
-                      ),
-                      const VerticalSpacerBox(size: SpacerSize.small),
-                      AuthFormField(
-                          onChanged: (String value) =>
-                              _controller.setEmail(value),
-                          label: 'Email',
-                          isPassword: false,
-                          inputType: TextInputType.emailAddress),
-                      const VerticalSpacerBox(size: SpacerSize.small),
-                      AuthFormField(
-                          onChanged: (String value) =>
-                              _controller.setPassword(value),
-                          label: 'Senha',
-                          isPassword: true,
-                          inputType: TextInputType.visiblePassword),
-                      const VerticalSpacerBox(size: SpacerSize.medium),
-                      context.watch<SignInController>().isLoading
-                          ? const CircularProgressIndicator()
-                          : PrimaryButton(
-                              text: 'Entrar',
-                              onPressed: () {
+            child: Container(
+              padding: const EdgeInsets.all(kDefaultPadding),
+              height: size.height * 0.8,
+              child: Form(
+                key: _formkey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'lib/assets/images/logo.png',
+                      width: size.width * 0.6,
+                    ),
+                    const VerticalSpacerBox(size: SpacerSize.small),
+                    AuthFormField(
+                        onChanged: (String value) =>
+                            _controller.setEmail(value),
+                        label: 'Email',
+                        isPassword: false,
+                        inputType: TextInputType.emailAddress),
+                    const VerticalSpacerBox(size: SpacerSize.small),
+                    AuthFormField(
+                        onChanged: (String value) =>
+                            _controller.setPassword(value),
+                        label: 'Senha',
+                        isPassword: true,
+                        inputType: TextInputType.visiblePassword),
+                    const VerticalSpacerBox(size: SpacerSize.medium),
+                    context.watch<SignInController>().isLoading
+                        ? const CircularProgressIndicator()
+                        : PrimaryButton(
+                            text: 'Entrar',
+                            onPressed: () {
+                              if (_formkey.currentState!.validate()) {
                                 context
                                     .read<SignInController>()
                                     .signIn(context);
-                                if (_formkey.currentState!.validate()) {}
-                              },
-                            ),
-                    ],
-                  ),
+                              }
+                            },
+                          ),
+                  ],
                 ),
               ),
             ),

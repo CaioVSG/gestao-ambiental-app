@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:meioambientemobile/core/models/user_model.dart';
+import 'package:meioambientemobile/core/models/visits_model.dart';
 import 'package:provider/provider.dart';
 
 class Api {
@@ -18,8 +19,8 @@ class Api {
             },
           ),
           data: {
-            'email': 'analista@analista.com',
-            'password': '12345678',
+            'email': email,
+            'password': password,
             'device_name': 'mobile',
           });
       if (response.statusCode == 200) {
@@ -46,6 +47,7 @@ class Api {
         ),
       );
       if (response.statusCode == 200) {
+        print(response.data);
         return (response.data);
       } else {
         return null;

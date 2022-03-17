@@ -5,7 +5,9 @@ class HomeScreenController with ChangeNotifier {
   bool isLoading = false;
   final _api = Api();
 
-  void getAllVisits(BuildContext context) async {
+  Future getAllVisits(BuildContext context) async {
+    print('getting');
+
     isLoading = true;
     _api.getAllVisits(context).then((value) {
       isLoading = false;
