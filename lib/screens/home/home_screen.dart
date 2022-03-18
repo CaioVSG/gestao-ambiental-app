@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:meioambientemobile/components/vertical_spacer_box.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
@@ -20,7 +22,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void didChangeDependencies() {
-    // HomeScreenController().getAllVisits(context);
+    final controller = Provider.of<HomeScreenController>(context);
+    controller.getAllVisits(context);
     super.didChangeDependencies();
   }
 
@@ -29,64 +32,78 @@ class _HomeScreenState extends State<HomeScreen> {
     Size size = MediaQuery.of(context).size;
     TextTheme textTheme = Theme.of(context).textTheme;
     return SafeArea(
-        child: Scaffold(
-            appBar: AppBar(),
-            drawer: const CustomDrawer(),
-            body: Padding(
-              padding: const EdgeInsets.all(kDefaultPadding),
-              child: FutureBuilder(
-                future: Api().getAllVisits(context),
-                builder: ((context, snapshot) {
-                  List<dynamic> dataList = snapshot.data as List<dynamic>;
-
-                  if (!snapshot.hasData) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else {
-                    return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Visitas agendadas'.toUpperCase(),
-                              style: kTitleStyles),
-                          const VerticalSpacerBox(size: SpacerSize.large),
-                          SizedBox(
-                            height: size.height * 0.7,
-                            child: ListView.separated(
-                              separatorBuilder: (context, index) {
-                                return const VerticalSpacerBox(
-                                    size: SpacerSize.small);
-                              },
-                              itemCount: dataList.length,
-                              itemBuilder: ((context, index) {
-                                final visitsModel = VisitsModel(
-                                    visitDate: dataList[index]['data_marcada'],
-                                    createdAt: dataList[index]['created_at']);
-                                return Card(
-                                  child: Container(
-                                    height: size.height * 0.17,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(
-                                            kDefaultRadius)),
-                                    child: VisitTile(
-                                      title: 'Posto Delta',
-                                      VisitDate:
-                                          visitsModel.visitDate.toString(),
-                                      CriationDate: '10/03/2022',
-                                      business: 'LMTS',
-                                      tipo: 'Denúncia',
-                                      onTap: () {
-                                        Navigator.pushNamed(
-                                            context, DetailsScreen.id);
-                                      },
-                                    ),
+      child: Scaffold(
+        appBar: AppBar(),
+        drawer: const CustomDrawer(),
+        body: Padding(
+            padding: const EdgeInsets.all(kDefaultPadding),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Visitas agendadas'.toUpperCase(), style: kTitleStyles),
+                //Icon(Icons.add_circle_outline,
+                //color: kDetailColor, size: size.width * 0.09),
+                const VerticalSpacerBox(size: SpacerSize.large),
+                FutureBuilder(
+                    future: Api().getAllVisits(context),
+                    builder: ((context, snapshot) {
+                      if (snapshot.hasData) {
+                        final List<dynamic> dataList =
+                            snapshot.data as List<dynamic>;
+                        final complaintModel = ComplaintModel(
+                            address: dataList[0]['denuncia']['endereco'],
+                            text: dataList[0]['denuncia']['endereco'],
+                            denunciator: dataList[0]['denuncia']['denunciante'],
+                            createdAt: dataList[0]['denuncia']['created_at'],
+                            updatedAt: dataList[0]['denuncia']['updated_at']);
+                        final visitsModel = VisitsModel(
+                            visitDate: dataList[0]['data_marcada'],
+                            visitDoneDate: dataList[0]['data_realizada'] ?? '',
+                            requirementId: dataList[0]['requerimento_id'] ?? '',
+                            complaintId: dataList[0]['denuncia_id'] ?? '',
+                            createdAt: dataList[0]['created_at'],
+                            updatedAt: dataList[0]['updated_at'],
+                            pruningId: dataList[0]['solicitacao_poda_id']);
+                        return SizedBox(
+                          height: size.height * 0.7,
+                          child: ListView.separated(
+                            separatorBuilder: (context, index) {
+                              return const VerticalSpacerBox(
+                                  size: SpacerSize.small);
+                            },
+                            itemCount: dataList.length,
+                            itemBuilder: ((context, index) {
+                              return Card(
+                                child: Container(
+                                  height: size.height * 0.17,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(
+                                          kDefaultRadius)),
+                                  child: VisitTile(
+                                    title: 'Posto Delta',
+                                    VisitDate: visitsModel.visitDate,
+                                    CriationDate: visitsModel.createdAt,
+                                    business: 'LMTS',
+                                    tipo: 'Denúncia',
+                                    onTap: () {
+                                      Navigator.pushNamed(
+                                          context, DetailsScreen.id);
+                                    },
                                   ),
-                                );
-                              }),
-                            ),
-                          )
-                        ]);
-                  }
-                }),
-              ),
-            )));
+                                ),
+                              );
+                            }),
+                          ),
+                        );
+                      } else {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                    }))
+              ],
+            )),
+      ),
+    );
   }
 }
