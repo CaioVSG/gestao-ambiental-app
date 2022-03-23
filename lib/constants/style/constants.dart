@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 // =======COLORS=========//
-const Color kPrimaryColor = Colors.white;
+const Color kPrimaryColor = Color(0xFFEEEEEE);
 const Color kTextColor = Color(0xFF2c3e50);
 const Color kLightColor = Color(0xFF2c3e50);
 const Color kSecondaryTextColor = Color(0xFF2c3e50);
@@ -25,6 +25,12 @@ const TextStyle kTextButtonTextStyle = TextStyle(
 
 const TextStyle kTitleStyles = TextStyle(
   fontSize: 22,
+  fontWeight: FontWeight.bold,
+  color: kDetailColor,
+);
+
+const TextStyle KProfileStyle = TextStyle(
+  fontSize: 30,
   fontWeight: FontWeight.bold,
   color: kDetailColor,
 );
