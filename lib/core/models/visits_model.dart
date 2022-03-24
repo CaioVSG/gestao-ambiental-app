@@ -4,12 +4,12 @@ class VisitsModel with ChangeNotifier {
   //Dados da Visita
   final String visitDate;
   final String visitDoneDate;
-  final String requirementId;
-  final String complaintId;
-  final String? analistId;
+  final int requirementId;
+  final int complaintId;
+  final int? analistId;
   final String createdAt;
   final String updatedAt;
-  final String pruningId; //solicitação_poda_id
+  final int pruningId; //solicitação_poda_id
 
   VisitsModel(
       {required this.visitDate,
