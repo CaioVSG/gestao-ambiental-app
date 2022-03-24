@@ -12,24 +12,40 @@ class ProfileScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(
+                Icons.account_circle_rounded,
+                color: Colors.white,
+              ),
+              onPressed: () {},
+            )
+          ],
           backgroundColor: kDetailColor,
-          title: Text('Perfil'.toUpperCase()),
         ),
         body: Padding(
           padding: const EdgeInsets.all(kDefaultPadding),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Center(
-                child: CircleAvatar(
-                    radius: (90),
-                    backgroundColor: Colors.transparent,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(50),
-                      child: Image.asset('lib/assets/images/logo.png'),
-                    ))),
+              child: CircleAvatar(
+                  radius: (80),
+                  backgroundColor: Colors.transparent,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(90),
+                    child: Image.asset('lib/assets/images/eu.png'),
+                  )),
+            ),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Center(
+                  child: Text(
+                'John Doe',
+                style: KProfileStyle,
+              )),
+            ),
             const VerticalSpacerBox(size: SpacerSize.large),
-            Text('Nome: ', style: kTitleStyles),
-            Text('Email: ', style: kTitleStyles),
+            const Text('Email: ', style: kdrawerText),
           ]),
         ),
       ),

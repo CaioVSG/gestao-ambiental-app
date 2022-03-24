@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:meioambientemobile/core/models/user_model.dart';
-import 'package:meioambientemobile/core/models/visits_model.dart';
 import 'package:provider/provider.dart';
 
 class Api {
