@@ -40,9 +40,9 @@ class _SplashScreenState extends State<SplashScreen> {
                     width: size.width * 0.5),
               ),
               const Spacer(),
-              Padding(
-                padding: const EdgeInsets.all(kSmallHeight),
-                child: const Text('versão: 1.0.0'),
+              const Padding(
+                padding: EdgeInsets.all(kSmallHeight),
+                child: Text('versão: 1.0.0'),
               ),
             ],
           ),

@@ -1,15 +1,12 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:meioambientemobile/components/vertical_spacer_box.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
 import 'package:meioambientemobile/core/api.dart';
 import 'package:meioambientemobile/core/models/user_model.dart';
-import 'package:meioambientemobile/core/models/visits_model.dart';
 import 'package:meioambientemobile/screens/details/details_screen.dart';
 import 'package:meioambientemobile/screens/home/home_screen_controller.dart';
+import 'package:meioambientemobile/screens/profile/profile_screen.dart';
 import 'package:provider/provider.dart';
-import 'components/custom_drawer.dart';
 import 'components/visit_tile.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -31,50 +28,60 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    TextTheme textTheme = Theme.of(context).textTheme;
     return SafeArea(
-<<<<<<< HEAD
         child: Scaffold(
             floatingActionButton: FloatingActionButton(onPressed: () {
               final UserModel userModel =
                   Provider.of<UserModel>(context, listen: false);
               print(userModel.refreshToken);
             }),
-            appBar: AppBar(),
-            drawer: const CustomDrawer(),
+            appBar: AppBar(
+              actions: <Widget>[
+                IconButton(
+                  icon: const Icon(
+                    Icons.account_circle_rounded,
+                    color: Colors.white,
+                    size: 32,
+                  ),
+                  onPressed: () {
+                    Navigator.popAndPushNamed(context, ProfileScreen.id);
+                  },
+                )
+              ],
+            ),
             body: Padding(
               padding: const EdgeInsets.all(kDefaultPadding),
               child: FutureBuilder(
                 future: Api().getAllVisits(context),
                 builder: ((context, snapshot) {
                   List<dynamic> dataList = snapshot.data as List<dynamic>;
-
                   if (snapshot.hasData) {
                     return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Visitas agendadas'.toUpperCase(),
-                              style: kTitleStyles),
-                          const VerticalSpacerBox(size: SpacerSize.large),
+                          Text('Visitas'.toUpperCase(), style: kTitleStyles),
+                          const VerticalSpacerBox(size: SpacerSize.tiny),
                           SizedBox(
-                            height: size.height * 0.7,
+                            height: size.height * 0.79,
                             child: ListView.separated(
                               separatorBuilder: (context, index) {
                                 return const VerticalSpacerBox(
                                     size: SpacerSize.small);
                               },
-                              itemCount: 2,
+                              itemCount: 4,
                               itemBuilder: ((context, index) {
                                 return Card(
                                   child: Container(
-                                    height: size.height * 0.17,
+                                    height: size.height * 0.2,
                                     decoration: BoxDecoration(
+                                        color: kDetailColor,
                                         borderRadius: BorderRadius.circular(
-                                            kDefaultRadius)),
+                                            kSmallHeight)),
                                     child: VisitTile(
-                                      title: 'Posto Delta',
-                                      VisitDate: 'asd',
-                                      CriationDate: '10/03/2022',
+                                      title:
+                                          'Av, Caruaru, B. Heliópolis, n. 123',
+                                      VisitDate: '25/03/2022',
+                                      hora: '15:00',
                                       business: 'LMTS',
                                       tipo: 'Denúncia',
                                       onTap: () {
@@ -94,80 +101,5 @@ class _HomeScreenState extends State<HomeScreen> {
                 }),
               ),
             )));
-=======
-      child: Scaffold(
-        appBar: AppBar(),
-        drawer: const CustomDrawer(),
-        body: Padding(
-            padding: const EdgeInsets.all(kDefaultPadding),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Visitas agendadas'.toUpperCase(), style: kTitleStyles),
-                //Icon(Icons.add_circle_outline,
-                //color: kDetailColor, size: size.width * 0.09),
-                const VerticalSpacerBox(size: SpacerSize.large),
-                FutureBuilder(
-                    future: Api().getAllVisits(context),
-                    builder: ((context, snapshot) {
-                      if (snapshot.hasData) {
-                        final List<dynamic> dataList =
-                            snapshot.data as List<dynamic>;
-                        final complaintModel = ComplaintModel(
-                            address: dataList[0]['denuncia']['endereco'],
-                            text: dataList[0]['denuncia']['endereco'],
-                            denunciator: dataList[0]['denuncia']['denunciante'],
-                            createdAt: dataList[0]['denuncia']['created_at'],
-                            updatedAt: dataList[0]['denuncia']['updated_at']);
-                        final visitsModel = VisitsModel(
-                            visitDate: dataList[0]['data_marcada'],
-                            visitDoneDate: dataList[0]['data_realizada'] ?? '',
-                            requirementId: dataList[0]['requerimento_id'] ?? '',
-                            complaintId: dataList[0]['denuncia_id'] ?? '',
-                            createdAt: dataList[0]['created_at'],
-                            updatedAt: dataList[0]['updated_at'],
-                            pruningId: dataList[0]['solicitacao_poda_id']);
-                        return SizedBox(
-                          height: size.height * 0.7,
-                          child: ListView.separated(
-                            separatorBuilder: (context, index) {
-                              return const VerticalSpacerBox(
-                                  size: SpacerSize.small);
-                            },
-                            itemCount: dataList.length,
-                            itemBuilder: ((context, index) {
-                              return Card(
-                                child: Container(
-                                  height: size.height * 0.17,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(
-                                          kDefaultRadius)),
-                                  child: VisitTile(
-                                    title: 'Posto Delta',
-                                    VisitDate: visitsModel.visitDate,
-                                    CriationDate: visitsModel.createdAt,
-                                    business: 'LMTS',
-                                    tipo: 'Denúncia',
-                                    onTap: () {
-                                      Navigator.pushNamed(
-                                          context, DetailsScreen.id);
-                                    },
-                                  ),
-                                ),
-                              );
-                            }),
-                          ),
-                        );
-                      } else {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                    }))
-              ],
-            )),
-      ),
-    );
->>>>>>> 34acf566e6b012558d59697fc63d772b8559d241
   }
 }
