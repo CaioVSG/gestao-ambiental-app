@@ -34,14 +34,26 @@ class DetailsScreen extends StatelessWidget {
           padding: const EdgeInsets.all(kDefaultPadding),
           child: SingleChildScrollView(
             child: SizedBox(
-              height: size.height * 0.96,
+              height: size.height * 1.07,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'DENÚNCIA AMBIENTAL',
-                    style: KHomeScreen,
-                    textAlign: TextAlign.start,
+                  InkWell(
+                    onTap: () => controller.selectImages(),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: const [
+                        Text(
+                          'DENÚNCIA AMBIENTAL',
+                          style: KHomeScreen,
+                          textAlign: TextAlign.start,
+                        ),
+                        Spacer(),
+                        Icon(
+                          Icons.more_horiz,
+                          color: kDetailColor,
+                        ),
+                      ],
+                    ),
                   ),
                   const Spacer(),
                   Card(
@@ -51,13 +63,19 @@ class DetailsScreen extends StatelessWidget {
                     color: kDetailColor,
                     child: Container(
                       padding: const EdgeInsets.all(10),
-                      height: size.height * 0.2,
+                      height: size.height * 0.35,
                       width: size.width * 0.92,
                       child: Column(children: [
                         Container(
                           alignment: Alignment.topLeft,
                           child: const Text('Descrição',
                               textAlign: TextAlign.start, style: KText),
+                        ),
+                        const TextField(
+                          autofocus: true,
+                          decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: 'Descrição do ocorrido'),
                         ),
                       ]),
                     ),

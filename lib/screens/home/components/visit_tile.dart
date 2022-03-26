@@ -6,6 +6,7 @@ class VisitTile extends StatelessWidget {
   final String title;
   // ignore: non_constant_identifier_names
   final String VisitDate;
+  final String empresa;
   final String hora;
   final VoidCallback onTap;
   final String business;
@@ -15,6 +16,7 @@ class VisitTile extends StatelessWidget {
     required this.title,
     // ignore: non_constant_identifier_names
     required this.VisitDate,
+    required this.empresa,
     required this.hora,
     required this.onTap,
     required this.business,
@@ -38,6 +40,15 @@ class VisitTile extends StatelessWidget {
                 ),
                 const HorizontalSpacerBox(size: SpacerSize.tiny),
                 Text(tipo, style: KText),
+                const Spacer(),
+                IconButton(
+                  icon: const Icon(
+                    Icons.email,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                  onPressed: () {},
+                )
               ],
             ),
             Row(mainAxisAlignment: MainAxisAlignment.start, children: [
@@ -51,9 +62,20 @@ class VisitTile extends StatelessWidget {
                 style: KTextDetails,
               ),
             ]),
+            Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+              const Icon(
+                Icons.business,
+                color: Colors.white,
+              ),
+              const HorizontalSpacerBox(size: SpacerSize.tiny),
+              Text(
+                empresa,
+                style: KTextDetails,
+              ),
+            ]),
             const Spacer(),
             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Icon(
                   Icons.event,

@@ -27,7 +27,7 @@ class _SignInScreenState extends State<SignInScreen> {
           child: Center(
             child: Container(
               padding: const EdgeInsets.all(kDefaultPadding),
-              height: size.height * 0.8,
+              height: size.height * 0.7,
               child: Form(
                 key: _formkey,
                 child: Column(
@@ -44,7 +44,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         label: 'Email',
                         isPassword: false,
                         inputType: TextInputType.emailAddress),
-                    const VerticalSpacerBox(size: SpacerSize.small),
+                    const VerticalSpacerBox(size: SpacerSize.tiny),
                     AuthFormField(
                         onChanged: (String value) =>
                             _controller.setPassword(value),

@@ -60,19 +60,19 @@ class _HomeScreenState extends State<HomeScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text('Visitas'.toUpperCase(), style: kTitleStyles),
-                          const VerticalSpacerBox(size: SpacerSize.tiny),
+                          const VerticalSpacerBox(size: SpacerSize.small),
                           SizedBox(
-                            height: size.height * 0.79,
+                            height: size.height * 0.789,
                             child: ListView.separated(
                               separatorBuilder: (context, index) {
                                 return const VerticalSpacerBox(
                                     size: SpacerSize.small);
                               },
-                              itemCount: 4,
+                              itemCount: 3,
                               itemBuilder: ((context, index) {
                                 return Card(
                                   child: Container(
-                                    height: size.height * 0.2,
+                                    height: size.height * 0.23,
                                     decoration: BoxDecoration(
                                         color: kDetailColor,
                                         borderRadius: BorderRadius.circular(
@@ -82,8 +82,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                           'Av, Caruaru, B. Heliópolis, n. 123',
                                       VisitDate: '25/03/2022',
                                       hora: '15:00',
-                                      business: 'LMTS',
+                                      empresa: 'LMTS',
                                       tipo: 'Denúncia',
+                                      business: '',
                                       onTap: () {
                                         Navigator.pushNamed(
                                             context, DetailsScreen.id);
