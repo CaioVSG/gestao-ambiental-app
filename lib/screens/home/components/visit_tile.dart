@@ -39,18 +39,10 @@ class VisitTile extends StatelessWidget {
                   color: Colors.white,
                 ),
                 const HorizontalSpacerBox(size: SpacerSize.tiny),
-                Text(tipo, style: KText),
-                const Spacer(),
-                IconButton(
-                  icon: const Icon(
-                    Icons.email,
-                    color: Colors.white,
-                    size: 30,
-                  ),
-                  onPressed: () {},
-                )
+                Text(tipo.toUpperCase(), style: KText),
               ],
             ),
+            const Spacer(),
             Row(mainAxisAlignment: MainAxisAlignment.start, children: [
               const Icon(
                 Icons.location_on,

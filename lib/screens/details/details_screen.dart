@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:meioambientemobile/components/horizontal_spacer_box.dart';
 import 'package:meioambientemobile/components/primary_button.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
+import 'package:meioambientemobile/screens/details/components/docs_screen.dart';
 import 'package:meioambientemobile/screens/details/components/finish_details_dialog.dart';
 import 'package:meioambientemobile/screens/details/details_screen_controller.dart';
 import 'package:meioambientemobile/screens/profile/profile_screen.dart';
@@ -34,26 +35,18 @@ class DetailsScreen extends StatelessWidget {
           padding: const EdgeInsets.all(kDefaultPadding),
           child: SingleChildScrollView(
             child: SizedBox(
-              height: size.height * 1.07,
+              height: size.height * 1.13,
               child: Column(
                 children: [
-                  InkWell(
-                    onTap: () => controller.selectImages(),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: const [
-                        Text(
-                          'DENÚNCIA AMBIENTAL',
-                          style: KHomeScreen,
-                          textAlign: TextAlign.start,
-                        ),
-                        Spacer(),
-                        Icon(
-                          Icons.more_horiz,
-                          color: kDetailColor,
-                        ),
-                      ],
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: const [
+                      Text(
+                        'DENÚNCIA AMBIENTAL',
+                        style: KHomeScreen,
+                        textAlign: TextAlign.start,
+                      ),
+                    ],
                   ),
                   const Spacer(),
                   Card(
@@ -62,22 +55,30 @@ class DetailsScreen extends StatelessWidget {
                     ),
                     color: kDetailColor,
                     child: Container(
-                      padding: const EdgeInsets.all(10),
-                      height: size.height * 0.35,
-                      width: size.width * 0.92,
+                      padding: const EdgeInsets.all(9),
+                      height: size.height * 0.25,
+                      width: size.width * 0.85,
                       child: Column(children: [
                         Container(
                           alignment: Alignment.topLeft,
                           child: const Text('Descrição',
                               textAlign: TextAlign.start, style: KText),
                         ),
-                        const TextField(
-                          autofocus: true,
-                          decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: 'Descrição do ocorrido'),
-                        ),
                       ]),
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    child: TextButton(
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) => const DocsScreen());
+                      },
+                      child: const Text(
+                        'Visualizar Documentação',
+                        style: KUnderline,
+                      ),
                     ),
                   ),
                   const Divider(color: kSecondaryTextColor),
@@ -98,7 +99,6 @@ class DetailsScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  //onTap: () => controller.selectImages(),
                   const Spacer(),
                   SizedBox(
                     height: size.height * 0.1,
@@ -111,7 +111,6 @@ class DetailsScreen extends StatelessWidget {
                       itemCount: 10,
                       itemBuilder: (BuildContext context, int index) {
                         return Container(
-                          height: size.height,
                           width: size.width * 0.2,
                           color: kDetailColor,
                           child: const Icon(
@@ -122,8 +121,122 @@ class DetailsScreen extends StatelessWidget {
                       },
                     ),
                   ),
+                  const Spacer(),
+                  const Divider(color: kSecondaryTextColor),
+                  TextButton(
+                    onPressed: () {
+                      Title(
+                          color: kPrimaryColor,
+                          child: const Text('COMENTÁRIO'));
+
+                      Container(
+                        color: Colors.white,
+                        child: TextFormField(
+                          decoration: const InputDecoration(
+                              border: InputBorder.none,
+                              hintText:
+                                  'Comentários a respeito da fiscalização'),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      'Adicionar Comentário',
+                      style: KUnderline,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  const Divider(color: kSecondaryTextColor),
+                  Row(
+                    children: const [
+                      Text('DETALHES DA VISITA', style: KDescription),
+                    ],
+                  ),
+                  const Spacer(),
+                  Row(
+                    children: const [
+                      Text('Tipo de Visita: Denúncia', style: kdrawerText),
+                    ],
+                  ),
+                  Row(
+                    children: const [
+                      Text('Data Marcada: 25/03/2022', style: kdrawerText),
+                    ],
+                  ),
+                  Row(
+                    children: const [
+                      Text('Data de Criação: 19/03/2022', style: kdrawerText),
+                    ],
+                  ),
+                  const Divider(color: kSecondaryTextColor),
+                  Row(
+                    children: const [
+                      Text('ENDEREÇO', style: KDescription),
+                    ],
+                  ),
+                  const Spacer(),
+                  Row(
+                    children: const [
+                      Text('CEP: 55295-123', style: kdrawerText),
+                    ],
+                  ),
+                  Row(
+                    children: const [
+                      Text('Garanhuns/PE', style: kdrawerText),
+                    ],
+                  ),
+                  Row(
+                    children: const [
+                      Text('End.¹: Av. Caruaru, n. 123', style: kdrawerText),
+                    ],
+                  ),
+                  Row(
+                    children: const [
+                      Text('End.²: B. Heliópolis', style: kdrawerText),
+                    ],
+                  ),
+                  const Divider(color: kSecondaryTextColor),
+                  Row(
+                    children: const [
+                      Text('DETALHES DO RESPONSÁVEL', style: KDescription),
+                    ],
+                  ),
+                  const Spacer(),
+                  Row(
+                    children: const [
+                      Text('Nome: Jane Dough', style: kdrawerText),
+                    ],
+                  ),
+                  Row(
+                    children: const [
+                      Text('CPF: 123.456.789-00', style: kdrawerText),
+                    ],
+                  ),
+                  Row(
+                    children: const [
+                      Text('RG: 12.345.678', style: kdrawerText),
+                    ],
+                  ),
+                  Row(
+                    children: const [
+                      Text('Contato: (12) 3456-7890', style: kdrawerText),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const Text('E-mail:', style: kdrawerText),
+                      TextButton(
+                        onPressed: () {
+                          //Navigator.push(context, route);
+                        },
+                        child: const Text(
+                          'janedough@example.com',
+                          style: kdrawerText,
+                        ),
+                      ),
+                    ],
+                  ),
                   Padding(
-                    padding: const EdgeInsets.all(40),
+                    padding: const EdgeInsets.all(30),
                     child: PrimaryButton(
                         text: 'Concluir Visita',
                         onPressed: () {
@@ -132,40 +245,6 @@ class DetailsScreen extends StatelessWidget {
                               builder: (context) => const FinishVisitDialog());
                         }),
                   ),
-                  const Divider(color: kSecondaryTextColor),
-                  const Text('DETALHES DA VISITA', style: KDescription),
-                  const Spacer(),
-                  const Text('Tipo de Visita: ',
-                      textAlign: TextAlign.start, style: kdrawerText),
-                  const Text('Data Marcada: ',
-                      textAlign: TextAlign.start, style: kdrawerText),
-                  const Text('Data de Criação: ',
-                      textAlign: TextAlign.start, style: kdrawerText),
-                  const Divider(color: kSecondaryTextColor),
-                  const Text('ENDEREÇO', style: KDescription),
-                  const Spacer(),
-                  const Text('Pernambuco',
-                      textAlign: TextAlign.start, style: kdrawerText),
-                  const Text('Garanhuns',
-                      textAlign: TextAlign.start, style: kdrawerText),
-                  const Text('55415-000',
-                      textAlign: TextAlign.start, style: kdrawerText),
-                  const Text('São José',
-                      textAlign: TextAlign.start, style: kdrawerText),
-                  const Text('Rua da Flores',
-                      textAlign: TextAlign.start, style: kdrawerText),
-                  const Text('Nº 146',
-                      textAlign: TextAlign.start, style: kdrawerText),
-                  const Divider(color: kSecondaryTextColor),
-                  const Text('DETALHES DO RESPONSÁVEL', style: KDescription),
-                  const Spacer(),
-                  const Text('CPF: 123.456.789-00',
-                      textAlign: TextAlign.start, style: kdrawerText),
-                  const Text('RG: 12.345.678',
-                      textAlign: TextAlign.start, style: kdrawerText),
-                  const Text('SDS: 81 912345678',
-                      textAlign: TextAlign.start, style: kdrawerText),
-                  const Spacer(),
                 ],
               ),
             ),

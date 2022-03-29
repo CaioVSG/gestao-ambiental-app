@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meioambientemobile/constants/style/constants.dart';
 import 'package:meioambientemobile/screens/home/home_screen.dart';
 
 class FinishVisitDialog extends StatelessWidget {
@@ -9,18 +10,31 @@ class FinishVisitDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      content: Text("Concluir Visita?"),
+      title: const Text(
+        'Concluir Visita?',
+        style: KHomeScreen2,
+      ),
+      content: const Text(
+        "Você não pode desfazer este processo!",
+        style: kdrawerText,
+      ),
       actions: [
         TextButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            child: Text('Cancelar')),
-        TextButton(
+            child: const Text(
+              'Cancelar',
+              style: kdrawerText,
+            )),
+        ElevatedButton(
             onPressed: () {
               Navigator.popAndPushNamed(context, HomeScreen.id);
             },
-            child: Text('Concluir'))
+            child: const Text(
+              'Concluir',
+              style: KTextDetails,
+            )),
       ],
     );
   }

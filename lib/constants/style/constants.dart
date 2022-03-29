@@ -6,6 +6,7 @@ const Color kTextColor = Color(0xFF2c3e50);
 const Color kLightColor = Color(0xFF2c3e50);
 const Color kSecondaryTextColor = Color(0xFF2c3e50);
 const Color kDetailColor = Color(0xFF4A7836);
+const Color kDetailColor2 = Colors.green;
 const Color kErrorColor = Colors.red;
 
 // =======SIZES=========//
@@ -40,6 +41,12 @@ const TextStyle KHomeScreen = TextStyle(
   color: kDetailColor,
 );
 
+const TextStyle KProfile = TextStyle(
+  fontSize: 22,
+  fontWeight: FontWeight.bold,
+  color: kDetailColor2,
+);
+
 const TextStyle KHomeScreen2 = TextStyle(
   fontSize: 18,
   fontWeight: FontWeight.bold,
@@ -47,7 +54,7 @@ const TextStyle KHomeScreen2 = TextStyle(
 );
 
 const TextStyle KText = TextStyle(
-  fontSize: 18,
+  fontSize: 19,
   fontWeight: FontWeight.bold,
   color: kPrimaryColor,
 );
@@ -69,3 +76,15 @@ const TextStyle KTextDetails = TextStyle(
   fontWeight: FontWeight.bold,
   color: kPrimaryColor,
 );
+
+const TextStyle KUnderline = TextStyle(
+    fontSize: 19,
+    fontWeight: FontWeight.bold,
+    color: kDetailColor,
+    decoration: TextDecoration.underline);
+
+const TextStyle KUnderline2 = TextStyle(
+    fontSize: 15,
+    fontWeight: FontWeight.bold,
+    color: kDetailColor,
+    decoration: TextDecoration.underline);
