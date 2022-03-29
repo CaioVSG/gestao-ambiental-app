@@ -67,7 +67,6 @@ class VisitTile extends StatelessWidget {
             ]),
             const Spacer(),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Icon(
                   Icons.event,

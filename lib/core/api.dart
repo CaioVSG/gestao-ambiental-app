@@ -33,26 +33,26 @@ class Api {
 
   //Requisita todos os dados de visitas
   Future getAllVisits(BuildContext context) async {
-    final userModel = Provider.of<UserModel>(context);
     try {
       var response = await _dio.get(
         baseUrl + '/visitas',
         options: Options(
           headers: {
-            'Authorization': 'Bearer ${userModel.refreshToken}',
+            'Authorization':
+                'Bearer ${Provider.of<UserModel>(context, listen: false).refreshToken}',
             'Content-Type': 'application/json',
             'Accept': 'application/json',
           },
         ),
       );
       if (response.statusCode == 200) {
-        print(response.data);
         return (response.data);
       } else {
         return null;
       }
     } catch (e) {
       print(e);
+      return null;
     }
   }
 }

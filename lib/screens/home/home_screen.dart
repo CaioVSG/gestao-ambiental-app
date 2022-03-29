@@ -17,12 +17,13 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
+late Future getAllVisits;
+
 class _HomeScreenState extends State<HomeScreen> {
   @override
-  void didChangeDependencies() {
-    final controller = Provider.of<HomeScreenController>(context);
-    controller.getAllVisits(context);
-    super.didChangeDependencies();
+  void initState() {
+    getAllVisits = Api().getAllVisits(context);
+    super.initState();
   }
 
   @override
@@ -30,11 +31,6 @@ class _HomeScreenState extends State<HomeScreen> {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
         child: Scaffold(
-            floatingActionButton: FloatingActionButton(onPressed: () {
-              final UserModel userModel =
-                  Provider.of<UserModel>(context, listen: false);
-              print(userModel.refreshToken);
-            }),
             appBar: AppBar(
               actions: <Widget>[
                 IconButton(
@@ -44,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     size: 32,
                   ),
                   onPressed: () {
-                    Navigator.popAndPushNamed(context, ProfileScreen.id);
+                    Navigator.pushNamed(context, ProfileScreen.id);
                   },
                 )
               ],
@@ -52,29 +48,29 @@ class _HomeScreenState extends State<HomeScreen> {
             body: Padding(
               padding: const EdgeInsets.all(kDefaultPadding),
               child: FutureBuilder(
-                future: Api().getAllVisits(context),
+                future: getAllVisits,
                 builder: ((context, snapshot) {
-                  List<dynamic> dataList = snapshot.data as List<dynamic>;
                   if (snapshot.hasData) {
+                    // List<dynamic> dataList = snapshot.data as List<dynamic>;
                     return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text('Visitas'.toUpperCase(), style: kTitleStyles),
                           const VerticalSpacerBox(size: SpacerSize.small),
                           SizedBox(
-                            height: size.height * 0.789,
+                            height: size.height * 0.75,
                             child: ListView.separated(
                               separatorBuilder: (context, index) {
                                 return const VerticalSpacerBox(
-                                    size: SpacerSize.small);
+                                    size: SpacerSize.tiny);
                               },
-                              itemCount: 3,
+                              itemCount: 5,
                               itemBuilder: ((context, index) {
                                 return Card(
+                                  color: kDetailColor,
                                   child: Container(
                                     height: size.height * 0.23,
                                     decoration: BoxDecoration(
-                                        color: kDetailColor,
                                         borderRadius: BorderRadius.circular(
                                             kSmallHeight)),
                                     child: VisitTile(
