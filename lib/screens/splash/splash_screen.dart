@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
     TextTheme textTheme = Theme.of(context).textTheme;
     return SafeArea(
       child: Scaffold(
-        backgroundColor: kPrimaryColor,
+        backgroundColor: kDetailColor,
         body: SizedBox(
           height: size.height,
           width: size.width,

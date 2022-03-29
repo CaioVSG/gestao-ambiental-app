@@ -5,17 +5,17 @@ const Color kPrimaryColor = Color(0xFFEEEEEE);
 const Color kTextColor = Color(0xFF2c3e50);
 const Color kLightColor = Color(0xFF2c3e50);
 const Color kSecondaryTextColor = Color(0xFF2c3e50);
-const Color kDetailColor = Color(0xFF4A7836);
+const Color kDetailColor = Color(0xFF293B28);
 const Color kDetailColor2 = Colors.green;
 const Color kErrorColor = Colors.red;
 
 // =======SIZES=========//
 const double kDefaultPadding = 28.0;
 const double kDefaultRadius = 8.0;
-const double kTinyHeight = 8.0;
-const double kSmallHeight = 14.0;
-const double kMediumtHeight = 30.0;
-const double kLargeHeight = 40;
+const double kTinyHeight = 4.0;
+const double kSmallHeight = 8.0;
+const double kMediumtHeight = 24.0;
+const double kLargeHeight = 42;
 
 // =======TEXT STYLE=========//
 const TextStyle kTextButtonTextStyle = TextStyle(
