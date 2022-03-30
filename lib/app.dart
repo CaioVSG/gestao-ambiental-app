@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meioambientemobile/constants/style/theme_manager.dart';
+import 'package:meioambientemobile/screens/edit%20image/edit_image_screen.dart';
 import 'package:meioambientemobile/screens/home/home_screen.dart';
 import 'package:meioambientemobile/screens/profile/profile_screen.dart';
 import 'package:meioambientemobile/screens/sign%20in/sign_in_screen.dart';
@@ -35,6 +36,7 @@ class App extends StatelessWidget {
         SignInScreen.id: (context) => const SignInScreen(),
         DetailsScreen.id: (context) => const DetailsScreen(),
         ProfileScreen.id: (context) => const ProfileScreen(),
+        EditImageScreen.id: (context) => const EditImageScreen(),
       },
     );
   }

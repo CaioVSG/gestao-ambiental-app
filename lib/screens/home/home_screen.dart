@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:meioambientemobile/components/vertical_spacer_box.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
 import 'package:meioambientemobile/core/api.dart';
-import 'package:meioambientemobile/core/models/user_model.dart';
 import 'package:meioambientemobile/screens/details/details_screen.dart';
-import 'package:meioambientemobile/screens/home/home_screen_controller.dart';
 import 'package:meioambientemobile/screens/profile/profile_screen.dart';
-import 'package:provider/provider.dart';
 import 'components/visit_tile.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -22,7 +19,10 @@ late Future getAllVisits;
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
-    getAllVisits = Api().getAllVisits(context);
+    // getAllVisits = Api().getAllVisits(context);
+    getAllVisits = Future.delayed(Duration(seconds: 1), () {
+      return true;
+    });
     super.initState();
   }
 

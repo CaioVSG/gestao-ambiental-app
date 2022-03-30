@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:meioambientemobile/components/horizontal_spacer_box.dart';
+import 'package:meioambientemobile/components/vertical_spacer_box.dart';
 import 'package:meioambientemobile/components/primary_button.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
 import 'package:meioambientemobile/screens/details/components/docs_screen.dart';
 import 'package:meioambientemobile/screens/details/components/finish_details_dialog.dart';
 import 'package:meioambientemobile/screens/details/details_screen_controller.dart';
+import 'package:meioambientemobile/screens/edit%20image/edit_image_screen.dart';
 import 'package:meioambientemobile/screens/profile/profile_screen.dart';
 
 class DetailsScreen extends StatelessWidget {
@@ -85,13 +87,12 @@ class DetailsScreen extends StatelessWidget {
                   InkWell(
                     onTap: () => controller.selectImages(),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: const [
                         Text(
                           'MÍDIA',
                           style: KHomeScreen2,
                         ),
-                        Spacer(),
                         Icon(
                           Icons.add_a_photo,
                           color: kDetailColor,
@@ -99,7 +100,7 @@ class DetailsScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const Spacer(),
+                  const VerticalSpacerBox(size: SpacerSize.small),
                   SizedBox(
                     height: size.height * 0.1,
                     child: ListView.separated(
@@ -110,12 +111,16 @@ class DetailsScreen extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       itemCount: 10,
                       itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          width: size.width * 0.2,
-                          color: kDetailColor,
-                          child: const Icon(
-                            Icons.image,
-                            color: kPrimaryColor,
+                        return InkWell(
+                          onTap: () =>
+                              Navigator.pushNamed(context, EditImageScreen.id),
+                          child: Container(
+                            width: size.width * 0.2,
+                            color: kDetailColor,
+                            child: const Icon(
+                              Icons.image,
+                              color: kPrimaryColor,
+                            ),
                           ),
                         );
                       },
@@ -151,7 +156,7 @@ class DetailsScreen extends StatelessWidget {
                       Text('DETALHES DA VISITA', style: KDescription),
                     ],
                   ),
-                  const Spacer(),
+                  const VerticalSpacerBox(size: SpacerSize.small),
                   Row(
                     children: const [
                       Text('Tipo de Visita: Denúncia', style: kdrawerText),

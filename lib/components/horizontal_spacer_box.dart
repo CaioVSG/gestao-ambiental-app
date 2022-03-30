@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
 
-enum SpacerSize {
-  tiny,
-  small,
-  medium,
-  large,
-}
+import 'vertical_spacer_box.dart';
 
 class HorizontalSpacerBox extends StatelessWidget {
   final SpacerSize size;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meioambientemobile/components/horizontal_spacer_box.dart';
+import 'package:meioambientemobile/components/vertical_spacer_box.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
 
 class VisitTile extends StatelessWidget {
