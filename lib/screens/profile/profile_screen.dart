@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meioambientemobile/components/vertical_spacer_box.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
+//import 'package:meioambientemobile/screens/sign%20in/sign_in_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   static const String id = 'profile_screen';
@@ -13,9 +14,6 @@ class ProfileScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: kDetailColor,
-          title: const Text(
-            'Seu perfil',
-          ),
         ),
         body: Padding(
           padding: const EdgeInsets.all(kDefaultPadding),
@@ -31,6 +29,7 @@ class ProfileScreen extends StatelessWidget {
                   // ignore: unnecessary_const
                   image: const DecorationImage(
                     fit: BoxFit.fill,
+                    //Vem uma URL na foto não sei se da p colcoar aqui
                     image: NetworkImage("https://i.imgur.com/BoN9kdC.png"),
                   ),
                 ),
@@ -43,23 +42,19 @@ class ProfileScreen extends StatelessWidget {
                   style: KProfileStyle,
                 )),
               ),
-              const VerticalSpacerBox(size: SpacerSize.medium),
-              Center(
-                child: Column(
-                  children: const [
-                    VerticalSpacerBox(size: SpacerSize.small),
-                    Text('E-MAIL', style: KDescription),
-                    Text('johndoe@example.com', style: KProfile),
-                    VerticalSpacerBox(size: SpacerSize.small),
-                    Text('CONTATO', style: KDescription),
-                    Text('(12) 3456-7890', style: KProfile),
-                    VerticalSpacerBox(size: SpacerSize.small),
-                    Text('FUNÇÃO', style: KDescription),
-                    Text('Analista', style: KProfile),
-                  ],
-                ),
-              ),
-
+              //Só envia o endereço de email na API
+              const VerticalSpacerBox(size: SpacerSize.small),
+              const Text('Email: johndoe@example.com', style: KHomeScreen),
+              const VerticalSpacerBox(size: SpacerSize.small),
+              //Não vem o cpf nem rg do user
+              const Text('CPF: 123.456.789-00',
+                  textAlign: TextAlign.start, style: KHomeScreen),
+              const VerticalSpacerBox(size: SpacerSize.small),
+              const Text('RG: 12.345.678',
+                  textAlign: TextAlign.start, style: KHomeScreen),
+              const VerticalSpacerBox(size: SpacerSize.small),
+              const Text('SDS: 81 912345678',
+                  textAlign: TextAlign.start, style: KHomeScreen),
               //   const Spacer(),
               //   Text('Sair'.toUpperCase(), style: kdrawerText),
               //   IconButton(

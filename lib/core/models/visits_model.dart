@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 
+//Todos os models Relacionados
 class VisitsModel with ChangeNotifier {
   //Dados da Visita
   final String visitDate;
@@ -47,27 +48,142 @@ class ComplaintModel {
       required this.updatedAt});
 }
 
+class PruningSolicitationModel {
+  final String? id;
+  final String? protocolo;
+  final String? rejectionReason;
+  final String? environmentalAuthorization;
+  final String? status;
+  final String? analistId;
+  final String? addressId;
+  final String? applicantId;
+  final String createdAt;
+  final String updatedAt;
+  final String comment;
+  final String? area;
+
+  PruningSolicitationModel(
+      {this.id,
+      this.protocolo,
+      this.rejectionReason,
+      this.environmentalAuthorization,
+      this.status,
+      this.analistId,
+      this.addressId,
+      this.applicantId,
+      required this.createdAt,
+      required this.updatedAt,
+      required this.comment,
+      this.area});
+}
+
 class CompanyModel {
   final String name;
   final String cpfCnpj;
-  final String isCnpj;
+  final String? isCnpj;
   final String? port;
-  final String userId;
-  final String phoneId;
-  final String addressId;
-  final String created_at;
-  final String updated_at;
-  final String legal_represetant;
+  final String? userId;
+  final String? phoneId;
+  final String? addressId;
+  final String? createdAt;
+  final String? updatedAt;
+  final String? legalRepresetant;
 
   CompanyModel(
       {required this.name,
       required this.cpfCnpj,
-      required this.isCnpj,
+      this.isCnpj,
       this.port,
-      required this.userId,
-      required this.phoneId,
-      required this.addressId,
-      required this.created_at,
-      required this.updated_at,
-      required this.legal_represetant});
+      this.userId,
+      this.phoneId,
+      this.addressId,
+      this.createdAt,
+      this.updatedAt,
+      this.legalRepresetant});
+}
+
+class AddressModel {
+  final String? id;
+  final String street;
+  final String number;
+  final String district;
+  final String city;
+  final String state;
+  final String? complement;
+  final String? cep;
+  final String? createdAt;
+  final String? updatedAt;
+
+  AddressModel({
+    this.id,
+    required this.street,
+    required this.number,
+    required this.district,
+    required this.city,
+    required this.state,
+    this.complement,
+    this.cep,
+    this.createdAt,
+    this.updatedAt,
+  });
+}
+
+class Phone {
+  final String? id;
+  final String number;
+  final String? createdAt;
+  final String? updatedAt;
+
+  Phone({
+    this.id,
+    required this.number,
+    this.createdAt,
+    this.updatedAt,
+  });
+}
+
+class Applicant {
+  final String? id;
+  final String cpf;
+  final String rg;
+  final String orgEmissor;
+  final String? userId;
+  final String? phoneId;
+  final String? addressId;
+  final String? createdAt;
+  final String? updatedAt;
+
+  Applicant({
+    this.id,
+    required this.cpf,
+    required this.rg,
+    required this.orgEmissor,
+    this.userId,
+    this.phoneId,
+    this.addressId,
+    this.createdAt,
+    this.updatedAt,
+  });
+}
+
+class Profile {
+  final String? id;
+  final String name;
+  final String email;
+  final String? emailVerifiedAt;
+  final String? role;
+  final String? profilePhotoPath;
+  final String? createdAt;
+  final String? updatedAt;
+  final String profilePhotoUrl;
+  Profile(
+      {this.id,
+      required this.name,
+      required this.email,
+      this.emailVerifiedAt,
+      this.role,
+      this.profilePhotoPath,
+      this.createdAt,
+      this.updatedAt,
+      required this.profilePhotoUrl});
 }
