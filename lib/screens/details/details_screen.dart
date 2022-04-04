@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:meioambientemobile/components/horizontal_spacer_box.dart';
 import 'package:meioambientemobile/components/vertical_spacer_box.dart';
@@ -232,7 +234,7 @@ class DetailsScreenState extends State<DetailsScreen> {
                             Text('ENDEREÇO', style: KDescription),
                           ],
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Row(
                           children: [
                             Text("CEP: ${addressModel.cep}",
@@ -292,9 +294,7 @@ class DetailsScreenState extends State<DetailsScreen> {
                           children: [
                             const Text('E-mail:', style: kdrawerText),
                             TextButton(
-                              onPressed: () {
-                                //Navigator.push(context, route);
-                              },
+                              onPressed: () {},
                               child: const Text(
                                 'janedough@example.com',
                                 style: kdrawerText,

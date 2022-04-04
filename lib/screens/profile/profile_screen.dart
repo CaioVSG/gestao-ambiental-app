@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meioambientemobile/components/vertical_spacer_box.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
+import 'package:meioambientemobile/screens/home/home_screen.dart';
 //import 'package:meioambientemobile/screens/sign%20in/sign_in_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -13,6 +14,18 @@ class ProfileScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+                size: 32,
+              ),
+              onPressed: () {
+                Navigator.popAndPushNamed(context, HomeScreen.id);
+              },
+            )
+          ],
           backgroundColor: kDetailColor,
         ),
         body: Padding(
@@ -44,17 +57,25 @@ class ProfileScreen extends StatelessWidget {
               ),
               //Só envia o endereço de email na API
               const VerticalSpacerBox(size: SpacerSize.small),
-              const Text('Email: johndoe@example.com', style: KHomeScreen),
+              const Center(
+                  child:
+                      Text('Email: johndoe@example.com', style: KHomeScreen)),
               const VerticalSpacerBox(size: SpacerSize.small),
               //Não vem o cpf nem rg do user
-              const Text('CPF: 123.456.789-00',
-                  textAlign: TextAlign.start, style: KHomeScreen),
+              const Center(
+                child: Text('CPF: 123.456.789-00',
+                    textAlign: TextAlign.start, style: KHomeScreen),
+              ),
               const VerticalSpacerBox(size: SpacerSize.small),
-              const Text('RG: 12.345.678',
-                  textAlign: TextAlign.start, style: KHomeScreen),
+              const Center(
+                child: Text('RG: 12.345.678',
+                    textAlign: TextAlign.start, style: KHomeScreen),
+              ),
               const VerticalSpacerBox(size: SpacerSize.small),
-              const Text('SDS: 81 912345678',
-                  textAlign: TextAlign.start, style: KHomeScreen),
+              const Center(
+                child: Text('SDS: 81 912345678',
+                    textAlign: TextAlign.start, style: KHomeScreen),
+              ),
               //   const Spacer(),
               //   Text('Sair'.toUpperCase(), style: kdrawerText),
               //   IconButton(
