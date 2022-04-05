@@ -6,9 +6,8 @@ import 'package:meioambientemobile/constants/style/constants.dart';
 class VisitTile extends StatelessWidget {
   final String title;
   // ignore: non_constant_identifier_names
-  final String VisitDate;
+  final String visitDate;
   final String empresa;
-  final String hora;
   final VoidCallback onTap;
   final String business;
   final String tipo;
@@ -16,9 +15,8 @@ class VisitTile extends StatelessWidget {
     Key? key,
     required this.title,
     // ignore: non_constant_identifier_names
-    required this.VisitDate,
+    required this.visitDate,
     required this.empresa,
-    required this.hora,
     required this.onTap,
     required this.business,
     required this.tipo,
@@ -40,7 +38,7 @@ class VisitTile extends StatelessWidget {
                   color: Colors.white,
                 ),
                 const HorizontalSpacerBox(size: SpacerSize.tiny),
-                Text(tipo.toUpperCase(), style: KText),
+                Text(tipo.toUpperCase(), style: kText),
               ],
             ),
             const Spacer(),
@@ -52,7 +50,7 @@ class VisitTile extends StatelessWidget {
               const HorizontalSpacerBox(size: SpacerSize.tiny),
               Text(
                 title,
-                style: KTextDetails,
+                style: kTextDetails,
               ),
             ]),
             Row(mainAxisAlignment: MainAxisAlignment.start, children: [
@@ -63,7 +61,7 @@ class VisitTile extends StatelessWidget {
               const HorizontalSpacerBox(size: SpacerSize.tiny),
               Text(
                 empresa,
-                style: KTextDetails,
+                style: kTextDetails,
               ),
             ]),
             const Spacer(),
@@ -76,8 +74,8 @@ class VisitTile extends StatelessWidget {
                 ),
                 const HorizontalSpacerBox(size: SpacerSize.tiny),
                 Text(
-                  VisitDate + '    ' + hora + 'h',
-                  style: KText,
+                  visitDate,
+                  style: kText,
                 ),
               ],
             ),

@@ -34,7 +34,7 @@ class App extends StatelessWidget {
         SplashScreen.routeName: (context) => const SplashScreen(),
         HomeScreen.id: (context) => const HomeScreen(),
         SignInScreen.id: (context) => const SignInScreen(),
-        DetailsScreen.id: (context) => const DetailsScreen(),
+        // DetailsScreen.id: (context) => const DetailsScreen(),
         ProfileScreen.id: (context) => const ProfileScreen(),
         EditImageScreen.id: (context) => const EditImageScreen(),
       },

@@ -16,7 +16,7 @@ class ThemeManager {
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         primary: kDetailColor,
-        textStyle: TextStyle(
+        textStyle: const TextStyle(
           color: kLightColor,
           fontSize: 16,
           fontWeight: FontWeight.w500,

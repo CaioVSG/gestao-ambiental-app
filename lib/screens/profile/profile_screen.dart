@@ -14,18 +14,7 @@ class ProfileScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          actions: <Widget>[
-            IconButton(
-              icon: const Icon(
-                Icons.arrow_back,
-                color: Colors.white,
-                size: 32,
-              ),
-              onPressed: () {
-                Navigator.popAndPushNamed(context, HomeScreen.id);
-              },
-            )
-          ],
+          title: const Text('Perfil'),
           backgroundColor: kDetailColor,
         ),
         body: Padding(
@@ -52,29 +41,29 @@ class ProfileScreen extends StatelessWidget {
                 child: Center(
                     child: Text(
                   'CJ',
-                  style: KProfileStyle,
+                  style: kProfileStyle,
                 )),
               ),
               //Só envia o endereço de email na API
               const VerticalSpacerBox(size: SpacerSize.small),
               const Center(
                   child:
-                      Text('Email: johndoe@example.com', style: KHomeScreen)),
+                      Text('Email: johndoe@example.com', style: kHomeScreen)),
               const VerticalSpacerBox(size: SpacerSize.small),
               //Não vem o cpf nem rg do user
               const Center(
                 child: Text('CPF: 123.456.789-00',
-                    textAlign: TextAlign.start, style: KHomeScreen),
+                    textAlign: TextAlign.start, style: kHomeScreen),
               ),
               const VerticalSpacerBox(size: SpacerSize.small),
               const Center(
                 child: Text('RG: 12.345.678',
-                    textAlign: TextAlign.start, style: KHomeScreen),
+                    textAlign: TextAlign.start, style: kHomeScreen),
               ),
               const VerticalSpacerBox(size: SpacerSize.small),
               const Center(
                 child: Text('SDS: 81 912345678',
-                    textAlign: TextAlign.start, style: KHomeScreen),
+                    textAlign: TextAlign.start, style: kHomeScreen),
               ),
               //   const Spacer(),
               //   Text('Sair'.toUpperCase(), style: kdrawerText),

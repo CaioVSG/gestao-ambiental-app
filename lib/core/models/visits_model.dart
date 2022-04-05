@@ -11,6 +11,57 @@ class VisitsModel with ChangeNotifier {
   final String createdAt;
   final String updatedAt;
   final int pruningId; //solicitação_poda_id
+  // final String? companyId;
+  // final String? companyNotSign;
+  // final String address;
+  // final String text;
+  // final String denunciator;
+  // final String? approval;
+  // final String? protocol;
+  // final String? analistId;
+  // final String createdAt;
+  // final String updatedAt;
+  // final String? id;
+  // final String? protocolo;
+  // final String? rejectionReason;
+  // final String? environmentalAuthorization;
+  // final String? status;
+  // final String? analistId;
+  // final String? addressId;
+  // final String? applicantId;
+  // final String createdAt;
+  // final String updatedAt;
+  // final String comment;
+  // final String? area;
+  // final String name;
+  // final String cpfCnpj;
+  // final String? isCnpj;
+  // final String? port;
+  // final String? userId;
+  // final String? phoneId;
+  // final String? addressId;
+  // final String? createdAt;
+  // final String? updatedAt;
+  // final String? legalRepresetant;
+  // final String? id;
+  // final String street;
+  // final String number;
+  // final String district;
+  // final String city;
+  // final String state;
+  // final String? complement;
+  // final String? cep;
+  // final String? createdAt;
+  // final String? updatedAt;
+  // final String? id;
+  // final String cpf;
+  // final String rg;
+  // final String orgEmissor;
+  // final String? userId;
+  // final String? phoneId;
+  // final String? addressId;
+  // final String? createdAt;
+  // final String? updatedAt;
 
   VisitsModel(
       {required this.visitDate,
@@ -109,8 +160,8 @@ class AddressModel {
   final String district;
   final String city;
   final String state;
-  final String? complement;
-  final String? cep;
+  final String complement;
+  final String cep;
   final String? createdAt;
   final String? updatedAt;
 
@@ -121,8 +172,8 @@ class AddressModel {
     required this.district,
     required this.city,
     required this.state,
-    this.complement,
-    this.cep,
+    required this.complement,
+    required this.cep,
     this.createdAt,
     this.updatedAt,
   });

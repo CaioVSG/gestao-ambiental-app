@@ -12,7 +12,7 @@ class FinishVisitDialog extends StatelessWidget {
     return AlertDialog(
       title: const Text(
         'Concluir Visita?',
-        style: KHomeScreen2,
+        style: kHomeScreen2,
       ),
       content: const Text(
         "Você não pode desfazer este processo!",
@@ -33,7 +33,7 @@ class FinishVisitDialog extends StatelessWidget {
             },
             child: const Text(
               'Concluir',
-              style: KTextDetails,
+              style: kTextDetails,
             )),
       ],
     );

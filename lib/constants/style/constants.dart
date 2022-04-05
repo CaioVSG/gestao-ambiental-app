@@ -29,37 +29,37 @@ const TextStyle kTitleStyles = TextStyle(
   color: kDetailColor,
 );
 
-const TextStyle KDescription = TextStyle(
+const TextStyle kDescription = TextStyle(
   fontSize: 17,
   fontWeight: FontWeight.bold,
   color: kDetailColor,
 );
 
-const TextStyle KHomeScreen = TextStyle(
+const TextStyle kHomeScreen = TextStyle(
   fontSize: 22,
   fontWeight: FontWeight.bold,
   color: kDetailColor,
 );
 
-const TextStyle KProfile = TextStyle(
+const TextStyle kProfile = TextStyle(
   fontSize: 22,
   fontWeight: FontWeight.bold,
   color: kDetailColor2,
 );
 
-const TextStyle KHomeScreen2 = TextStyle(
+const TextStyle kHomeScreen2 = TextStyle(
   fontSize: 18,
   fontWeight: FontWeight.bold,
   color: kDetailColor,
 );
 
-const TextStyle KText = TextStyle(
+const TextStyle kText = TextStyle(
   fontSize: 19,
   fontWeight: FontWeight.bold,
   color: kPrimaryColor,
 );
 
-const TextStyle KProfileStyle = TextStyle(
+const TextStyle kProfileStyle = TextStyle(
   fontSize: 40,
   fontWeight: FontWeight.bold,
   color: kDetailColor,
@@ -71,19 +71,19 @@ const TextStyle kdrawerText = TextStyle(
   color: kDetailColor,
 );
 
-const TextStyle KTextDetails = TextStyle(
+const TextStyle kTextDetails = TextStyle(
   fontSize: 14,
   fontWeight: FontWeight.bold,
   color: kPrimaryColor,
 );
 
-const TextStyle KUnderline = TextStyle(
+const TextStyle kUnderline = TextStyle(
     fontSize: 19,
     fontWeight: FontWeight.bold,
     color: kDetailColor,
     decoration: TextDecoration.underline);
 
-const TextStyle KUnderline2 = TextStyle(
+const TextStyle kUnderline2 = TextStyle(
     fontSize: 15,
     fontWeight: FontWeight.bold,
     color: kDetailColor,
