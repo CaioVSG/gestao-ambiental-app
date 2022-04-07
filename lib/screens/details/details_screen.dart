@@ -82,7 +82,6 @@ class DetailsScreenState extends State<DetailsScreen> {
             padding: const EdgeInsets.all(kDefaultPadding),
             child: SingleChildScrollView(
               child: SizedBox(
-                height: size.height * 1.13,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -96,7 +95,6 @@ class DetailsScreenState extends State<DetailsScreen> {
                         ),
                       ],
                     ),
-                    const Spacer(),
                     Card(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(kDefaultRadius),
@@ -178,7 +176,6 @@ class DetailsScreenState extends State<DetailsScreen> {
                             'Nenhuma imagem selecionada',
                             style: TextStyle(color: kErrorColor),
                           ),
-                    const Spacer(),
                     const Divider(color: kSecondaryTextColor),
                     TextButton(
                       onPressed: () {
@@ -265,7 +262,6 @@ class DetailsScreenState extends State<DetailsScreen> {
                         Text('DETALHES DO RESPONSÁVEL', style: kDescription),
                       ],
                     ),
-                    const Spacer(),
                     Row(
                       children: [
                         Text(widget.companyName, style: kdrawerText),
