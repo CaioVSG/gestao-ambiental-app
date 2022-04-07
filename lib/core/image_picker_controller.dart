@@ -3,17 +3,17 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 class ImagePickerController with ChangeNotifier {
-  // ignore: non_constant_identifier_names
-  Future<void> PickFile() async {
+  Future<List<File>?> pickImagesFromGalery() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
         allowMultiple: true,
         allowedExtensions: ['jpeg', 'png', 'jpg'],
         type: FileType.custom);
 
     if (result != null) {
-      List<File> files = result.paths.map((path) => File('')).toList();
+      List<File> files = result.files.map((file) => File(file.path!)).toList();
+      return files;
     } else {
-      // User canceled the picker
+      return null;
     }
   }
 }

@@ -1,23 +1,51 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:meioambientemobile/core/image_picker_controller.dart';
 import '../../core/api.dart';
 
 class DetailsScreenController with ChangeNotifier {
   bool isLoading = false;
-  final _api = Api();
   final _imagePickerController = ImagePickerController();
-  void selectImages() {
-    _imagePickerController.PickFile();
+  int _selectedImageLength = 0;
+  int? _selectedImageIndex;
+  bool _showCommentSection = false;
+
+  List<File> _selectedImages = [];
+
+  List<File> get selectedImages => _selectedImages;
+  set selectedImages(List<File> value) {
+    _selectedImages = value;
+    notifyListeners();
   }
 
-  Future getAllVisits(BuildContext context) async {
-    isLoading = true;
-    _api.getAllVisits(context).then((value) {
-      isLoading = false;
-      if (value != null) {
-      } else {
-        //print('Deu Ruim');
-      }
-    });
+  int get selectedImageIndex => _selectedImageIndex!;
+  set selectedImageIndex(int value) {
+    _selectedImageIndex = value;
+    notifyListeners();
+  }
+
+  int get selectedImageLength => _selectedImageLength;
+  get showCommentSection => _showCommentSection;
+
+  set selectedImageLength(int length) {
+    _selectedImageLength = length;
+    notifyListeners();
+  }
+
+  set setCommentSection(bool value) {
+    _showCommentSection = value;
+    notifyListeners();
+  }
+
+  Future selectImages() async {
+    List<File>? files = await _imagePickerController.pickImagesFromGalery();
+    selectedImageLength = files!.length;
+    selectedImages = files;
+  }
+
+  void deleteSelectedImage() {
+    selectedImages.removeAt(selectedImageIndex);
+    selectedImageLength = selectedImages.length;
   }
 }

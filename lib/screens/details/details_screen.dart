@@ -52,16 +52,15 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class DetailsScreenState extends State<DetailsScreen> {
+  late DetailsScreenController? controller;
   @override
   void didChangeDependencies() {
-    final controller = Provider.of<DetailsScreenController>(context);
-    controller.getAllVisits(context);
+    controller = Provider.of<DetailsScreenController>(context);
     super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
-    final controller = DetailsScreenController();
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -132,7 +131,7 @@ class DetailsScreenState extends State<DetailsScreen> {
                     ),
                     const Divider(color: kSecondaryTextColor),
                     InkWell(
-                      onTap: () => controller.selectImages(),
+                      onTap: () => controller!.selectImages(),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: const [
@@ -148,55 +147,76 @@ class DetailsScreenState extends State<DetailsScreen> {
                       ),
                     ),
                     const VerticalSpacerBox(size: SpacerSize.small),
-                    SizedBox(
-                      height: size.height * 0.1,
-                      child: ListView.separated(
-                        separatorBuilder: (context, index) {
-                          return const HorizontalSpacerBox(
-                              size: SpacerSize.small);
-                        },
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 10,
-                        itemBuilder: (BuildContext context, int index) {
-                          return InkWell(
-                            onTap: () => Navigator.pushNamed(
-                                context, EditImageScreen.id),
-                            child: Container(
-                              width: size.width * 0.2,
-                              color: kDetailColor,
-                              child: const Icon(
-                                Icons.image,
-                                color: kPrimaryColor,
-                              ),
+                    controller!.selectedImageLength > 0
+                        ? SizedBox(
+                            height: size.height * 0.1,
+                            child: ListView.separated(
+                              separatorBuilder: (context, index) {
+                                return const HorizontalSpacerBox(
+                                    size: SpacerSize.small);
+                              },
+                              scrollDirection: Axis.horizontal,
+                              itemCount: controller!.selectedImageLength,
+                              itemBuilder: (BuildContext context, int index) {
+                                return InkWell(
+                                  onTap: () {
+                                    controller!.selectedImageIndex = index;
+                                    Navigator.pushNamed(
+                                        context, EditImageScreen.id);
+                                  },
+                                  // child: Text(
+                                  //     controller!.selectedImages[index].path)
+                                  child: Image.file(
+                                    controller!.selectedImages[index],
+                                    width: size.width * 0.2,
+                                  ),
+                                );
+                              },
                             ),
-                          );
-                        },
-                      ),
-                    ),
+                          )
+                        : const Text(
+                            'Nenhuma imagem selecionada',
+                            style: TextStyle(color: kErrorColor),
+                          ),
                     const Spacer(),
                     const Divider(color: kSecondaryTextColor),
                     TextButton(
                       onPressed: () {
-                        Title(
-                            color: kPrimaryColor,
-                            child: const Text('COMENTÁRIO'));
-
-                        Container(
-                          color: Colors.white,
-                          child: TextFormField(
-                            decoration: const InputDecoration(
-                                border: InputBorder.none,
-                                hintText:
-                                    'Comentários a respeito da fiscalização'),
-                          ),
-                        );
+                        controller!.setCommentSection =
+                            !controller!.showCommentSection;
                       },
-                      child: const Text(
-                        'Adicionar Comentário',
+                      child: Text(
+                        controller!.showCommentSection
+                            ? 'Ocultar comentário'
+                            : 'Adicionar Comentário',
                         style: kUnderline,
                         textAlign: TextAlign.center,
                       ),
                     ),
+                    controller!.showCommentSection
+                        ? Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Title(
+                                  color: kPrimaryColor,
+                                  child: const Text('COMENTÁRIO')),
+                              const VerticalSpacerBox(size: SpacerSize.small),
+                              SizedBox(
+                                height: size.height * 0.2,
+                                child: TextFormField(
+                                  maxLines: null,
+                                  keyboardType: TextInputType.multiline,
+                                  decoration: const InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      fillColor: kPrimaryColor,
+                                      hintText:
+                                          'Comentários a respeito da fiscalização'),
+                                ),
+                              )
+                            ],
+                          )
+                        : const SizedBox(),
+
                     const Divider(color: kSecondaryTextColor),
                     Row(
                       children: const [

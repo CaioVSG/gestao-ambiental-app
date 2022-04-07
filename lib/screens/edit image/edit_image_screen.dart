@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
 import 'package:meioambientemobile/core/edit_image_controller.dart';
+import 'package:meioambientemobile/screens/details/details_screen_controller.dart';
 import 'package:provider/provider.dart';
 
 class EditImageScreen extends StatefulWidget {
   static const String id = 'edit_image_screen';
-  const EditImageScreen({Key? key}) : super(key: key);
+  const EditImageScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<EditImageScreen> createState() => _EditImageScreenState();
 }
 
-EditImageController? controller;
-
 class _EditImageScreenState extends State<EditImageScreen> {
+  EditImageController? controller;
+  DetailsScreenController? detailsScreenController;
   @override
   void didChangeDependencies() {
+    detailsScreenController =
+        Provider.of<DetailsScreenController>(context, listen: false);
     controller = Provider.of<EditImageController>(context, listen: false);
     super.didChangeDependencies();
   }
@@ -106,7 +111,11 @@ class _EditImageScreenState extends State<EditImageScreen> {
                             TextButton(
                               child: const Text('Excluir'),
                               onPressed: () {
-                                Navigator.of(context).pop();
+                                int popTimes = 0;
+                                detailsScreenController!.deleteSelectedImage();
+                                Navigator.popUntil(context, (route) {
+                                  return popTimes++ == 2;
+                                });
                               },
                             ),
                           ],
@@ -123,8 +132,14 @@ class _EditImageScreenState extends State<EditImageScreen> {
       body: Stack(
         children: [
           Center(
-            child:
-                SizedBox(height: size.height * 0.4, child: const Placeholder()),
+            child: SizedBox(
+                height: size.height * 0.6,
+                width: size.width,
+                child: Image.file(
+                  detailsScreenController!.selectedImages[
+                      detailsScreenController!.selectedImageIndex],
+                  fit: BoxFit.fill,
+                )),
           ),
           Align(
             alignment: Alignment.bottomCenter,
