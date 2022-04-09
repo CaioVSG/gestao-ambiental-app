@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meioambientemobile/components/vertical_spacer_box.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
-import 'package:meioambientemobile/screens/home/home_screen.dart';
-//import 'package:meioambientemobile/screens/sign%20in/sign_in_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   static const String id = 'profile_screen';
@@ -14,6 +12,10 @@ class ProfileScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          /*title: Image.asset(
+              'lib/assets/images/logo.png',
+              width: size.width * 0.25,
+            ),*/
           title: const Text('Perfil'),
           backgroundColor: kDetailColor,
         ),
@@ -31,7 +33,7 @@ class ProfileScreen extends StatelessWidget {
                   // ignore: unnecessary_const
                   image: const DecorationImage(
                     fit: BoxFit.fill,
-                    //Vem uma URL na foto não sei se da p colcoar aqui
+                    //Vem uma URL na foto não sei se da p colocar aqui
                     image: NetworkImage("https://i.imgur.com/BoN9kdC.png"),
                   ),
                 ),
@@ -45,13 +47,11 @@ class ProfileScreen extends StatelessWidget {
                 )),
               ),
               //Só envia o endereço de email na API
-              const VerticalSpacerBox(size: SpacerSize.small),
-              const Center(
-                  child:
-                      Text('Email: johndoe@example.com', style: kHomeScreen)),
+              const VerticalSpacerBox(size: SpacerSize.large),
+              const Center(child: Text('Email: ', style: kHomeScreen)),
               const VerticalSpacerBox(size: SpacerSize.small),
               //Não vem o cpf nem rg do user
-              const Center(
+              /*const Center(
                 child: Text('CPF: 123.456.789-00',
                     textAlign: TextAlign.start, style: kHomeScreen),
               ),
@@ -65,17 +65,13 @@ class ProfileScreen extends StatelessWidget {
                 child: Text('SDS: 81 912345678',
                     textAlign: TextAlign.start, style: kHomeScreen),
               ),
-              //   const Spacer(),
-              //   Text('Sair'.toUpperCase(), style: kdrawerText),
-              //   IconButton(
-              //     icon: const Icon(
-              //       Icons.exit_to_app,
-              //       color: kDetailColor,
-              //     ),
-              //     onPressed: () {
-              //       Navigator.popAndPushNamed(context, SignInScreen.id);
-              //     },
-              //   )
+              */
+              const Spacer(),
+              Center(
+                child: Image.asset('lib/assets/images/logo.png',
+                    width: size.width * 0.3),
+              ),
+              const Divider(color: kSecondaryTextColor),
             ],
           ),
         ),

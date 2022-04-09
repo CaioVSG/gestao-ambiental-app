@@ -3,15 +3,12 @@ import 'package:meioambientemobile/components/horizontal_spacer_box.dart';
 import 'package:meioambientemobile/components/vertical_spacer_box.dart';
 import 'package:meioambientemobile/components/primary_button.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
-import 'package:meioambientemobile/core/models/visits_model.dart';
 import 'package:meioambientemobile/screens/details/components/docs_screen.dart';
 import 'package:meioambientemobile/screens/details/components/finish_details_dialog.dart';
 import 'package:meioambientemobile/screens/details/details_screen_controller.dart';
 import 'package:meioambientemobile/screens/edit%20image/edit_image_screen.dart';
 import 'package:meioambientemobile/screens/profile/profile_screen.dart';
 import 'package:provider/provider.dart';
-
-import '../../core/api.dart';
 
 class DetailsScreen extends StatefulWidget {
   static const String id = 'details_screen';
@@ -47,6 +44,7 @@ class DetailsScreen extends StatefulWidget {
   final String companyName;
   final String phoneNumber;
   final String email;
+
   @override
   DetailsScreenState createState() => DetailsScreenState();
 }
@@ -62,9 +60,16 @@ class DetailsScreenState extends State<DetailsScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    DateTime data;
 
     return Scaffold(
         appBar: AppBar(
+          title: Center(
+            child: Image.asset(
+              'lib/assets/images/logo.png',
+              width: size.width * 0.25,
+            ),
+          ),
           actions: <Widget>[
             IconButton(
               icon: const Icon(
@@ -95,6 +100,7 @@ class DetailsScreenState extends State<DetailsScreen> {
                         ),
                       ],
                     ),
+                    const VerticalSpacerBox(size: SpacerSize.small),
                     Card(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(kDefaultRadius),
@@ -182,12 +188,14 @@ class DetailsScreenState extends State<DetailsScreen> {
                         controller!.setCommentSection =
                             !controller!.showCommentSection;
                       },
-                      child: Text(
-                        controller!.showCommentSection
-                            ? 'Ocultar comentário'
-                            : 'Adicionar Comentário',
-                        style: kUnderline,
-                        textAlign: TextAlign.center,
+                      child: Center(
+                        child: Text(
+                          controller!.showCommentSection
+                              ? 'Ocultar comentário'
+                              : 'Adicionar Comentário',
+                          style: kUnderline,
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                     ),
                     controller!.showCommentSection
@@ -199,7 +207,7 @@ class DetailsScreenState extends State<DetailsScreen> {
                                   child: const Text('COMENTÁRIO')),
                               const VerticalSpacerBox(size: SpacerSize.small),
                               SizedBox(
-                                height: size.height * 0.2,
+                                height: size.height * 0.09,
                                 child: TextFormField(
                                   maxLines: null,
                                   keyboardType: TextInputType.multiline,
@@ -246,14 +254,14 @@ class DetailsScreenState extends State<DetailsScreen> {
                         Text('ENDEREÇO', style: kDescription),
                       ],
                     ),
-
+                    const VerticalSpacerBox(size: SpacerSize.small),
+                    Text('Cidade: ${widget.city}', style: kdrawerText),
                     Text('Rua: ${widget.street}', style: kdrawerText),
                     Text('Número: ${widget.adressNumber}', style: kdrawerText),
-                    Text('CEP: ${widget.cep}', style: kdrawerText),
-                    Text('COMPLEMENTO: ${widget.complement}',
+                    Text('Complemento: ${widget.complement}',
                         style: kdrawerText),
-                    Text('BAIRRO: ${widget.district}', style: kdrawerText),
-                    Text('CIDADE: ${widget.city}', style: kdrawerText),
+                    Text('Bairro: ${widget.district}', style: kdrawerText),
+                    Text('CEP: ${widget.cep}', style: kdrawerText),
 
                     const Divider(color: kSecondaryTextColor),
                     //Só aparece o requerente se for uma requisição, em caso de denuncia não aparece nenhuma dessas informações
@@ -262,6 +270,7 @@ class DetailsScreenState extends State<DetailsScreen> {
                         Text('DETALHES DO RESPONSÁVEL', style: kDescription),
                       ],
                     ),
+                    const VerticalSpacerBox(size: SpacerSize.small),
                     Row(
                       children: [
                         Text(widget.companyName, style: kdrawerText),

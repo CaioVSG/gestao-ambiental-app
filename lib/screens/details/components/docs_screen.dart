@@ -19,7 +19,7 @@ class DocsDialog extends StatelessWidget {
           shrinkWrap: true,
           itemCount: 3,
           itemBuilder: (BuildContext context, int index) {
-            return DocTile(title: 'title');
+            return const DocTile(title: 'Anexo');
           },
         ),
       ),

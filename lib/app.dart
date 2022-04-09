@@ -7,8 +7,6 @@ import 'package:meioambientemobile/screens/sign%20in/sign_in_screen.dart';
 import 'package:meioambientemobile/screens/splash/splash_screen.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
-import 'screens/details/details_screen.dart';
-
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
 

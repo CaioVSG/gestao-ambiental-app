@@ -39,6 +39,10 @@ dependencies:
   dio: ^4.0.4
   file_picker: ^4.5.1
   http: ^0.13.4
+  intl: ^0.17.0
+  flutter_localizations: 
+    sdk: flutter
+    version: ^0.0.0
 
 dev_dependencies:
   flutter_test:
