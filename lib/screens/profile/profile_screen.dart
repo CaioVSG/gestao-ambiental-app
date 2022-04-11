@@ -2,10 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:meioambientemobile/components/vertical_spacer_box.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   static const String id = 'profile_screen';
-  const ProfileScreen({Key? key}) : super(key: key);
+  const ProfileScreen(
+      {Key? key,
+      required this.email,
+      required this.name,
+      required this.profilePhotoUrl})
+      : super(key: key);
 
+  final String email;
+  final String name;
+  final String profilePhotoUrl;
+
+  @override
+  ProfileScreenState createState() => ProfileScreenState();
+}
+
+class ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -16,39 +30,43 @@ class ProfileScreen extends StatelessWidget {
               'lib/assets/images/logo.png',
               width: size.width * 0.25,
             ),*/
-          title: const Text('Perfil'),
+
+          title: const Center(child: Text('Perfil')),
           backgroundColor: kDetailColor,
         ),
         body: Padding(
           padding: const EdgeInsets.all(kDefaultPadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+            children: <Widget>[
               Center(
-                  child: Container(
-                width: 200,
-                height: 200,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  // ignore: unnecessary_const
-                  image: const DecorationImage(
-                    fit: BoxFit.fill,
-                    //Vem uma URL na foto não sei se da p colocar aqui
-                    image: NetworkImage("https://i.imgur.com/BoN9kdC.png"),
+                child: Container(
+                  width: 350,
+                  height: 250,
+                  decoration: const BoxDecoration(
+                    color: kDetailColor,
+                    borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(24),
+                        bottomLeft: Radius.circular(24)),
                   ),
                 ),
-              )),
-              const Padding(
-                padding: EdgeInsets.all(15.0),
-                child: Center(
-                    child: Text(
-                  'CJ',
-                  style: kProfileStyle,
-                )),
+              ),
+              Center(
+                child: Row(
+                  children: [
+                    Text(widget.name, style: kProfileStyle),
+                  ],
+                ),
               ),
               //Só envia o endereço de email na API
               const VerticalSpacerBox(size: SpacerSize.large),
-              const Center(child: Text('Email: ', style: kHomeScreen)),
+              Center(
+                child: Row(
+                  children: [
+                    Text('Email: ${widget.email}', style: kdrawerText),
+                  ],
+                ),
+              ),
               const VerticalSpacerBox(size: SpacerSize.small),
               //Não vem o cpf nem rg do user
               /*const Center(

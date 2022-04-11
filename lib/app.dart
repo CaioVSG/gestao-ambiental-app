@@ -33,7 +33,7 @@ class App extends StatelessWidget {
         HomeScreen.id: (context) => const HomeScreen(),
         SignInScreen.id: (context) => const SignInScreen(),
         // DetailsScreen.id: (context) => const DetailsScreen(),
-        ProfileScreen.id: (context) => const ProfileScreen(),
+        //ProfileScreen.id: (context) => const ProfileScreen(),
         EditImageScreen.id: (context) => const EditImageScreen(),
       },
     );

@@ -27,6 +27,8 @@ class DetailsScreen extends StatefulWidget {
     required this.cnpj,
     required this.companyName,
     required this.email,
+    required this.name,
+    required this.profilePhotoUrl,
   }) : super(key: key);
 
   final String eventDate;
@@ -44,7 +46,9 @@ class DetailsScreen extends StatefulWidget {
   final String companyName;
   final String phoneNumber;
   final String email;
-
+  final String name;
+  final String profilePhotoUrl;
+  
   @override
   DetailsScreenState createState() => DetailsScreenState();
 }
@@ -60,7 +64,6 @@ class DetailsScreenState extends State<DetailsScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    DateTime data;
 
     return Scaffold(
         appBar: AppBar(
@@ -78,9 +81,9 @@ class DetailsScreenState extends State<DetailsScreen> {
                 size: 32,
               ),
               onPressed: () {
-                Navigator.popAndPushNamed(context, ProfileScreen.id);
+                 Navigator.pushNamed(context, ProfileScreen.id);
               },
-            )
+            ),
           ],
         ),
         body: Padding(
@@ -256,11 +259,14 @@ class DetailsScreenState extends State<DetailsScreen> {
                     ),
                     const VerticalSpacerBox(size: SpacerSize.small),
                     Text('Cidade: ${widget.city}', style: kdrawerText),
-                    Text('Rua: ${widget.street}', style: kdrawerText),
-                    Text('Número: ${widget.adressNumber}', style: kdrawerText),
-                    Text('Complemento: ${widget.complement}',
+                    Text(
+                        'Rua: ${widget.street} - '
+                        ' Nº: ${widget.adressNumber}',
                         style: kdrawerText),
                     Text('Bairro: ${widget.district}', style: kdrawerText),
+                    Text('Complemento: ${widget.complement}',
+                        style: kdrawerText),
+
                     Text('CEP: ${widget.cep}', style: kdrawerText),
 
                     const Divider(color: kSecondaryTextColor),
@@ -273,7 +279,8 @@ class DetailsScreenState extends State<DetailsScreen> {
                     const VerticalSpacerBox(size: SpacerSize.small),
                     Row(
                       children: [
-                        Text(widget.companyName, style: kdrawerText),
+                        Text('Empresa: ${widget.companyName}',
+                            style: kdrawerText),
                       ],
                     ),
                     Row(
@@ -284,10 +291,13 @@ class DetailsScreenState extends State<DetailsScreen> {
 
                     Text('Telefone: ${widget.phoneNumber}', style: kdrawerText),
                     Text(
-                      'email: ${widget.email}',
+                      'E-mail: ${widget.email}',
                       style: kdrawerText,
                     ),
+                    //Text('nome: ${widget.name}', style: kdrawerText),
+                    //Text('foto: ${widget.profilePhotoUrl}', style: kdrawerText),
                     const VerticalSpacerBox(size: SpacerSize.medium),
+
                     PrimaryButton(
                         text: 'Concluir Visita',
                         onPressed: () {
