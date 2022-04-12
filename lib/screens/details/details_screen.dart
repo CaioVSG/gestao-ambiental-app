@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:meioambientemobile/components/horizontal_spacer_box.dart';
 import 'package:meioambientemobile/components/vertical_spacer_box.dart';
 import 'package:meioambientemobile/components/primary_button.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
+import 'package:meioambientemobile/core/util/custom_date_formater.dart';
 import 'package:meioambientemobile/screens/details/components/docs_screen.dart';
 import 'package:meioambientemobile/screens/details/components/finish_details_dialog.dart';
 import 'package:meioambientemobile/screens/details/details_screen_controller.dart';
@@ -14,6 +16,7 @@ class DetailsScreen extends StatefulWidget {
   static const String id = 'details_screen';
   const DetailsScreen({
     Key? key,
+    required this.denunciaId,
     required this.eventDate,
     required this.creationDate,
     required this.adress,
@@ -30,7 +33,7 @@ class DetailsScreen extends StatefulWidget {
     required this.name,
     required this.profilePhotoUrl,
   }) : super(key: key);
-
+  final int denunciaId;
   final String eventDate;
   final String creationDate;
   final String adress;
@@ -48,7 +51,7 @@ class DetailsScreen extends StatefulWidget {
   final String email;
   final String name;
   final String profilePhotoUrl;
-  
+
   @override
   DetailsScreenState createState() => DetailsScreenState();
 }
@@ -81,7 +84,7 @@ class DetailsScreenState extends State<DetailsScreen> {
                 size: 32,
               ),
               onPressed: () {
-                 Navigator.pushNamed(context, ProfileScreen.id);
+                Navigator.pushNamed(context, ProfileScreen.id);
               },
             ),
           ],
@@ -241,13 +244,15 @@ class DetailsScreenState extends State<DetailsScreen> {
                     Row(
                       //Modificar as datas
                       children: [
-                        Text('Data Marcada: ${widget.eventDate}',
+                        Text(
+                            'Data Marcada: ${CustomDateFormater.dateTimeToString(CustomDateFormater.stringToDateTime(widget.eventDate))}',
                             style: kdrawerText),
                       ],
                     ),
                     Row(
                       children: [
-                        Text('Data de Criação: ${widget.creationDate}',
+                        Text(
+                            'Data de Criação: ${CustomDateFormater.dateTimeToString(CustomDateFormater.stringToDateTime(widget.creationDate))}',
                             style: kdrawerText),
                       ],
                     ),
@@ -288,22 +293,41 @@ class DetailsScreenState extends State<DetailsScreen> {
                         Text('CNPJ: ${widget.cnpj}', style: kdrawerText),
                       ],
                     ),
-
-                    Text('Telefone: ${widget.phoneNumber}', style: kdrawerText),
+                    SizedBox(
+                      height: size.height * 0.03,
+                      child: Row(
+                        children: [
+                          TextButton(
+                              style: TextButton.styleFrom(
+                                padding: EdgeInsets.zero,
+                              ),
+                              onPressed: () {
+                                Clipboard.setData(
+                                        ClipboardData(text: widget.phoneNumber))
+                                    .then((value) => ScaffoldMessenger.of(
+                                            context)
+                                        .showSnackBar(const SnackBar(
+                                            content: Text(
+                                                'Telefone copiado para a área de transferência'))));
+                              },
+                              child: Text('Telefone: ${widget.phoneNumber}',
+                                  style: kdrawerText)),
+                          const Icon(Icons.copy)
+                        ],
+                      ),
+                    ),
                     Text(
                       'E-mail: ${widget.email}',
                       style: kdrawerText,
                     ),
-                    //Text('nome: ${widget.name}', style: kdrawerText),
-                    //Text('foto: ${widget.profilePhotoUrl}', style: kdrawerText),
                     const VerticalSpacerBox(size: SpacerSize.medium),
-
                     PrimaryButton(
                         text: 'Concluir Visita',
                         onPressed: () {
                           showDialog(
                               context: context,
-                              builder: (context) => const FinishVisitDialog());
+                              builder: (context) =>
+                                  FinishVisitDialog(id: widget.denunciaId));
                         }),
                   ],
                 ),

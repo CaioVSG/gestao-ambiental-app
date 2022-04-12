@@ -2,31 +2,17 @@ import 'package:flutter/material.dart';
 
 class UserModel with ChangeNotifier {
   int id = 0;
-  String refreshToken = '';
+  String token = '';
   String name = '';
   String email = '';
   String profilePhotoUrl = '';
-  void setUserRefreshToken(String refreshToken) {
-    this.refreshToken = refreshToken;
-    notifyListeners();
-  }
 
-  void setUserName(String name) {
-    this.name = name;
-    notifyListeners();
-  }
-
-  void setUserEmail(String email) {
-    this.email = email;
-    notifyListeners();
-  }
-
-  void setUserId(int id) {
+  void setUser(
+      int id, String token, String name, String email, String profilePhotoUrl) {
     this.id = id;
-    notifyListeners();
-  }
-
-  void setUserProfilePhotoUrl(String profilePhotoUrl) {
+    this.token = token;
+    this.name = name;
+    this.email = email;
     this.profilePhotoUrl = profilePhotoUrl;
     notifyListeners();
   }

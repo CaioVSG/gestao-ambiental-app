@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:meioambientemobile/components/horizontal_spacer_box.dart';
 import 'package:meioambientemobile/components/vertical_spacer_box.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
+import 'package:meioambientemobile/core/util/custom_date_formater.dart';
 
 class VisitTile extends StatelessWidget {
   final String title;
@@ -11,16 +12,21 @@ class VisitTile extends StatelessWidget {
   final VoidCallback onTap;
   final String business;
   final String tipo;
-  const VisitTile({
-    Key? key,
-    required this.title,
-    // ignore: non_constant_identifier_names
-    required this.visitDate,
-    required this.empresa,
-    required this.onTap,
-    required this.business,
-    required this.tipo,
-  }) : super(key: key);
+
+  final String street;
+  final String number;
+  const VisitTile(
+      {Key? key,
+      required this.title,
+      // ignore: non_constant_identifier_names
+      required this.visitDate,
+      required this.empresa,
+      required this.onTap,
+      required this.business,
+      required this.tipo,
+      required this.street,
+      required this.number})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,29 +47,11 @@ class VisitTile extends StatelessWidget {
                 Text(tipo.toUpperCase(), style: kText),
               ],
             ),
-            const Spacer(),
-            Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-              const Icon(
-                Icons.location_on,
-                color: Colors.white,
-              ),
-              const HorizontalSpacerBox(size: SpacerSize.tiny),
-              Text(
-                title,
-                style: kTextDetails,
-              ),
-            ]),
-            Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-              const Icon(
-                Icons.business,
-                color: Colors.white,
-              ),
-              const HorizontalSpacerBox(size: SpacerSize.tiny),
-              Text(
-                empresa,
-                style: kTextDetails,
-              ),
-            ]),
+            const VerticalSpacerBox(size: SpacerSize.small),
+            Text(
+              street + ' ,$number',
+              style: kSubtitleTextStyle,
+            ),
             const Spacer(),
             Row(
               children: [
@@ -74,7 +62,8 @@ class VisitTile extends StatelessWidget {
                 ),
                 const HorizontalSpacerBox(size: SpacerSize.tiny),
                 Text(
-                  visitDate,
+                  CustomDateFormater.dateTimeWithHourToString(
+                      CustomDateFormater.stringToDateTime(visitDate)),
                   style: kText,
                 ),
               ],

@@ -23,7 +23,12 @@ class Api {
             'device_name': 'mobile',
           });
       if (response.statusCode == 200) {
-        userModel.setUserRefreshToken(response.data);
+        userModel.setUser(
+            response.data['id'],
+            response.data['token'],
+            response.data['name'],
+            response.data['email'],
+            response.data['profile_photo_url']);
         return true;
       }
     } catch (e) {
@@ -39,7 +44,7 @@ class Api {
         options: Options(
           headers: {
             'Authorization':
-                'Bearer ${Provider.of<UserModel>(context, listen: false).refreshToken}',
+                'Bearer ${Provider.of<UserModel>(context, listen: false).token}',
             'Content-Type': 'application/json',
             'Accept': 'application/json',
           },
@@ -51,8 +56,29 @@ class Api {
         return null;
       }
     } catch (e) {
-      print(e);
       return null;
+    }
+  }
+
+  //requisita a finalização da visita
+  Future finishVisit(BuildContext context, int id) async {
+    try {
+      Response response = await _dio.post(baseUrl + '/visitas/$id/concluir',
+          options: Options(
+            headers: {
+              'Authorization':
+                  'Bearer ${Provider.of<UserModel>(context, listen: false).token}',
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+            },
+          ));
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      return false;
     }
   }
 }

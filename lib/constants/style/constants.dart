@@ -52,7 +52,10 @@ const TextStyle kHomeScreen2 = TextStyle(
   fontWeight: FontWeight.bold,
   color: kDetailColor,
 );
-
+const kSubtitleTextStyle = TextStyle(
+  fontSize: 18,
+  color: kPrimaryColor,
+);
 const TextStyle kText = TextStyle(
   fontSize: 19,
   fontWeight: FontWeight.bold,
@@ -67,7 +70,6 @@ const TextStyle kProfileStyle = TextStyle(
 
 const TextStyle kdrawerText = TextStyle(
   fontSize: 15,
-  fontWeight: FontWeight.bold,
   color: kDetailColor,
 );
 
