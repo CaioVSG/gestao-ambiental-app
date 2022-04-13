@@ -21,35 +21,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // _manageOrders(List<dynamic> data) {
-  //   return ComplaintModel(
-  //       //Não achei o index para substituir o 0 e percorrer todo o array
-  //       address: data[0]['denuncia']['endereco'] ?? '',
-  //       text: data[0]['denuncia']['endereco'] ?? '',
-  //       denunciator: data[0]['denuncia']['denunciante'] ?? '',
-  //       createdAt: data[0]['denuncia']['created_at'] ?? '',
-  //       updatedAt: data[0]['denuncia']['updated_at'] ?? '');
-
-  //   final visitsModel = VisitsModel(
-  //     visitDate: data[0]['data_marcada'] ?? '',
-  //     visitDoneDate: data[0]['data_realizada'] ?? '',
-  //     requirementId: data[0]['requerimento_id'] ?? 0,
-  //     complaintId: data[0]['denuncia_id'] ?? 0,
-  //     createdAt: data[0]['created_at'] ?? '',
-  //     updatedAt: data[0]['updated_at'] ?? '',
-  //     pruningId: data[0]['solicitacao_poda_id'] ?? 0,
-  //   );
-  //   final companyModel = CompanyModel(
-  //     name: data[0]['denuncia']['empresa']['nome'],
-  //     cpfCnpj: data[0]['denuncia']['empresa']['cpf_cnpj'],
-  //   );
-  //   final addressModel = AddressModel(
-  //       street: data[0]['denuncia']['empresa']['endereco']['rua'] ?? '',
-  //       number: data[0]['denuncia']['empresa']['endereco']['numero'],
-  //       district: data[0]['denuncia']['empresa']['endereco']['bairro'],
-  //       city: data[0]['denuncia']['empresa']['endereco']['cidade'],
-  //       state: data[0]['denuncia']['empresa']['estado'] ?? '');
-  // }
   late Future _getAllVisits;
   @override
   void didChangeDependencies() {
@@ -130,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: ListView.separated(
                           separatorBuilder: (context, index) {
                             return const VerticalSpacerBox(
-                                size: SpacerSize.small);
+                                size: SpacerSize.tiny);
                           },
                           itemCount: dataList.length,
                           itemBuilder: ((context, index) {
@@ -138,45 +109,189 @@ class _HomeScreenState extends State<HomeScreen> {
 
                             VisitTile getVisitTilesInfo() {
                               if (data['denuncia'] != null) {
+                                if (data['denuncia']['empresa'] == null) {
+                                  return VisitTile(
+                                      title: 'title',
+                                      visitDate: DateTime.now().toString(),
+                                      empresa: 'empresa',
+                                      onTap: () {},
+                                      business: 'business',
+                                      tipo: 'Denúncia sem empresa',
+                                      street: 'street',
+                                      number: 'number');
+                                } else {
+                                  final model = VisitsModel(
+                                    id: data['id'] ?? 0,
+                                    dueDate: data['data_marcada'],
+                                    typeTitle: 'Denúncia',
+                                    createdDate: data['created_at'],
+                                    completedDate: data['data_realizada'],
+                                    cep: data['denuncia']['empresa']['endereco']
+                                            ['cep'] ??
+                                        '',
+                                    city: data['denuncia']['empresa']
+                                            ['endereco']['cidade'] ??
+                                        '',
+                                    neighborhood: data['denuncia']['empresa']
+                                            ['endereco']['bairro'] ??
+                                        '',
+                                    number: data['denuncia']['empresa']
+                                            ['endereco']['numero'] ??
+                                        '',
+                                    state: data['denuncia']['empresa']
+                                            ['endereco']['estado'] ??
+                                        '',
+                                    street: data['denuncia']['empresa']
+                                            ['endereco']['rua'] ??
+                                        '',
+                                    complement: data['denuncia']['empresa']
+                                            ['endereco']['complemento'] ??
+                                        '',
+                                    companyName: data['denuncia']['empresa']
+                                            ['nome'] ??
+                                        '',
+                                    phoneNumber: data['denuncia']['empresa']
+                                            ['telefone']['numero'] ??
+                                        '',
+                                    cnpjOrCpf: data['denuncia']['empresa']
+                                            ['cpf_cnpj'] ??
+                                        '',
+                                    companyEmail: data['denuncia']['empresa']
+                                            ['user']['email'] ??
+                                        '',
+                                  );
+                                  return VisitTile(
+                                    title: 'Denúncia',
+                                    visitDate: model.dueDate,
+                                    completedDate: model.completedDate,
+                                    empresa: 'empresa',
+                                    onTap: () {
+                                      Navigator.push(context,
+                                          MaterialPageRoute(builder: (context) {
+                                        return DetailsScreen(
+                                          denunciaId: model.id,
+                                          type: model.typeTitle,
+                                          eventDate: model.dueDate,
+                                          creationDate: model.createdDate!,
+                                          completedDate: model.completedDate,
+                                          adress: model.street,
+                                          street: model.street,
+                                          adressNumber: model.number,
+                                          district: model.neighborhood,
+                                          city: model.city,
+                                          cep: model.cep,
+                                          complement: model.complement,
+                                          phoneNumber: model.phoneNumber,
+                                          companyName: model.companyName,
+                                          cnpj: model.cnpjOrCpf,
+                                          email: model.companyEmail,
+                                          name: 'model.name',
+                                          profilePhotoUrl:
+                                              'model.profilePhotoUrl',
+                                        );
+                                      }));
+                                    },
+                                    business: 'business',
+                                    tipo: model.typeTitle,
+                                    street: model.street,
+                                    number: model.number,
+                                  );
+                                }
+                              } else if (data['solicitacao_poda'] != null) {
                                 final model = VisitsModel(
                                   id: data['id'] ?? 0,
                                   dueDate: data['data_marcada'],
-                                  typeTitle: 'Denúncia',
+                                  typeTitle: 'Solicitação Poda',
                                   createdDate: data['created_at'],
-                                  cep: data['denuncia']['empresa']['endereco']
+                                  comment: data['comentario'],
+                                  cep: data['solicitacao_poda']['endereco']
                                       ['cep'],
-                                  city: data['denuncia']['empresa']['endereco']
+                                  city: data['solicitacao_poda']['endereco']
                                       ['cidade'],
-                                  neighborhood: data['denuncia']['empresa']
+                                  neighborhood: data['solicitacao_poda']
                                       ['endereco']['bairro'],
-                                  number: data['denuncia']['empresa']
-                                      ['endereco']['numero'],
-                                  state: data['denuncia']['empresa']['endereco']
+                                  number: data['solicitacao_poda']['endereco']
+                                      ['numero'],
+                                  state: data['solicitacao_poda']['endereco']
                                       ['estado'],
-                                  street: data['denuncia']['empresa']
-                                      ['endereco']['rua'],
-                                  complement: data['denuncia']['empresa']
+                                  street: data['solicitacao_poda']['endereco']
+                                      ['rua'],
+                                  complement: data['solicitacao_poda']
                                       ['endereco']['complemento'],
-                                  companyName: data['denuncia']['empresa']
-                                      ['nome'],
-                                  phoneNumber: data['denuncia']['empresa']
-                                      ['telefone']['numero'],
-                                  cnpjOrCpf: data['denuncia']['empresa']
-                                      ['cpf_cnpj'],
-                                  companyEmail: data['denuncia']['empresa']
-                                      ['user']['email'],
+                                  companyName: data['solicitacao_poda']
+                                      ['requerente']['user']['name'],
+                                  phoneNumber: '',
+                                  cnpjOrCpf: data['solicitacao_poda']
+                                      ['requerente']['cpf'],
+                                  companyEmail: data['solicitacao_poda']
+                                      ['requerente']['user']['email'],
                                 );
                                 return VisitTile(
                                   title: 'Denúncia',
                                   visitDate: model.dueDate,
+                                  completedDate: null,
+                                  empresa: model.companyName,
+                                  onTap: () {},
+                                  business: 'business',
+                                  tipo: model.typeTitle,
+                                  street: model.street,
+                                  number: model.number,
+                                );
+                              } else if (data['requerimento'] != null) {
+                                final model = VisitsModel(
+                                  id: data['id'] ?? 0,
+                                  dueDate: data['data_marcada'] ?? '',
+                                  typeTitle: 'Requerimento',
+                                  createdDate: data['created_at'] ?? '',
+                                  completedDate: data['data_realizada'],
+                                  cep: data['requerimento']['empresa']
+                                          ['endereco']['cep'] ??
+                                      '',
+                                  city: data['requerimento']['empresa']
+                                          ['endereco']['cidade'] ??
+                                      '',
+                                  neighborhood: data['requerimento']['empresa']
+                                          ['endereco']['bairro'] ??
+                                      '',
+                                  number: data['requerimento']['empresa']
+                                          ['endereco']['numero'] ??
+                                      '',
+                                  state: data['requerimento']['empresa']
+                                          ['endereco']['estado'] ??
+                                      '',
+                                  street: data['requerimento']['empresa']
+                                          ['endereco']['rua'] ??
+                                      '',
+                                  complement: data['requerimento']['empresa']
+                                          ['endereco']['complemento'] ??
+                                      '',
+                                  companyName: data['requerimento']['empresa']
+                                          ['nome'] ??
+                                      '',
+                                  phoneNumber: data['requerimento']['empresa']
+                                          ['telefone']['numero'] ??
+                                      '',
+                                  cnpjOrCpf: data['requerimento']['empresa']
+                                          ['cpf_cnpj'] ??
+                                      '',
+                                  companyEmail: data['requerimento']['empresa']
+                                          ['user']['email'] ??
+                                      '',
+                                );
+                                return VisitTile(
+                                  title: 'Requerimento',
+                                  visitDate: DateTime.now().toString(),
+                                  completedDate: model.completedDate,
                                   empresa: 'empresa',
                                   onTap: () {
                                     Navigator.push(context,
                                         MaterialPageRoute(builder: (context) {
                                       return DetailsScreen(
                                         denunciaId: model.id,
+                                        type: model.typeTitle,
                                         eventDate: model.dueDate,
                                         creationDate: model.createdDate!,
+                                        completedDate: model.completedDate,
                                         adress: model.street,
                                         street: model.street,
                                         adressNumber: model.number,
@@ -199,39 +314,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                   street: model.street,
                                   number: model.number,
                                 );
-                              } else if (data['solicitacao_poda'] != null) {
-                                // final model = VisitsModel(
-                                //     dueDate: data['data_marcada'],
-                                //     typeTitle: 'Solicitação de poda',
-                                //     createdDate: data['created_at']);
-                                return VisitTile(
-                                  title: 'Denúncia',
-                                  visitDate: 'model.dueDate',
-                                  empresa: 'empresa',
-                                  onTap: () {},
-                                  business: 'business',
-                                  tipo: 'model.typeTitle',
-                                  street: '',
-                                  number: '',
-                                );
-                              } else if (data['requerimento'] != null) {
-                                // final model = VisitsModel(
-                                //     dueDate: data['data_marcada'],
-                                //     typeTitle: 'Requerimento',
-                                //     createdDate: data['created_at']);
-                                return VisitTile(
-                                  title: 'Denúncia',
-                                  visitDate: 'model.dueDate',
-                                  empresa: 'empresa',
-                                  onTap: () {},
-                                  business: 'business',
-                                  tipo: 'model.typeTitle',
-                                  street: '',
-                                  number: '',
-                                );
                               } else {
                                 return VisitTile(
                                   title: 'title',
+                                  completedDate: null,
                                   visitDate: '',
                                   empresa: 'empresa',
                                   onTap: () {},
@@ -244,28 +330,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             }
 
                             return Card(
-                              child: Container(
-                                  height: size.height * 0.23,
-                                  decoration: BoxDecoration(
-                                      color: kDetailColor,
-                                      borderRadius:
-                                          BorderRadius.circular(kSmallHeight)),
-                                  child: getVisitTilesInfo()
-                                  // child: VisitTile(
-                                  //   title: addressModel.street +
-                                  //       ', ' +
-                                  //       addressModel.district +
-                                  //       ', ' +
-                                  //       addressModel.number,
-                                  //   //Não sei converter do dataTime p separar desse modo
-                                  //   visitDate: visitsModel.visitDate,
-                                  //   empresa: companyModel.name,
-                                  //   //Não consegui colocar um condicional nesse campo para cada caso
-                                  //   tipo: 'Denúncia',
-                                  //   business: '',
-                                  //   onTap: () {
-
-                                  ),
+                              child: getVisitTilesInfo(),
                             );
                           }),
                         ),
@@ -281,91 +346,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
-// if (data['solicitacao_poda'] != null) {
-                            //   print('é solicitacao');
-                            // } else if (data['requerimento'] != null) {
-                            //   print('é requerimento');
-                            // } else if (data['denuncia'] != null) {
-                            //   var denunciaData = data['denuncia'];
-                            //   if (data['data_realizada'] != null) {
-                            //     complaintModel = ComplaintModel(
-                            //         address: denunciaData['endereco'] ?? '',
-                            //         text: denunciaData['endereco'] ?? '',
-                            //         denunciator: denunciaData['denunciante'] ?? '',
-                            //         createdAt: denunciaData['created_at'] ?? '',
-                            //         updatedAt: denunciaData['updated_at'] ?? '');
-
-                            //     visitsModel = VisitsModel(
-                            //       visitDate: data['data_marcada'] ?? '',
-                            //       visitDoneDate: data['data_realizada'] ?? '',
-                            //       requirementId: data['requerimento_id'] ?? 0,
-                            //       complaintId: data['denuncia_id'] ?? 0,
-                            //       createdAt: data['created_at'] ?? '',
-                            //       updatedAt: data['updated_at'] ?? '',
-                            //       pruningId: data['solicitacao_poda_id'] ?? 0,
-                            //     );
-                            //     companyModel = CompanyModel(
-                            //       name: denunciaData['empresa']['nome'] ?? '',
-                            //       cpfCnpj: denunciaData['empresa']['cpf_cnpj'] ?? '',
-                            //     );
-                            //     addressModel = AddressModel(
-                            //       street: denunciaData['empresa']['endereco']['rua'] ?? '',
-                            //       number: denunciaData['empresa']['endereco']['numero'],
-                            //       district: denunciaData['empresa']['endereco']['bairro'],
-                            //       city: denunciaData['empresa']['endereco']['cidade'],
-                            //       state: denunciaData['empresa']['estado'] ?? '',
-                            //       complement: denunciaData['empresa']['endereco']
-                            //               ['complemento'] ??
-                            //           '',
-                            //       cep: denunciaData['empresa']['endereco']['cep'],
-                            //     );
-                            //     profileModel = Profile(
-                            //         name: denunciaData['empresa']['user']['name'],
-                            //         email: denunciaData['empresa']['user']['email'],
-                            //         profilePhotoUrl: 'profilePhotoUrl');
-                            //     phoneModel = Phone(
-                            //         number: denunciaData['empresa']['telefone']['numero']);
-                            //   } else {
-                            //     complaintModel = ComplaintModel(
-                            //         address: data['denuncia']['endereco'] ?? '',
-                            //         text: data['denuncia']['endereco'] ?? '',
-                            //         denunciator: data['denuncia']['denunciante'] ?? '',
-                            //         createdAt: data['denuncia']['created_at'] ?? '',
-                            //         updatedAt: data['denuncia']['updated_at'] ?? '');
-
-                            //     visitsModel = VisitsModel(
-                            //       visitDate: data['data_marcada'] ?? '',
-                            //       visitDoneDate: data['data_realizada'] ?? '',
-                            //       requirementId: data['requerimento_id'] ?? 0,
-                            //       complaintId: data['denuncia_id'] ?? 0,
-                            //       createdAt: data['created_at'] ?? '',
-                            //       updatedAt: data['updated_at'] ?? '',
-                            //       pruningId: data['solicitacao_poda_id'] ?? 0,
-                            //     );
-                            //     companyModel = CompanyModel(
-                            //       name: data['denuncia']['empresa']['nome'] ?? '',
-                            //       cpfCnpj: data['denuncia']['empresa']['cpf_cnpj'] ?? '',
-                            //     );
-                            //      addressModel = AddressModel(
-                            //       street:
-                            //           data['denuncia']['empresa']['endereco']['rua'] ?? '',
-                            //       number: data['denuncia']['empresa']['endereco']['numero'],
-                            //       district: data['denuncia']['empresa']['endereco']
-                            //           ['bairro'],
-                            //       city: data['denuncia']['empresa']['endereco']['cidade'],
-                            //       state: data['denuncia']['empresa']['estado'] ?? '',
-                            //       complement: data['denuncia']['empresa']['endereco']
-                            //               ['complemento'] ??
-                            //           '',
-                            //       cep: data['denuncia']['empresa']['endereco']['cep'],
-                            //     );
-                            //      profileModel = Profile(
-                            //         name: data['denuncia']['empresa']['user']['name'],
-                            //         email: data['denuncia']['empresa']['user']['email'],
-                            //         profilePhotoUrl: 'profilePhotoUrl');
-                            //     phoneModel = Phone(
-                            //         number: data['denuncia']['empresa']['telefone']
-                            //             ['numero']);
-                            //   }
-                            // }

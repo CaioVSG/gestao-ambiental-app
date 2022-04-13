@@ -17,7 +17,9 @@ class DetailsScreen extends StatefulWidget {
   const DetailsScreen({
     Key? key,
     required this.denunciaId,
+    required this.type,
     required this.eventDate,
+    this.completedDate,
     required this.creationDate,
     required this.adress,
     required this.street,
@@ -34,7 +36,9 @@ class DetailsScreen extends StatefulWidget {
     required this.profilePhotoUrl,
   }) : super(key: key);
   final int denunciaId;
+  final String type;
   final String eventDate;
+  final String? completedDate;
   final String creationDate;
   final String adress;
 
@@ -67,15 +71,18 @@ class DetailsScreenState extends State<DetailsScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
     return Scaffold(
         appBar: AppBar(
-          title: Center(
-            child: Image.asset(
-              'lib/assets/images/logo.png',
-              width: size.width * 0.25,
-            ),
-          ),
+          backgroundColor:
+              widget.completedDate == null ? kDetailColor : kCompletedColor,
+          centerTitle: true,
+          title: widget.completedDate == null
+              ? Image.asset(
+                  'lib/assets/images/logo.png',
+                  width: size.width * 0.25,
+                )
+              : Text(
+                  'CONCLUÍDA EM ${CustomDateFormater.dateTimeToString(CustomDateFormater.stringToDateTime(widget.completedDate!))}'),
           actions: <Widget>[
             IconButton(
               icon: const Icon(
@@ -96,22 +103,19 @@ class DetailsScreenState extends State<DetailsScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: const [
-                        Text(
-                          'DENÚNCIA AMBIENTAL',
-                          style: kHomeScreen,
-                          textAlign: TextAlign.start,
-                        ),
-                      ],
+                    Text(
+                      widget.type.toUpperCase(),
+                      style: kHomeScreen,
+                      textAlign: TextAlign.start,
                     ),
                     const VerticalSpacerBox(size: SpacerSize.small),
                     Card(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(kDefaultRadius),
                       ),
-                      color: kDetailColor,
+                      color: widget.completedDate == null
+                          ? kDetailColor
+                          : kCompletedColor,
                       child: Container(
                         padding: const EdgeInsets.all(9),
                         height: size.height * 0.25,
@@ -140,22 +144,24 @@ class DetailsScreenState extends State<DetailsScreen> {
                       ),
                     ),
                     const Divider(color: kSecondaryTextColor),
-                    InkWell(
-                      onTap: () => controller!.selectImages(),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text(
-                            'MÍDIA',
-                            style: kHomeScreen2,
-                          ),
-                          Icon(
-                            Icons.add_a_photo,
-                            color: kDetailColor,
-                          ),
-                        ],
-                      ),
-                    ),
+                    widget.completedDate == null
+                        ? InkWell(
+                            onTap: () => controller!.selectImages(),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: const [
+                                Text(
+                                  'MÍDIA',
+                                  style: kHomeScreen2,
+                                ),
+                                Icon(
+                                  Icons.add_a_photo,
+                                  color: kDetailColor,
+                                ),
+                              ],
+                            ),
+                          )
+                        : const SizedBox(),
                     const VerticalSpacerBox(size: SpacerSize.small),
                     controller!.selectedImageLength > 0
                         ? SizedBox(
@@ -321,14 +327,17 @@ class DetailsScreenState extends State<DetailsScreen> {
                       style: kdrawerText,
                     ),
                     const VerticalSpacerBox(size: SpacerSize.medium),
-                    PrimaryButton(
-                        text: 'Concluir Visita',
-                        onPressed: () {
-                          showDialog(
-                              context: context,
-                              builder: (context) =>
-                                  FinishVisitDialog(id: widget.denunciaId));
-                        }),
+                    widget.completedDate == null
+                        ? PrimaryButton(
+                            text: 'Concluir Visita',
+                            onPressed: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) =>
+                                      FinishVisitDialog(id: widget.denunciaId));
+                            })
+                        : const Center(
+                            child: Text('Esta visita já foi concluída')),
                   ],
                 ),
               ),

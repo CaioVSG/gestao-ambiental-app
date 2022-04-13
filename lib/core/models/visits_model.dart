@@ -19,11 +19,15 @@ class VisitsModel with ChangeNotifier {
   final String complement;
   final String cep;
 
-  //DENUNCIA STRIC DATA
+  //DENUNCIA STRICT DATA
   final String companyName;
   final String phoneNumber;
   final String cnpjOrCpf;
   final String companyEmail;
+
+  //PODA STRICT DATA
+  final String? comment;
+
   VisitsModel({
     required this.id,
     required this.dueDate,
@@ -41,6 +45,7 @@ class VisitsModel with ChangeNotifier {
     required this.phoneNumber,
     required this.companyEmail,
     required this.cnpjOrCpf,
+    this.comment,
   });
 }
 // class ComplaintModel {

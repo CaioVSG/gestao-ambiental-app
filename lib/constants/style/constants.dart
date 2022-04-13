@@ -8,6 +8,7 @@ const Color kSecondaryTextColor = Color(0xFF2c3e50);
 const Color kDetailColor = Color(0xFF293B28);
 const Color kDetailColor2 = Colors.green;
 const Color kErrorColor = Colors.red;
+const Color kCompletedColor = Colors.grey;
 
 // =======SIZES=========//
 const double kDefaultPadding = 28.0;

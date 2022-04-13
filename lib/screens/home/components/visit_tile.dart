@@ -8,6 +8,7 @@ class VisitTile extends StatelessWidget {
   final String title;
   // ignore: non_constant_identifier_names
   final String visitDate;
+  final String? completedDate;
   final String empresa;
   final VoidCallback onTap;
   final String business;
@@ -20,6 +21,7 @@ class VisitTile extends StatelessWidget {
       required this.title,
       // ignore: non_constant_identifier_names
       required this.visitDate,
+      this.completedDate,
       required this.empresa,
       required this.onTap,
       required this.business,
@@ -30,9 +32,14 @@ class VisitTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return InkWell(
       onTap: onTap,
-      child: Padding(
+      child: Container(
+        height: size.height * 0.23,
+        decoration: BoxDecoration(
+            color: completedDate == null ? kDetailColor : kCompletedColor,
+            borderRadius: BorderRadius.circular(kSmallHeight)),
         padding: const EdgeInsets.all(kMediumtHeight),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

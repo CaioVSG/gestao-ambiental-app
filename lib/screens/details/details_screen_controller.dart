@@ -52,6 +52,8 @@ class DetailsScreenController with ChangeNotifier {
             duration: Duration(seconds: 2),
           ),
         );
+        _selectedImages.clear();
+        _selectedImageLength = 0;
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
