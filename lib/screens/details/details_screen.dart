@@ -5,7 +5,7 @@ import 'package:meioambientemobile/components/vertical_spacer_box.dart';
 import 'package:meioambientemobile/components/primary_button.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
 import 'package:meioambientemobile/core/util/custom_date_formater.dart';
-import 'package:meioambientemobile/screens/details/components/docs_screen.dart';
+import 'package:meioambientemobile/screens/details/components/docs_dialog.dart';
 import 'package:meioambientemobile/screens/details/components/finish_details_dialog.dart';
 import 'package:meioambientemobile/screens/details/details_screen_controller.dart';
 import 'package:meioambientemobile/screens/edit%20image/edit_image_screen.dart';
@@ -14,27 +14,29 @@ import 'package:provider/provider.dart';
 
 class DetailsScreen extends StatefulWidget {
   static const String id = 'details_screen';
-  const DetailsScreen({
-    Key? key,
-    required this.denunciaId,
-    required this.type,
-    required this.eventDate,
-    this.completedDate,
-    required this.creationDate,
-    required this.adress,
-    required this.street,
-    required this.adressNumber,
-    required this.district,
-    required this.city,
-    required this.cep,
-    required this.complement,
-    required this.phoneNumber,
-    required this.cnpj,
-    required this.companyName,
-    required this.email,
-    required this.name,
-    required this.profilePhotoUrl,
-  }) : super(key: key);
+  const DetailsScreen(
+      {Key? key,
+      required this.denunciaId,
+      required this.type,
+      required this.eventDate,
+      this.completedDate,
+      required this.creationDate,
+      required this.adress,
+      required this.street,
+      required this.adressNumber,
+      required this.district,
+      required this.city,
+      required this.cep,
+      required this.complement,
+      required this.phoneNumber,
+      required this.cnpj,
+      required this.companyId,
+      required this.companyName,
+      required this.email,
+      required this.name,
+      required this.profilePhotoUrl,
+      this.requirementId})
+      : super(key: key);
   final int denunciaId;
   final String type;
   final String eventDate;
@@ -50,11 +52,14 @@ class DetailsScreen extends StatefulWidget {
   final String cep;
 
   final String cnpj;
+  final int companyId;
   final String companyName;
   final String phoneNumber;
   final String email;
   final String name;
   final String profilePhotoUrl;
+
+  final int? requirementId;
 
   @override
   DetailsScreenState createState() => DetailsScreenState();
@@ -134,8 +139,12 @@ class DetailsScreenState extends State<DetailsScreen> {
                       child: TextButton(
                         onPressed: () {
                           showDialog(
+                              barrierDismissible: false,
                               context: context,
-                              builder: (context) => const DocsDialog());
+                              builder: (context) => DocsDialog(
+                                    companyId: widget.companyId,
+                                    requirementId: widget.requirementId!,
+                                  ));
                         },
                         child: const Text(
                           'Visualizar Documentação',

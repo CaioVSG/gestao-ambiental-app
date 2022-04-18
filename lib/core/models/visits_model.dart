@@ -7,7 +7,7 @@ class VisitsModel with ChangeNotifier {
   final String dueDate;
   final String? completedDate;
   final String? createdDate;
-
+  final int companyId;
   final String typeTitle;
 
   //ENDEREÇO
@@ -28,6 +28,9 @@ class VisitsModel with ChangeNotifier {
   //PODA STRICT DATA
   final String? comment;
 
+  //REQUIREMENT STRICT DATA
+  final int? requirementId;
+
   VisitsModel({
     required this.id,
     required this.dueDate,
@@ -45,7 +48,9 @@ class VisitsModel with ChangeNotifier {
     required this.phoneNumber,
     required this.companyEmail,
     required this.cnpjOrCpf,
+    required this.companyId,
     this.comment,
+    this.requirementId,
   });
 }
 // class ComplaintModel {

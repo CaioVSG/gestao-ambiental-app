@@ -121,6 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       number: 'number');
                                 } else {
                                   final model = VisitsModel(
+                                    companyId: 0,
                                     id: data['id'] ?? 0,
                                     dueDate: data['data_marcada'],
                                     typeTitle: 'Denúncia',
@@ -169,6 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       Navigator.push(context,
                                           MaterialPageRoute(builder: (context) {
                                         return DetailsScreen(
+                                          companyId: 1,
                                           denunciaId: model.id,
                                           type: model.typeTitle,
                                           eventDate: model.dueDate,
@@ -199,6 +201,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 }
                               } else if (data['solicitacao_poda'] != null) {
                                 final model = VisitsModel(
+                                  companyId: 0,
                                   id: data['id'] ?? 0,
                                   dueDate: data['data_marcada'],
                                   typeTitle: 'Solicitação Poda',
@@ -239,6 +242,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 );
                               } else if (data['requerimento'] != null) {
                                 final model = VisitsModel(
+                                  companyId: data['requerimento']['empresa_id'],
+                                  requirementId: data['requerimento_id'],
                                   id: data['id'] ?? 0,
                                   dueDate: data['data_marcada'] ?? '',
                                   typeTitle: 'Requerimento',
@@ -287,6 +292,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Navigator.push(context,
                                         MaterialPageRoute(builder: (context) {
                                       return DetailsScreen(
+                                        requirementId: model.requirementId,
+                                        companyId: model.companyId,
                                         denunciaId: model.id,
                                         type: model.typeTitle,
                                         eventDate: model.dueDate,

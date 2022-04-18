@@ -41,6 +41,31 @@ class DetailsScreenController with ChangeNotifier {
     notifyListeners();
   }
 
+  getSpecifiedDocument(
+      {required int companyId,
+      required int requirementId,
+      required int documentId,
+      required BuildContext context}) async {
+    isLoading = true;
+    notifyListeners();
+    var response = await _api.downloadSpecifiedDocument(
+        companyId: companyId,
+        requirementId: requirementId,
+        documentId: documentId,
+        context: context);
+    isLoading = false;
+    notifyListeners();
+    if (response == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: kErrorColor,
+          content: Text('Erro ao baixar documento'),
+          duration: Duration(seconds: 2),
+        ),
+      );
+    }
+  }
+
   finishVisit(BuildContext context, int id) async {
     _api.finishVisit(context, id).then((value) {
       if (value) {
