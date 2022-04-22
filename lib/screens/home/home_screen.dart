@@ -170,6 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       Navigator.push(context,
                                           MaterialPageRoute(builder: (context) {
                                         return DetailsScreen(
+                                          requirementId: null,
                                           companyId: 1,
                                           denunciaId: model.id,
                                           type: model.typeTitle,

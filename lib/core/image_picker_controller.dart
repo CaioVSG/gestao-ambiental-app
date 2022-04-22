@@ -5,9 +5,7 @@ import 'package:flutter/material.dart';
 class ImagePickerController with ChangeNotifier {
   Future<List<File>?> pickImagesFromGalery() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
-        allowMultiple: true,
-        allowedExtensions: ['jpeg', 'png', 'jpg'],
-        type: FileType.custom);
+        allowMultiple: true, allowedExtensions: ['jpg'], type: FileType.custom);
 
     if (result != null) {
       List<File> files = result.files.map((file) => File(file.path!)).toList();

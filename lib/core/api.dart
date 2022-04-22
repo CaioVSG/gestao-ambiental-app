@@ -96,13 +96,14 @@ class Api {
 
   Future downloadSpecifiedDocument({
     required int companyId,
+    required String documentName,
     required int requirementId,
     required int documentId,
     required BuildContext context,
   }) async {
     try {
-      var dir = await getExternalStorageDirectory();
-      String fullPath = dir!.path + '/' + documentId.toString() + '.pdf';
+      var dir = await getTemporaryDirectory();
+      String fullPath = dir.path + "/$documentName.pdf'";
       var response = await _dio.download(
         baseUrl +
             '/empresas/$companyId/requerimento/$requirementId/documentos/$documentId/arquivo',
@@ -128,14 +129,48 @@ class Api {
 
       if (response.statusCode == 200) {
         File documentFile = File(fullPath);
+        log(documentFile.path);
         if (documentFile.existsSync()) {
-          debugPrint('exists');
-          OpenFile.open(fullPath);
+          OpenFile.open(documentFile.path);
         }
-        var raf = documentFile.openSync(mode: FileMode.write);
-        raf.writeFromSync(response.data);
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
 
-        raf.close();
+  Future sendVisitImages({
+    required int visitId,
+    required List<String> imagePaths,
+    required String comment,
+    required BuildContext context,
+  }) async {
+    final filesList = <MultipartFile>[];
+    for (var i = 0; i < imagePaths.length; i++) {
+      filesList.add(await MultipartFile.fromFile(imagePaths[i],
+          filename: 'image_$i.jpg'));
+    }
+
+    final body = FormData.fromMap(
+        {'id': visitId, 'image': filesList, 'comment': comment});
+    try {
+      var response = await _dio.post(
+        baseUrl + '/visitas/$visitId/image',
+        data: body,
+        options: Options(
+          headers: {
+            'Authorization':
+                'Bearer ${Provider.of<UserModel>(context, listen: false).token}',
+            'Content-Type': 'multipart/form-data',
+            'Accept': 'application/json',
+          },
+        ),
+      );
+      print(response.data);
+      if (response.statusCode == 200) {
+        return (response.data);
       } else {
         return null;
       }

@@ -9,12 +9,17 @@ class DetailsScreenController with ChangeNotifier {
   final _api = Api();
 
   bool isLoading = false;
+  bool isUploadingImages = false;
+
   final _imagePickerController = ImagePickerController();
   int _selectedImageLength = 0;
   int? _selectedImageIndex;
   bool _showCommentSection = false;
 
   List<File> _selectedImages = [];
+  List<String> _imagePaths = [];
+
+  List<String> get imagePaths => _imagePaths;
 
   List<File> get selectedImages => _selectedImages;
   set selectedImages(List<File> value) {
@@ -41,8 +46,48 @@ class DetailsScreenController with ChangeNotifier {
     notifyListeners();
   }
 
+  sendVisitImages({
+    required int visitId,
+    required List<String> imagePath,
+    required String comment,
+    required BuildContext context,
+  }) {
+    isUploadingImages = true;
+    _api
+        .sendVisitImages(
+            visitId: visitId,
+            imagePaths: imagePaths,
+            comment: comment,
+            context: context)
+        .then((value) {
+      if (value != null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: kDetailColor,
+            content: Text('Fotos enviadas com sucesso'),
+            duration: Duration(seconds: 4),
+          ),
+        );
+        isUploadingImages = false;
+        notifyListeners();
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: kErrorColor,
+            content: Text('Erro ao enviar fotos'),
+            duration: Duration(seconds: 2),
+          ),
+        );
+        isUploadingImages = false;
+        notifyListeners();
+      }
+    });
+    notifyListeners();
+  }
+
   getSpecifiedDocument(
       {required int companyId,
+      required String documentName,
       required int requirementId,
       required int documentId,
       required BuildContext context}) async {
@@ -50,6 +95,7 @@ class DetailsScreenController with ChangeNotifier {
     notifyListeners();
     var response = await _api.downloadSpecifiedDocument(
         companyId: companyId,
+        documentName: documentName,
         requirementId: requirementId,
         documentId: documentId,
         context: context);
@@ -98,6 +144,7 @@ class DetailsScreenController with ChangeNotifier {
   Future selectImages() async {
     List<File>? files = await _imagePickerController.pickImagesFromGalery();
     selectedImageLength = files!.length;
+    _imagePaths = files.map((file) => file.path).toList();
     selectedImages = files;
   }
 

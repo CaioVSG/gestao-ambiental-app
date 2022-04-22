@@ -134,24 +134,26 @@ class DetailsScreenState extends State<DetailsScreen> {
                         ]),
                       ),
                     ),
-                    Container(
-                      alignment: Alignment.center,
-                      child: TextButton(
-                        onPressed: () {
-                          showDialog(
-                              barrierDismissible: false,
-                              context: context,
-                              builder: (context) => DocsDialog(
-                                    companyId: widget.companyId,
-                                    requirementId: widget.requirementId!,
-                                  ));
-                        },
-                        child: const Text(
-                          'Visualizar Documentação',
-                          style: kUnderline,
-                        ),
-                      ),
-                    ),
+                    widget.requirementId != null
+                        ? Container(
+                            alignment: Alignment.center,
+                            child: TextButton(
+                                onPressed: () {
+                                  showDialog(
+                                      barrierDismissible: false,
+                                      context: context,
+                                      builder: (context) => DocsDialog(
+                                            companyId: widget.companyId,
+                                            requirementId:
+                                                widget.requirementId!,
+                                          ));
+                                },
+                                child: const Text(
+                                  'Visualizar Documentação',
+                                  style: kUnderline,
+                                )),
+                          )
+                        : const SizedBox(),
                     const Divider(color: kSecondaryTextColor),
                     widget.completedDate == null
                         ? InkWell(
@@ -174,7 +176,7 @@ class DetailsScreenState extends State<DetailsScreen> {
                     const VerticalSpacerBox(size: SpacerSize.small),
                     controller!.selectedImageLength > 0
                         ? SizedBox(
-                            height: size.height * 0.1,
+                            height: size.height * 0.2,
                             child: ListView.separated(
                               separatorBuilder: (context, index) {
                                 return const HorizontalSpacerBox(
@@ -203,6 +205,20 @@ class DetailsScreenState extends State<DetailsScreen> {
                             'Nenhuma imagem selecionada',
                             style: TextStyle(color: kErrorColor),
                           ),
+                    const VerticalSpacerBox(size: SpacerSize.small),
+                    controller!.selectedImageLength > 0
+                        ? PrimaryButton(
+                            text: controller!.isUploadingImages
+                                ? 'Enviando imagens'
+                                : 'Enviar imagens',
+                            onPressed: () {
+                              controller!.sendVisitImages(
+                                  visitId: widget.denunciaId,
+                                  imagePath: controller!.imagePaths,
+                                  comment: 'comment',
+                                  context: context);
+                            })
+                        : const SizedBox(),
                     const Divider(color: kSecondaryTextColor),
                     TextButton(
                       onPressed: () {

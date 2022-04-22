@@ -129,6 +129,7 @@ class DocTile extends StatelessWidget {
                               listen: false)
                           .getSpecifiedDocument(
                               companyId: companyId,
+                              documentName: title,
                               requirementId: requirementId,
                               documentId: id,
                               context: context);
