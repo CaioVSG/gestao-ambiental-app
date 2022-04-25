@@ -7,6 +7,7 @@ import 'package:meioambientemobile/constants/style/constants.dart';
 import 'package:meioambientemobile/core/util/custom_date_formater.dart';
 import 'package:meioambientemobile/screens/details/components/docs_dialog.dart';
 import 'package:meioambientemobile/screens/details/components/finish_details_dialog.dart';
+import 'package:meioambientemobile/screens/details/components/image_selector.dart';
 import 'package:meioambientemobile/screens/details/details_screen_controller.dart';
 import 'package:meioambientemobile/screens/edit%20image/edit_image_screen.dart';
 import 'package:meioambientemobile/screens/profile/profile_screen.dart';
@@ -157,7 +158,7 @@ class DetailsScreenState extends State<DetailsScreen> {
                     const Divider(color: kSecondaryTextColor),
                     widget.completedDate == null
                         ? InkWell(
-                            onTap: () => controller!.selectImages(),
+                            onTap: () => controller!.selectImages(context),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: const [
@@ -174,50 +175,50 @@ class DetailsScreenState extends State<DetailsScreen> {
                           )
                         : const SizedBox(),
                     const VerticalSpacerBox(size: SpacerSize.small),
-                    controller!.selectedImageLength > 0
+                    !controller!.isUploadingImages
                         ? SizedBox(
-                            height: size.height * 0.2,
-                            child: ListView.separated(
-                              separatorBuilder: (context, index) {
-                                return const HorizontalSpacerBox(
-                                    size: SpacerSize.small);
-                              },
-                              scrollDirection: Axis.horizontal,
-                              itemCount: controller!.selectedImageLength,
-                              itemBuilder: (BuildContext context, int index) {
-                                return InkWell(
-                                  onTap: () {
-                                    controller!.selectedImageIndex = index;
-                                    Navigator.pushNamed(
-                                        context, EditImageScreen.id);
-                                  },
-                                  // child: Text(
-                                  //     controller!.selectedImages[index].path)
-                                  child: Image.file(
-                                    controller!.selectedImages[index],
-                                    width: size.width * 0.2,
+                            child: controller!.selectedImageLength > 0
+                                ? SizedBox(
+                                    height: size.height * 0.2,
+                                    child: ListView.separated(
+                                      separatorBuilder: (context, index) {
+                                        return const HorizontalSpacerBox(
+                                            size: SpacerSize.small);
+                                      },
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount:
+                                          controller!.selectedImageLength,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        return ImageSelector(
+                                            controller: controller,
+                                            index: index);
+                                      },
+                                    ),
+                                  )
+                                : const Text(
+                                    'Nenhuma imagem selecionada',
+                                    style: TextStyle(color: kErrorColor),
                                   ),
-                                );
-                              },
-                            ),
                           )
-                        : const Text(
-                            'Nenhuma imagem selecionada',
-                            style: TextStyle(color: kErrorColor),
-                          ),
+                        : const Center(child: CircularProgressIndicator()),
+
                     const VerticalSpacerBox(size: SpacerSize.small),
-                    controller!.selectedImageLength > 0
-                        ? PrimaryButton(
-                            text: controller!.isUploadingImages
-                                ? 'Enviando imagens'
-                                : 'Enviar imagens',
-                            onPressed: () {
-                              controller!.sendVisitImages(
-                                  visitId: widget.denunciaId,
-                                  imagePath: controller!.imagePaths,
-                                  comment: 'comment',
-                                  context: context);
-                            })
+                    !controller!.isUploadingImages
+                        ? SizedBox(
+                            child: controller!.selectedImageLength > 0
+                                ? PrimaryButton(
+                                    text: controller!.isUploadingImages
+                                        ? 'Enviando imagens'
+                                        : 'Enviar imagens',
+                                    onPressed: () {
+                                      controller!.sendVisitImages(
+                                          visitId: widget.denunciaId,
+                                          imagePath: controller!.imagePaths,
+                                          context: context);
+                                    })
+                                : const SizedBox(),
+                          )
                         : const SizedBox(),
                     const Divider(color: kSecondaryTextColor),
                     TextButton(

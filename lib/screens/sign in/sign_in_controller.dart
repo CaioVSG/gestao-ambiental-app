@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
 import 'package:meioambientemobile/core/api.dart';
-import 'package:meioambientemobile/core/user_model.dart';
 import 'package:meioambientemobile/screens/home/home_screen.dart';
 
 class SignInController with ChangeNotifier {

@@ -2,8 +2,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
 import 'package:meioambientemobile/core/api.dart';
+import 'package:meioambientemobile/core/edit_image_controller.dart';
 import 'package:meioambientemobile/core/image_picker_controller.dart';
 import 'package:meioambientemobile/screens/home/home_screen.dart';
+import 'package:provider/provider.dart';
 
 class DetailsScreenController with ChangeNotifier {
   final _api = Api();
@@ -12,6 +14,7 @@ class DetailsScreenController with ChangeNotifier {
   bool isUploadingImages = false;
 
   final _imagePickerController = ImagePickerController();
+
   int _selectedImageLength = 0;
   int? _selectedImageIndex;
   bool _showCommentSection = false;
@@ -49,7 +52,6 @@ class DetailsScreenController with ChangeNotifier {
   sendVisitImages({
     required int visitId,
     required List<String> imagePath,
-    required String comment,
     required BuildContext context,
   }) {
     isUploadingImages = true;
@@ -57,7 +59,8 @@ class DetailsScreenController with ChangeNotifier {
         .sendVisitImages(
             visitId: visitId,
             imagePaths: imagePaths,
-            comment: comment,
+            comment: Provider.of<EditImageController>(context, listen: false)
+                .imageDescriptionText,
             context: context)
         .then((value) {
       if (value != null) {
@@ -69,6 +72,7 @@ class DetailsScreenController with ChangeNotifier {
           ),
         );
         isUploadingImages = false;
+        clearWorkingImages();
         notifyListeners();
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -123,8 +127,6 @@ class DetailsScreenController with ChangeNotifier {
             duration: Duration(seconds: 2),
           ),
         );
-        _selectedImages.clear();
-        _selectedImageLength = 0;
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -141,15 +143,30 @@ class DetailsScreenController with ChangeNotifier {
     });
   }
 
-  Future selectImages() async {
+  Future selectImages(BuildContext context) async {
     List<File>? files = await _imagePickerController.pickImagesFromGalery();
     selectedImageLength = files!.length;
     _imagePaths = files.map((file) => file.path).toList();
+    List<String> descriptionList =
+        List.filled(files.length, 'Esta imagem não tem descrição.');
+    Provider.of<EditImageController>(context, listen: false)
+        .setDescriptionsList(descriptionList);
     selectedImages = files;
+  }
+
+  void editImage(int index) {
+    selectedImageIndex = index;
   }
 
   void deleteSelectedImage() {
     selectedImages.removeAt(selectedImageIndex);
     selectedImageLength = selectedImages.length;
+  }
+
+  void clearWorkingImages() {
+    selectedImages.clear();
+    selectedImageLength = 0;
+    _imagePaths.clear();
+    notifyListeners();
   }
 }

@@ -53,20 +53,23 @@ class _EditImageScreenState extends State<EditImageScreen> {
                                 horizontal: kMediumtHeight),
                             child: Column(
                               children: [
-                                // TextFormField(
-                                //   initialValue: controller!
-                                //           .imageDescriptionText.isNotEmpty
-                                //       ? controller!.imageDescriptionText
-                                //       : '',
-                                //   onChanged: (value) {
-                                //     controller!.setImageDescriptionText(value);
-                                //   },
-                                //   maxLines: null,
-                                //   keyboardType: TextInputType.multiline,
-                                //   decoration: const InputDecoration(
-                                //     labelText: 'Descrição',
-                                //   ),
-                                // ),
+                                TextFormField(
+                                  initialValue:
+                                      controller!.imageDescriptionText[
+                                          detailsScreenController!
+                                              .selectedImageIndex],
+                                  onChanged: (value) {
+                                    controller!.setDescriptionText(
+                                        detailsScreenController!
+                                            .selectedImageIndex,
+                                        value);
+                                  },
+                                  maxLines: null,
+                                  keyboardType: TextInputType.multiline,
+                                  decoration: const InputDecoration(
+                                    labelText: 'Descrição',
+                                  ),
+                                ),
                                 const Spacer(),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
@@ -145,9 +148,8 @@ class _EditImageScreenState extends State<EditImageScreen> {
             alignment: Alignment.bottomCenter,
             child: Padding(
               padding: const EdgeInsets.all(15),
-              // child: Text(controller!.imageDescriptionText.isNotEmpty
-              //     ? controller!.imageDescriptionText
-              //     : controller!.defaultEditingText),
+              child: Text(controller!.imageDescriptionText[
+                  detailsScreenController!.selectedImageIndex]),
             ),
           ),
         ],

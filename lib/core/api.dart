@@ -144,7 +144,7 @@ class Api {
   Future sendVisitImages({
     required int visitId,
     required List<String> imagePaths,
-    required String comment,
+    required List<String> comment,
     required BuildContext context,
   }) async {
     final filesList = <MultipartFile>[];
@@ -168,7 +168,6 @@ class Api {
           },
         ),
       );
-      print(response.data);
       if (response.statusCode == 200) {
         return (response.data);
       } else {

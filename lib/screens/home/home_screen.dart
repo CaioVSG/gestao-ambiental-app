@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:meioambientemobile/components/vertical_spacer_box.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
 import 'package:meioambientemobile/core/api.dart';
-import 'package:meioambientemobile/core/models/item_model.dart';
 import 'package:meioambientemobile/core/models/visits_model.dart';
 import 'package:meioambientemobile/screens/details/details_screen.dart';
 import 'package:meioambientemobile/screens/filter%20dates/filter_date.dart';
