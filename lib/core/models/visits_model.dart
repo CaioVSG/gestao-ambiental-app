@@ -9,6 +9,7 @@ class VisitsModel with ChangeNotifier {
   final String? createdDate;
   final int companyId;
   final String typeTitle;
+  final String? text;
 
   //ENDEREÇO
   final String street;
@@ -35,6 +36,7 @@ class VisitsModel with ChangeNotifier {
     required this.id,
     required this.dueDate,
     required this.typeTitle,
+    this.text,
     this.completedDate,
     required this.createdDate,
     required this.street,

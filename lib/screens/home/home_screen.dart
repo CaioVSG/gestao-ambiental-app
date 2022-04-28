@@ -109,11 +109,62 @@ class _HomeScreenState extends State<HomeScreen> {
                             VisitTile getVisitTilesInfo() {
                               if (data['denuncia'] != null) {
                                 if (data['denuncia']['empresa'] == null) {
+                                  final model = VisitsModel(
+                                    companyId: 0,
+                                    id: data['id'] ?? 0,
+                                    text: data['denuncia']['texto'] ?? '',
+                                    dueDate: data['data_marcada'],
+                                    typeTitle: 'Denúncia',
+                                    createdDate: data['created_at'],
+                                    completedDate: data['data_realizada'],
+                                    cep: 'Não tem',
+                                    city: 'Não tem',
+                                    neighborhood: 'Não tem',
+                                    number: 'Não tem',
+                                    state: 'Não tem',
+                                    street: data['denuncia']['endereco'] ??
+                                        'Não tem',
+                                    complement: 'Não tem',
+                                    companyName: data['denuncia']
+                                        ['empresa_nao_cadastrada'],
+                                    phoneNumber: 'Não tem',
+                                    cnpjOrCpf: 'Não tem',
+                                    companyEmail: 'Não tem',
+                                  );
                                   return VisitTile(
                                       title: 'title',
-                                      visitDate: DateTime.now().toString(),
+                                      visitDate: model.dueDate,
                                       empresa: 'empresa',
-                                      onTap: () {},
+                                      onTap: () {
+                                        Navigator.push(context,
+                                            MaterialPageRoute(
+                                                builder: (context) {
+                                          return DetailsScreen(
+                                            requirementId: null,
+                                            text: model.text,
+                                            companyId: 1,
+                                            denunciaId: model.id,
+                                            type: model.typeTitle,
+                                            eventDate: model.dueDate,
+                                            creationDate: model.createdDate!,
+                                            completedDate: model.completedDate,
+                                            adress: model.street,
+                                            street: model.street,
+                                            adressNumber: model.number,
+                                            district: model.neighborhood,
+                                            city: model.city,
+                                            cep: model.cep,
+                                            complement: model.complement,
+                                            phoneNumber: model.phoneNumber,
+                                            companyName: model.companyName,
+                                            cnpj: model.cnpjOrCpf,
+                                            email: model.companyEmail,
+                                            name: 'model.name',
+                                            profilePhotoUrl:
+                                                'model.profilePhotoUrl',
+                                          );
+                                        }));
+                                      },
                                       business: 'business',
                                       tipo: 'Denúncia sem empresa',
                                       street: 'street',
@@ -230,11 +281,38 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ['requerente']['user']['email'],
                                 );
                                 return VisitTile(
-                                  title: 'Denúncia',
+                                  title: 'Solicitação Poda',
                                   visitDate: model.dueDate,
                                   completedDate: null,
                                   empresa: model.companyName,
-                                  onTap: () {},
+                                  onTap: () {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                      return DetailsScreen(
+                                        requirementId: null,
+                                        companyId: 1,
+                                        denunciaId: model.id,
+                                        type: model.typeTitle,
+                                        eventDate: model.dueDate,
+                                        creationDate: model.createdDate!,
+                                        completedDate: model.completedDate,
+                                        adress: model.street,
+                                        street: model.street,
+                                        adressNumber: model.number,
+                                        district: model.neighborhood,
+                                        city: model.city,
+                                        cep: model.cep,
+                                        complement: model.complement,
+                                        phoneNumber: model.phoneNumber,
+                                        companyName: model.companyName,
+                                        cnpj: model.cnpjOrCpf,
+                                        email: model.companyEmail,
+                                        name: 'model.name',
+                                        profilePhotoUrl:
+                                            'model.profilePhotoUrl',
+                                      );
+                                    }));
+                                  },
                                   business: 'business',
                                   tipo: model.typeTitle,
                                   street: model.street,
@@ -327,7 +405,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   completedDate: null,
                                   visitDate: '',
                                   empresa: 'empresa',
-                                  onTap: () {},
+                                  onTap: () {
+                                    print('onTap');
+                                  },
                                   business: 'business',
                                   tipo: 'tipo',
                                   street: '',

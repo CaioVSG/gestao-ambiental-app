@@ -19,6 +19,7 @@ class DetailsScreen extends StatefulWidget {
       {Key? key,
       required this.denunciaId,
       required this.type,
+      this.text,
       required this.eventDate,
       this.completedDate,
       required this.creationDate,
@@ -40,6 +41,7 @@ class DetailsScreen extends StatefulWidget {
       : super(key: key);
   final int denunciaId;
   final String type;
+  final String? text;
   final String eventDate;
   final String? completedDate;
   final String creationDate;
@@ -115,26 +117,29 @@ class DetailsScreenState extends State<DetailsScreen> {
                       textAlign: TextAlign.start,
                     ),
                     const VerticalSpacerBox(size: SpacerSize.small),
-                    Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(kDefaultRadius),
-                      ),
-                      color: widget.completedDate == null
-                          ? kDetailColor
-                          : kCompletedColor,
-                      child: Container(
-                        padding: const EdgeInsets.all(9),
-                        height: size.height * 0.25,
-                        width: size.width * 0.85,
-                        child: Column(children: [
-                          Container(
-                            alignment: Alignment.topLeft,
-                            child: const Text('Descrição',
-                                textAlign: TextAlign.start, style: kText),
-                          ),
-                        ]),
-                      ),
-                    ),
+                    widget.text != null
+                        ? Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(kDefaultRadius),
+                            ),
+                            color: widget.completedDate == null
+                                ? kDetailColor
+                                : kCompletedColor,
+                            child: Container(
+                              padding: const EdgeInsets.all(9),
+                              height: size.height * 0.25,
+                              width: size.width * 0.85,
+                              child: Column(children: [
+                                Container(
+                                  alignment: Alignment.topLeft,
+                                  child: Text(widget.text!,
+                                      textAlign: TextAlign.start, style: kText),
+                                ),
+                              ]),
+                            ),
+                          )
+                        : const SizedBox(),
                     widget.requirementId != null
                         ? Container(
                             alignment: Alignment.center,
