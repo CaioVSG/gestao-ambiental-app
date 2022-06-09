@@ -34,14 +34,6 @@ class _HomeScreenState extends State<HomeScreen> {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            setState(() {
-              _getAllVisits = Api().getAllVisits(context);
-            });
-          },
-          child: const Icon(Icons.refresh),
-        ),
         appBar: AppBar(
           title: Image.asset(
             'lib/assets/images/logo.png',

@@ -9,7 +9,6 @@ import 'package:meioambientemobile/screens/details/components/docs_dialog.dart';
 import 'package:meioambientemobile/screens/details/components/finish_details_dialog.dart';
 import 'package:meioambientemobile/screens/details/components/image_selector.dart';
 import 'package:meioambientemobile/screens/details/details_screen_controller.dart';
-import 'package:meioambientemobile/screens/edit%20image/edit_image_screen.dart';
 import 'package:meioambientemobile/screens/profile/profile_screen.dart';
 import 'package:provider/provider.dart';
 

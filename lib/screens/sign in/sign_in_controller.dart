@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:meioambientemobile/constants/style/constants.dart';
 import 'package:meioambientemobile/core/api.dart';
 import 'package:meioambientemobile/screens/home/home_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInController with ChangeNotifier {
   bool isLoading = false;

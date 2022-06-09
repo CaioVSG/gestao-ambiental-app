@@ -10,6 +10,7 @@ import 'package:meioambientemobile/core/util/download_controller.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Api {
   final _dio = Dio();
@@ -37,6 +38,10 @@ class Api {
             response.data['name'],
             response.data['email'],
             response.data['profile_photo_url']);
+        final prefs = await SharedPreferences.getInstance();
+        prefs.setString('token', response.data['token']);
+        prefs.setString('email', email);
+        prefs.setString('password', password);
         return true;
       }
     } catch (e) {
