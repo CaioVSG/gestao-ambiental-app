@@ -99,6 +99,66 @@ class Api {
     }
   }
 
+  Future getAllImagesFromVisits(
+      {required int denunciaId, required BuildContext context}) async {
+    try {
+      var response = await _dio.get(
+        baseUrl + '/denuncias/$denunciaId/fotos',
+        options: Options(
+          headers: {
+            'Authorization':
+                'Bearer ${Provider.of<UserModel>(context, listen: false).token}',
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+        ),
+      );
+      if (response.statusCode == 200) {
+        log('success: ${response.data}');
+        return (response.data);
+      } else {
+        log('Erro ao buscar fotos da denúncia');
+        return null;
+      }
+    } on DioError catch (e) {
+      log('Erro ao buscar fotos da denúncia ${e.toString()} and ${e.response!.data}');
+      return null;
+    } catch (e) {
+      log('Erro ao buscar fotos da denúncia');
+      return null;
+    }
+  }
+
+  Future getVisitDoneImages(
+      {required int visitId, required BuildContext context}) async {
+    try {
+      var response = await _dio.get(
+        baseUrl + '/visitas/$visitId/fotos',
+        options: Options(
+          headers: {
+            'Authorization':
+                'Bearer ${Provider.of<UserModel>(context, listen: false).token}',
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+        ),
+      );
+      if (response.statusCode == 200) {
+        log('success: ${response.data}');
+        return (response.data);
+      } else {
+        log('Erro ao buscar fotos da denúncia');
+        return null;
+      }
+    } on DioError catch (e) {
+      log('Erro ao buscar fotos da denúncia ${e.toString()} and ${e.response!.data}');
+      return null;
+    } catch (e) {
+      log('Erro ao buscar fotos da denúncia');
+      return null;
+    }
+  }
+
   Future downloadSpecifiedDocument({
     required int companyId,
     required String documentName,
@@ -178,7 +238,10 @@ class Api {
       } else {
         return null;
       }
+    } on DioError catch (e) {
+      log('error sending image: ${e.toString()} and ${e.response!.data}');
     } catch (e) {
+      log('Erro: $e');
       return null;
     }
   }
@@ -196,6 +259,7 @@ class Api {
             },
           ));
       if (response.statusCode == 200) {
+        log('Finished visita: ${response.data}');
         return true;
       } else {
         return false;

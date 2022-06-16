@@ -19,7 +19,6 @@ class VisitTile extends StatelessWidget {
   const VisitTile(
       {Key? key,
       required this.title,
-      // ignore: non_constant_identifier_names
       required this.visitDate,
       this.completedDate,
       required this.empresa,
@@ -32,6 +31,7 @@ class VisitTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('Completed date is: $completedDate');
     Size size = MediaQuery.of(context).size;
     return InkWell(
       onTap: onTap,
@@ -52,11 +52,25 @@ class VisitTile extends StatelessWidget {
                 ),
                 const HorizontalSpacerBox(size: SpacerSize.tiny),
                 Text(tipo.toUpperCase(), style: kText),
+                const Spacer(),
+                completedDate == null
+                    ? const SizedBox()
+                    : const Text(
+                        'Visita concluída',
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                completedDate == null
+                    ? const SizedBox()
+                    : const Icon(
+                        Icons.check,
+                      )
               ],
             ),
             const VerticalSpacerBox(size: SpacerSize.small),
             Text(
-              street + ' ,$number',
+              street + ' $number',
               style: kSubtitleTextStyle,
             ),
             const Spacer(),

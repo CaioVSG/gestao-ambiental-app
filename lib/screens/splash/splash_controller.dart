@@ -34,6 +34,7 @@ class SplashScreenController {
     final token = prefs.getString('token');
     if (token != null) {
       log('user has token');
+      log(token);
       return true;
     } else {
       log('user has no token');
