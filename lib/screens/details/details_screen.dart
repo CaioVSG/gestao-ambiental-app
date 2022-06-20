@@ -84,11 +84,71 @@ class DetailsScreenState extends State<DetailsScreen> {
     _getVisitImages = Api().getAllImagesFromVisits(
         denunciaId: widget.denunciaId, context: context);
     if (widget.completedDate != null) {
-      _getVisitDoneImages = Api()
-          .getVisitDoneImages(visitId: widget.denunciaId, context: context);
+      _getVisitDoneImages = Api().getVisitDoneImages(
+          visitId: widget.denunciaId != 0 ? widget.denunciaId : widget.visitId,
+          context: context);
     }
 
     super.initState();
+  }
+
+  Widget _buildAnexedImages(Size size) {
+    if (widget.requirementId != null) {
+      return const SizedBox();
+    }
+    return Column(
+      children: <Widget>[
+        const Text(
+          'IMAGENS ANEXADAS',
+          style: kHomeScreen,
+        ),
+        FutureBuilder(
+            future: _getVisitImages,
+            builder: ((context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (snapshot.hasError) {
+                return const Center(
+                  child: Text('Erro ao carregar imagens'),
+                );
+              } else {
+                if (snapshot.data == null) {
+                  return const Text('Nenhuma imagem encontrada');
+                }
+                var data = snapshot.data as List<dynamic>;
+                if (data.isEmpty) {
+                  return const Center(
+                    child: Text('Esta denúncia não possui imagens'),
+                  );
+                } else {
+                  final List<int> imageIds = [];
+                  for (var element in data) {
+                    imageIds.add(element['id']);
+                  }
+                  return SizedBox(
+                    height: size.height * 0.3,
+                    child: ListView.separated(
+                        separatorBuilder: (context, index) =>
+                            const HorizontalSpacerBox(size: SpacerSize.small),
+                        itemCount: imageIds.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: ((context, index) {
+                          return CachedNetworkImage(
+                              httpHeaders: {
+                                'Authorization': 'Bearer ' + _token,
+                                'Accept': 'application/json'
+                              },
+                              imageUrl:
+                                  'http://77.243.85.238:8003/api/denuncias/${widget.denunciaId}/fotos/${imageIds[index]}/arquivo');
+                        })),
+                  );
+                }
+              }
+            })),
+      ],
+    );
   }
 
   @override
@@ -141,7 +201,7 @@ class DetailsScreenState extends State<DetailsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.type.toUpperCase(),
+                      '${widget.type.toUpperCase()} ID: ${widget.visitId}',
                       style: kHomeScreen,
                       textAlign: TextAlign.start,
                     ),
@@ -169,58 +229,8 @@ class DetailsScreenState extends State<DetailsScreen> {
                             ),
                           )
                         : const SizedBox(),
-                    const Text(
-                      'IMAGENS ANEXADAS',
-                      style: kHomeScreen,
-                    ),
-
-                    FutureBuilder(
-                        future: _getVisitImages,
-                        builder: ((context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          } else if (snapshot.hasError) {
-                            return const Center(
-                              child: Text('Erro ao carregar imagens'),
-                            );
-                          } else {
-                            if (snapshot.data == null) {
-                              return const Text('Nenhuma imagem encontrada');
-                            }
-                            var data = snapshot.data as List<dynamic>;
-                            if (data.isEmpty) {
-                              return const Center(
-                                child: Text('Esta denúncia não possui imagens'),
-                              );
-                            } else {
-                              final List<int> imageIds = [];
-                              for (var element in data) {
-                                imageIds.add(element['id']);
-                              }
-                              return SizedBox(
-                                height: size.height * 0.3,
-                                child: ListView.separated(
-                                    separatorBuilder: (context, index) =>
-                                        const HorizontalSpacerBox(
-                                            size: SpacerSize.small),
-                                    itemCount: imageIds.length,
-                                    scrollDirection: Axis.horizontal,
-                                    itemBuilder: ((context, index) {
-                                      return CachedNetworkImage(
-                                          httpHeaders: {
-                                            'Authorization': 'Bearer ' + _token,
-                                            'Accept': 'application/json'
-                                          },
-                                          imageUrl:
-                                              'http://77.243.85.238:8003/api/denuncias/${widget.denunciaId}/fotos/${imageIds[index]}/arquivo');
-                                    })),
-                              );
-                            }
-                          }
-                        })),
+                    // !!AQUI VAI AS IMAGENS ANEXADAS
+                    _buildAnexedImages(size),
                     widget.requirementId != null
                         ? Container(
                             alignment: Alignment.center,
@@ -264,7 +274,7 @@ class DetailsScreenState extends State<DetailsScreen> {
                     !controller!.isUploadingImages
                         ? SizedBox(
                             child: controller!.selectedImageLength > 0 &&
-                                    widget.completedDate != null
+                                    widget.completedDate == null
                                 ? SizedBox(
                                     height: size.height * 0.2,
                                     child: ListView.separated(
@@ -300,7 +310,7 @@ class DetailsScreenState extends State<DetailsScreen> {
                                         : 'Enviar imagens',
                                     onPressed: () {
                                       controller!.sendVisitImages(
-                                          visitId: widget.denunciaId,
+                                          visitId: widget.visitId,
                                           imagePath: controller!.imagePaths,
                                           context: context);
                                     })
@@ -539,7 +549,7 @@ class DetailsScreenState extends State<DetailsScreen> {
                               showDialog(
                                   context: context,
                                   builder: (context) =>
-                                      FinishVisitDialog(id: widget.denunciaId));
+                                      FinishVisitDialog(id: widget.visitId));
                             })
                         : const Center(
                             child: Text('Esta visita já foi concluída')),

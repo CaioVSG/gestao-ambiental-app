@@ -71,7 +71,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('Visitas'.toUpperCase(), style: kTitleStyles),
+                            Text(
+                                'Visitas: '.toUpperCase() +
+                                    dataList.length.toString(),
+                                style: kTitleStyles),
                             // InkWell(
                             //   onTap: () => showDialog(
                             //       context: context,
@@ -144,8 +147,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                               requirementId: null,
                                               text: model.text,
                                               companyId: 1,
-                                              denunciaId: data['denuncia']
-                                                  ['id'],
+                                              denunciaId:
+                                                  data['denuncia']['id'] ?? 0,
                                               type: model.typeTitle,
                                               eventDate: model.dueDate,
                                               creationDate: model.createdDate!,
@@ -259,6 +262,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 } else if (data['solicitacao_poda'] != null) {
                                   final model = VisitsModel(
                                     companyId: 0,
+                                    completedDate: data['data_realizada'],
                                     id: data['id'] ?? 0,
                                     dueDate: data['data_marcada'],
                                     typeTitle: 'Solicitação Poda',
@@ -277,7 +281,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     street: data['solicitacao_poda']['endereco']
                                         ['rua'],
                                     complement: data['solicitacao_poda']
-                                        ['endereco']['complemento'],
+                                            ['endereco']['complemento'] ??
+                                        '',
                                     companyName: data['solicitacao_poda']
                                         ['requerente']['user']['name'],
                                     phoneNumber: '',
@@ -298,8 +303,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           visitId: data['id'],
                                           requirementId: null,
                                           companyId: 1,
-                                          denunciaId:
-                                              data['denuncia']['id'] ?? 0,
+                                          denunciaId: 0,
                                           type: model.typeTitle,
                                           eventDate: model.dueDate,
                                           creationDate: model.createdDate!,
@@ -382,7 +386,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           visitId: data['id'],
                                           requirementId: model.requirementId,
                                           companyId: model.companyId,
-                                          denunciaId: data['denuncia']['id'],
+                                          denunciaId: 0,
                                           type: model.typeTitle,
                                           eventDate: model.dueDate,
                                           creationDate: model.createdDate!,

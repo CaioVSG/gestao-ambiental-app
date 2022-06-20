@@ -79,13 +79,13 @@ class VisitTile extends StatelessWidget {
                 const Icon(
                   Icons.event,
                   color: Colors.white,
-                  size: 27,
+                  size: 16,
                 ),
                 const HorizontalSpacerBox(size: SpacerSize.tiny),
                 Text(
                   CustomDateFormater.dateTimeWithHourToString(
                       CustomDateFormater.stringToDateTime(visitDate)),
-                  style: kText,
+                  style: const TextStyle(fontSize: 14, color: Colors.white),
                 ),
               ],
             ),

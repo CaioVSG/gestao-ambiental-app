@@ -246,7 +246,6 @@ class Api {
     }
   }
 
-  //requisita a finalização da visita
   Future finishVisit(BuildContext context, int id) async {
     try {
       Response response = await _dio.post(baseUrl + '/visitas/$id/concluir',
