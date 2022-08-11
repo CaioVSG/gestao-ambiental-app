@@ -6,6 +6,7 @@ import 'package:meioambientemobile/core/util/custom_date_formater.dart';
 
 class VisitTile extends StatelessWidget {
   final String title;
+  final int id;
   // ignore: non_constant_identifier_names
   final String visitDate;
   final String? completedDate;
@@ -26,12 +27,12 @@ class VisitTile extends StatelessWidget {
       required this.business,
       required this.tipo,
       required this.street,
-      required this.number})
+      required this.number,
+      required this.id})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    print('Completed date is: $completedDate');
     Size size = MediaQuery.of(context).size;
     return InkWell(
       onTap: onTap,
@@ -51,21 +52,8 @@ class VisitTile extends StatelessWidget {
                   color: Colors.white,
                 ),
                 const HorizontalSpacerBox(size: SpacerSize.tiny),
-                Text(tipo.toUpperCase(), style: kText),
+                Text(tipo.toUpperCase() + ' #$id', style: kText),
                 const Spacer(),
-                completedDate == null
-                    ? const SizedBox()
-                    : const Text(
-                        'Visita concluída',
-                        style: TextStyle(
-                          fontSize: 16,
-                        ),
-                      ),
-                completedDate == null
-                    ? const SizedBox()
-                    : const Icon(
-                        Icons.check,
-                      )
               ],
             ),
             const VerticalSpacerBox(size: SpacerSize.small),
@@ -83,12 +71,28 @@ class VisitTile extends StatelessWidget {
                 ),
                 const HorizontalSpacerBox(size: SpacerSize.tiny),
                 Text(
-                  CustomDateFormater.dateTimeWithHourToString(
-                      CustomDateFormater.stringToDateTime(visitDate)),
+                  'Data: ' +
+                      CustomDateFormater.dateTimeWithHourToString(
+                          CustomDateFormater.stringToDateTime(visitDate)),
                   style: const TextStyle(fontSize: 14, color: Colors.white),
                 ),
               ],
             ),
+            completedDate == null
+                ? const SizedBox()
+                : Row(
+                    children: const [
+                      Text(
+                        'Visita concluída',
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                      Icon(
+                        Icons.check,
+                      )
+                    ],
+                  ),
           ],
         ),
       ),

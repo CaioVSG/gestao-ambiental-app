@@ -1,5 +1,3 @@
-// import 'dart:html';
-
 import 'dart:developer';
 import 'dart:io';
 
@@ -14,6 +12,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Api {
   final _dio = Dio();
+  // static const String baseUrl = 'http://185.28.23.76:8080/api';
+  //!!test
   static const String baseUrl = 'http://77.243.85.238:8003/api';
 
   Future login(BuildContext context, String email, String password) async {
@@ -32,6 +32,7 @@ class Api {
             'device_name': 'mobile',
           });
       if (response.statusCode == 200) {
+        log('successfuly logged in with the status of 200');
         userModel.setUser(
             response.data['id'],
             response.data['token'],
@@ -44,7 +45,11 @@ class Api {
         prefs.setString('password', password);
         return true;
       }
+    } on DioError catch (e) {
+      log('Something got wrong while trying to login with the error ${e.response!.statusCode} and the message ${e.response!.data['message']}');
+      return false;
     } catch (e) {
+      log('Something got wrong while trying to login with the error $e');
       return false;
     }
   }
