@@ -10,16 +10,17 @@ import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../constants/style/constants.dart';
+
 class Api {
   final _dio = Dio();
-  // static const String baseUrl = 'http://185.28.23.76:8080/api';
+  // static const String kBaseUrl = 'http://185.28.23.76:8080/api';
   //!!test
-  static const String baseUrl = 'http://77.243.85.238:8003/api';
 
   Future login(BuildContext context, String email, String password) async {
     final UserModel userModel = Provider.of<UserModel>(context, listen: false);
     try {
-      var response = await _dio.post(baseUrl + '/users/auth',
+      var response = await _dio.post(kBaseUrl + '/users/auth',
           options: Options(
             headers: {
               'Content-Type': 'application/json',
@@ -46,7 +47,7 @@ class Api {
         return true;
       }
     } on DioError catch (e) {
-      log('Something got wrong while trying to login with the error ${e.response!.statusCode} and the message ${e.response!.data['message']}');
+      log('Something got wrong while trying to login with the error ${e.response?.statusCode} and the message ${e.response?.data['message']}');
       return false;
     } catch (e) {
       log('Something got wrong while trying to login with the error $e');
@@ -58,7 +59,7 @@ class Api {
   Future getAllVisits(BuildContext context) async {
     try {
       var response = await _dio.get(
-        baseUrl + '/visitas',
+        kBaseUrl + '/visitas',
         options: Options(
           headers: {
             'Authorization':
@@ -84,7 +85,8 @@ class Api {
       required BuildContext context}) async {
     try {
       var response = await _dio.get(
-        baseUrl + '/empresas/$companyId/requerimento/$requirementId/documentos',
+        kBaseUrl +
+            '/empresas/$companyId/requerimento/$requirementId/documentos',
         options: Options(
           headers: {
             'Authorization':
@@ -108,7 +110,7 @@ class Api {
       {required int denunciaId, required BuildContext context}) async {
     try {
       var response = await _dio.get(
-        baseUrl + '/denuncias/$denunciaId/fotos',
+        kBaseUrl + '/denuncias/$denunciaId/fotos',
         options: Options(
           headers: {
             'Authorization':
@@ -138,7 +140,7 @@ class Api {
       {required int visitId, required BuildContext context}) async {
     try {
       var response = await _dio.get(
-        baseUrl + '/visitas/$visitId/fotos',
+        kBaseUrl + '/visitas/$visitId/fotos',
         options: Options(
           headers: {
             'Authorization':
@@ -175,7 +177,7 @@ class Api {
       var dir = await getTemporaryDirectory();
       String fullPath = dir.path + "/$documentName.pdf'";
       var response = await _dio.download(
-        baseUrl +
+        kBaseUrl +
             '/empresas/$companyId/requerimento/$requirementId/documentos/$documentId/arquivo',
         fullPath,
         onReceiveProgress: (count, total) {
@@ -227,7 +229,7 @@ class Api {
         {'id': visitId, 'image': filesList, 'comment': comment});
     try {
       var response = await _dio.post(
-        baseUrl + '/visitas/$visitId/image',
+        kBaseUrl + '/visitas/$visitId/image',
         data: body,
         options: Options(
           headers: {
@@ -253,7 +255,7 @@ class Api {
 
   Future finishVisit(BuildContext context, int id) async {
     try {
-      Response response = await _dio.post(baseUrl + '/visitas/$id/concluir',
+      Response response = await _dio.post(kBaseUrl + '/visitas/$id/concluir',
           options: Options(
             headers: {
               'Authorization':

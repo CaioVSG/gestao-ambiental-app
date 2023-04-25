@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+// =========BaseURL=========//
+const String kBaseUrl = 'http://77.243.85.238:8003/api';
 // =======COLORS=========//
 const Color kPrimaryColor = Color(0xFFEEEEEE);
 const Color kTextColor = Color(0xFF2c3e50);

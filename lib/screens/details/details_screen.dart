@@ -141,8 +141,20 @@ class DetailsScreenState extends State<DetailsScreen> {
                                 'Authorization': 'Bearer ' + _token,
                                 'Accept': 'application/json'
                               },
+                              placeholder: (context, url) => const Center(
+                                  child: CircularProgressIndicator()),
                               imageUrl:
-                                  'http://77.243.85.238:8003/api/denuncias/${widget.denunciaId}/fotos/${imageIds[index]}/arquivo');
+                                  '$kBaseUrl/denuncias/${widget.denunciaId}/fotos/${imageIds[index]}/arquivo',
+                              errorWidget: (context, url, error) {
+                                return Center(
+                                  child: Text(
+                                    "Erro ao carregar imagem",
+                                    style: TextStyle(
+                                        color: Colors.redAccent[700],
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                );
+                              });
                         })),
                   );
                 }
@@ -422,7 +434,7 @@ class DetailsScreenState extends State<DetailsScreen> {
                                                 'Accept': 'application/json'
                                               },
                                               imageUrl:
-                                                  'http://77.243.85.238:8003/api/visitas/12/fotos/18/arquivo');
+                                                  '$kBaseUrl/visitas/${widget.denunciaId}/fotos/${imageIds[index]}/arquivo');
                                         })),
                                   );
                                 }
